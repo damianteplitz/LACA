@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Cursos</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
@@ -11,10 +10,10 @@
        
         <style>
                 body  { 
-                        background-image: url("../../../assets/img/papel.jpg");
+                        background-image: url('../../assets/img/papel.jpg');
                         font-family : "Palatino Linotype", "Book Antiqua", Palatino, serif ; 
                 }
-                #navbar 	{color: rgb(0, 0, 0); background-color: rgb(249, 182, 236);}
+                #navbar     {color: rgb(0, 0, 0); background-color: rgb(249, 182, 236);}
                 #curso_box1 {color: rgb(0, 0, 0); background-color: rgb(220, 200, 242);}
                 #curso_box2 {color: rgb(0, 0, 0); background-color: rgb(190, 190, 242);}
                 #curso_box3 {color: rgb(0, 0, 0); background-color: rgb(160, 180, 242);}
