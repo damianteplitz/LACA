@@ -101,52 +101,12 @@
                         <h4 class="modal-title">Detalles del curso</h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
-                    <!-- Modal body -->
-                    <div class="modal-body">
-                        <form>
-                            <div class="input-group mb-3 input-group-lg">
-                                <input type="text" class="form-control" value="Nombre del curso">
-                            </div>
-                            <div class="input-group m-1 input-group-md">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">Profe</span>
-                                </div>
-                                <input type="text" class="form-control" value="Eli">
-                            </div>
-                            <div class="input-group m-1 input-group-md">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">Duracion</span>
-                                </div>
-                                <input type="text" class="form-control" value="8 clases de 4 horas">
-                            </div>
-                            <div class="input-group m-1 input-group-md">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text ">Modalidad</span>
-                                </div>
-                                <input type="text" class="form-control" value="Presencial">
-                            </div>
-                            <div class="input-group m-1 input-group-md">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">Objetivo</span>
-                                </div>
-                                <input type="text" class="form-control" value="3 ojos">
-                            </div>
-                            <div class="input-group m-1 input-group-md">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">Requisitos</span>
-                                </div>
-                                <input type="text" class="form-control" value="pote de pus">
-                            </div>
-                            <div class="input-group m-1 input-group-md ">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">Materiales</span>
-                                </div>
-                                <input type="text" class="form-control" value="Eli">
-                            </div>
-                        </form>
-                    </div>
+                    <!-- Modal body 
+                    
+                    -->
                     <!-- Modal footer -->
                     <div class="modal-footer">
+                        <button type="submit" form="submit" value="Guardar">Submit</button>
                         <button type="button" class="btn btn-success" data-dismiss="modal">Guardar</button>
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                     </div>
@@ -182,22 +142,28 @@
         </div>
         
     </body>
-</html>
+
 
 <script>
-$(document).ready(function(){
-  $("#myInput").on("keyup", function() {
-    var value = $(this).val().toLowerCase();
-    $(".dropdown-menu li").filter(function() {
-      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-    });
-  });
-});
 
-var box = document.querySelectorAll("#box");
-for (i = 0; i < box.length; i++) {
-  box[i].style.backgroundColor = "rgb("+(220-i*15)+","+(200-i*5)+","+242+")";
-}
+
+
+
+
+
+$(document).ready(function(){
+    $("#myInput").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $(".dropdown-menu li").filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+    });
+
+    var box = document.querySelectorAll("#box");
+    for (i = 0; i < box.length; i++) {
+        box[i].style.backgroundColor = "rgb("+(220-i*15)+","+(200-i*5)+","+242+")";
+    }
+});
 
 </script>
 
