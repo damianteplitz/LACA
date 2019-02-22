@@ -12,7 +12,7 @@ class New_model extends CI_Model {
                 return $query->result_array();
         }
 
-        public function set_news()
+        public function set_curso()
         {
                 $this->load->helper('url');
 

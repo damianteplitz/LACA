@@ -27,69 +27,43 @@
                     <!-- Modal body -->
                     <div class="modal-body">
 
-                    
                         <form>
-                        <div class="input-group mb-3 input-group-lg" for="nombre">
-                            <input type="input" class="form-control" placeholder="Nombre del curso">
-                        </div>
-                        <label for="detalles">Detalles</label>
-                        <textarea name="detalles"></textarea><br />
-                        <label for="duracion">Duracion</label>
-                        <input type="number" name="duracion" /><br />
-                        <label for="minimo">Minimo</label>
-                        <input type="number" name="minimo" /><br />
-                        <label for="maximo">Maximo</label>
-                        <input type="number" name="maximo" /><br />
-                        <input type="submit" name="submit" value="Guardar" />
+                            <div class="input-group mb-3 input-group-lg" for="nombre">
+                                <input type="input" class="form-control" name="nombre" placeholder="Nombre del curso">
+                            </div>
+                            <div class="input-group m-1 input-group-md">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" for="detalles">Detalles</span>
+                                </div>
+                                <input type="text" class="form-control" name="detalles">
+                            </div>
+                            <div class="input-group m-1 input-group-md">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" for="duracion">Duracion</span>
+                                </div>
+                                <input type="number" class="form-control" name="duracion">
+                            </div>
+                            <div class="input-group m-1 input-group-md">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" for="minimo">Minimo</span>
+                                </div>
+                                <input type="number" class="form-control" name="minimo">
+                            </div>
+                            <div class="input-group m-1 input-group-md">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" for="maximo">Maximo</span>
+                                </div>
+                                <input type="number" class="form-control" name="maximo">
+                            </div>
+                            <div class="modal-footer">
+                                <input type="submit" name="nuevo_curso_btn" value="Guardar" class="btn btn-success"/>
+                            </div>
+                            
                         </form>
 
-                        <form>
-                            
-                                
-                            <div class="input-group m-1 input-group-md">
-                                <div class="input-group-prepend">
-                                <span class="input-group-text">Profe</span>
-                            </div>
-                                <input type="text" class="form-control">
-                            </div>
-                            <div class="input-group m-1 input-group-md">
-                                <div class="input-group-prepend">
-                                <span class="input-group-text">Duracion</span>
-                            </div>
-                                <input type="text" class="form-control">
-                            </div>
-                            <div class="input-group m-1 input-group-md">
-                                <div class="input-group-prepend">
-                                <span class="input-group-text ">Modalidad</span>
-                            </div>
-                                <input type="text" class="form-control">
-                            </div>
-                            <div class="input-group m-1 input-group-md">
-                                <div class="input-group-prepend">
-                                <span class="input-group-text">Objetivo</span>
-                            </div>
-                                <input type="text" class="form-control">
-                            </div>
-                            <div class="input-group m-1 input-group-md">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">Requisitos</span>
-                                </div>
-                                <input type="text" class="form-control">
-                            </div>
-                            <div class="input-group m-1 input-group-md ">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">Materiales</span>
-                                </div>
-                                <input type="text" class="form-control">
-                            </div>
-                        </form>
                     </div>
                     <!-- Modal footer -->
-                    <div class="modal-footer">
-
-                        <button type="button" class="btn btn-success" data-dismiss="modal">Guardar</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-                    </div>
+                    
                 </div>
             </div>
         </div>
@@ -101,11 +75,11 @@
                         <h4 class="modal-title">Detalles del curso</h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
-                    <!-- Modal body -->
+                    <!-- Modal body 
                     <div class="modal-body">
                         <form>
                             <div class="input-group mb-3 input-group-lg">
-                                <input type="text" class="form-control" value="Nombre del curso">
+                                <input type="text" class="form-control" value="Nombre del curso" name="nombre">
                             </div>
                             <div class="input-group m-1 input-group-md">
                                 <div class="input-group-prepend">
@@ -145,6 +119,7 @@
                             </div>
                         </form>
                     </div>
+                    -->
                     <!-- Modal footer -->
                     <div class="modal-footer">
                         <button type="button" class="btn btn-success" data-dismiss="modal">Guardar</button>

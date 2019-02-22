@@ -15,9 +15,13 @@ class Cursos extends CI_Controller {
                 $data['materia'] = $this->new_model->get_news();
                 $data['persona'] = $this->new_model->get_clientes();
                 $data['title'] = 'Create a news item';
+                $this->load->view('templates/header', $data);
+                $this->load->view('cursos/cursos');
+                $this->load->view('cursos/modal_cursos_nuevo');
+                $this->load->view('templates/footer');
+                
 
-
-                $this->form_validation->set_rules('nombre', 'Nombre', 'required');
+                /*$this->form_validation->set_rules('nombre', 'Nombre', 'required');
                 $this->form_validation->set_rules('apellido', 'Apellido', 'required');
                 $this->form_validation->set_rules('documento', 'Documento', 'required');
                 $this->form_validation->set_rules('direccion', 'Direccion', 'required');
@@ -29,16 +33,14 @@ class Cursos extends CI_Controller {
                 $this->form_validation->set_rules('duracion', 'Duracion', 'required');
                 $this->form_validation->set_rules('minimo', 'Minimo', 'required');
                 $this->form_validation->set_rules('maximo', 'Maximo', 'required');
-                
-                if ($this->form_validation->run() === FALSE)
-                {
-                        $this->load->view('templates/header', $data);
-                        $this->load->view('cursos/cursos');
-                        $this->load->view('templates/footer');
-                        $this->load->view('cursos/modal_cursos_nuevo');
+                */
+                if ($this->form_validation->run() == FALSE)
+                { echo "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
                 }
                 else
                 {
+                        echo $this->input->post('nombre');
+                        echo "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
                         $this->new_model->set_news();
                         $data['title'] = 'Generar nuevo curso';
                 
