@@ -27,7 +27,8 @@
                     <!-- Modal body -->
                     <div class="modal-body">
 
-                        <form>
+                        <?php echo form_open('index.php/cursos/nuevo_Curso'); ?>
+
                             <div class="input-group mb-3 input-group-lg" for="nombre">
                                 <input type="input" class="form-control" name="nombre" placeholder="Nombre del curso">
                             </div>
@@ -56,10 +57,10 @@
                                 <input type="number" class="form-control" name="maximo">
                             </div>
                             <div class="modal-footer">
-                                <input type="submit" name="nuevo_curso_btn" value="Guardar" class="btn btn-success"/>
+                                <button type="submit" id="register" class="btn btn-primary">Guardar</button>
                             </div>
                             
-                        </form>
+                        <?php echo form_close(); ?>
 
                     </div>
                     <!-- Modal footer -->
