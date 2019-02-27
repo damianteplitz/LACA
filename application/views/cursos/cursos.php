@@ -1,16 +1,3 @@
-<style>
-        body  { 
-                background-image: url('../../assets/img/papel.jpg');
-                font-family : "Palatino Linotype", "Book Antiqua", Palatino, serif ; 
-        }
-        #navbar     {color: rgb(0, 0, 0); background-color: rgb(249, 182, 236);}
-        #curso_box1 {color: rgb(0, 0, 0); background-color: rgb(220, 200, 242);}
-        #curso_box2 {color: rgb(0, 0, 0); background-color: rgb(190, 190, 242);}
-        #curso_box3 {color: rgb(0, 0, 0); background-color: rgb(160, 180, 242);}
-        #curso_box4 {color: rgb(0, 0, 0); background-color: rgb(130, 170, 242);}
-        #curso_box5 {color: rgb(0, 0, 0); background-color: rgb(100, 160, 242);}
-        #curso_box6 {color: rgb(0, 0, 0); background-color: rgb(70, 150, 242);}
-</style>
     <head>
         <title>Cursos</title>
     </head>
