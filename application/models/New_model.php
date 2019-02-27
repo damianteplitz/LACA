@@ -6,7 +6,7 @@ class New_model extends CI_Model {
                 $this->load->database();
         }
         
-        public function get_news()
+        public function get_det_cursos()
         {
                 $query = $this->db->get('Cursos');
                 return $query->result_array();
@@ -18,7 +18,7 @@ class New_model extends CI_Model {
                 $this->load->helper('url');
                 //chequear query antes en vez de esto que no sirve
                
-                $cursosexistentes = $this->new_model->get_news();
+                $cursosexistentes = $this->new_model->get_det_cursos();
                 
                 foreach ($cursosexistentes as $course){
                         if ($course['nombre'] == $data['nombre']){
@@ -38,6 +38,27 @@ class New_model extends CI_Model {
                                 window.location.href="cursos";
                                 </script>';
                         return $result;
+                }
+        }
+
+        
+
+
+        public function upload_curso($data)
+        {
+                $this->db->where('id',$data['id']);
+                
+                if($this->db->update('Cursos', $data) )
+                {
+                        echo '<script type="text/javascript">
+                                alert("Curso actualizado");
+                                window.location.href="cursos";
+                                </script>';
+                        return $result;
+                }
+                else
+                {
+                        $this->db->_error_message();
                 }
         }
 

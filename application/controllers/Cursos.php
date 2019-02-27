@@ -11,8 +11,7 @@ class Cursos extends CI_Controller {
         {
                 $this->load->helper('form');
                 $this->load->library('form_validation');
-               
-                $data['materia'] = $this->new_model->get_news();
+                $data['materia'] = $this->new_model->get_det_cursos();
                 $data['persona'] = $this->new_model->get_clientes();
                 $data['title'] = 'Create a news item';
                 $this->load->view('templates/header', $data);
@@ -35,12 +34,12 @@ class Cursos extends CI_Controller {
                 $this->form_validation->set_rules('maximo', 'Maximo', 'required');
                 */
                 if ($this->form_validation->run() == FALSE)
-                { echo "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
+                { 
                 }
                 else
                 {
                         echo $this->input->post('nombre');
-                        echo "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
+                       
                         $this->new_model->set_news();
                         $data['title'] = 'Generar nuevo curso';
                 
@@ -49,5 +48,120 @@ class Cursos extends CI_Controller {
                         $this->load->view('templates/footer');
                         $this->load->view('cursos/modal_cursos_nuevo');
                 }
+        }
+        public function nuevo_Curso()
+        {
+                       
+                if (!empty($_POST)) {
+                        $this->load->helper('form');
+                        $this->load->library('form_validation');
+                        
+                        $nombre = $this->input->post('nombre');
+                        $detalles = $this->input->post('detalles');
+                        $duracion = $this->input->post('duracion');
+                        $minimo = $this->input->post('minimo');
+                        $maximo = $this->input->post('maximo'); 
+                        
+                        $data['title'] = 'Crear nuevo curso';
+
+                        $datos = array(
+                                'nombre' => $nombre,
+                                'detalles' => $detalles,
+                                'duracion' => $duracion,
+                                'minimo' => $minimo,
+                                'maximo' => $maximo       
+                        );
+                        
+                        if($nombre && $detalles && $duracion && $minimo && $maximo){
+                                if($respuesta = $this->new_model->set_curso($datos)){        
+                                        $message = "Orden Actualizado!";
+                                        $type    = "success";			
+                                }	
+                                else {
+                                        $message = "Error en BD.";
+                                        $type    = "warn";	
+                                }
+        
+                        }
+                        else {
+                                $message = "Error, verifique los datos.";
+                                $type    = "warn";	
+                        }
+                        
+
+                }
+
+                $data['materia'] = $this->new_model->get_det_cursos();
+                $data['persona'] = $this->new_model->get_clientes();
+                $this->load->view('templates/header', $data);
+                $this->load->view('cursos/cursos');
+                $this->load->view('cursos/modal_cursos_nuevo');
+                $this->load->view('templates/footer');
+                $result = array(
+                        'message' => $message,
+                        'type'    => $type
+                );
+                echo json_encode($result);
+        }
+
+        public function editar_Curso()
+        {
+                       
+                if (!empty($_POST)) {
+                        $this->load->helper('form');
+                        $this->load->library('form_validation');
+                        
+                        $id = $this->input->post('id');
+                        $nombre = $this->input->post('nombre');
+                        $detalles = $this->input->post('detalles');
+                        $duracion = $this->input->post('duracion');
+                        $minimo = $this->input->post('minimo');
+                        $maximo = $this->input->post('maximo'); 
+                        
+                        $data['title'] = 'Crear nuevo curso';
+
+                        $datos = array(
+                                'id' => $id,
+                                'nombre' => $nombre,
+                                'detalles' => $detalles,
+                                'duracion' => $duracion,
+                                'minimo' => $minimo,
+                                'maximo' => $maximo       
+                        );
+                        
+                        if($nombre && $detalles && $duracion && $minimo && $maximo){
+                                if($respuesta = $this->new_model->upload_curso($datos)){        
+                                        $message = "Orden Actualizado!";
+                                        $type    = "success";			
+                                }	
+                                else {
+                                        $message = "Error en BD.";
+                                        $type    = "warn";	
+                                }
+        
+                        }
+                        else {
+                                $message = "Error, verifique los datos.";
+                                $type    = "warn";	
+                        }
+                        
+
+                }
+
+                $data['materia'] = $this->new_model->get_det_cursos();
+                $data['persona'] = $this->new_model->get_clientes();
+                $this->load->view('templates/header', $data);
+                $this->load->view('cursos/cursos');
+                $this->load->view('cursos/modal_cursos_nuevo');
+                $this->load->view('templates/footer');
+                $result = array(
+                        'message' => $message,
+                        'type'    => $type
+                );
+                echo json_encode($result);
+        }
+
+        public function get_det_cursos (){
+                $data  = $this->New_model->get_det_cursos();
         }
 }
