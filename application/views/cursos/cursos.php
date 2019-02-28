@@ -163,21 +163,4 @@ for (i = 0; i < box.length; i++) {
   box[i].id = i;
 }
 
-
-
-
-function get_det_cursos(){
-    $.ajax({
-        url: './Cursos/get_det_cursos',
-        type: 'GET',
-        dataType: 'json',
-        cache: false,
-        async: true,
-        success: function(data){
-        },
-        error: function (xhr, ajaxOptions, thrownError) {
-        },
-    });
-}
-
 </script>
