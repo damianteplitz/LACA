@@ -148,7 +148,6 @@ $(document).ready(function(){
 
     //hacer una funcion que me cargue los detalles de todas los cursos y despues con el index cambio el valor de cada modal (ver como hacer)
     //Basicamente la variable dinamica NO TIENE QUE SER EN PHP
-    get_det_cursos();
     $("#myInput").on("keyup", function() {
         var value = $(this).val().toLowerCase();
         $(".dropdown-menu li").filter(function() {
@@ -162,5 +161,10 @@ for (i = 0; i < box.length; i++) {
   box[i].style.backgroundColor = "rgb("+(220-i*15)+","+(200-i*5)+","+242+")";
   box[i].id = i;
 }
+
+
+
+
+
 
 </script>
