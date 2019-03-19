@@ -180,7 +180,7 @@ $(document).ready(function(){
       
       
 });
-
+var id_cliente;
 var box = document.querySelectorAll("#box");
 for (i = 0; i < box.length; i++) {
   box[i].style.backgroundColor = "rgb("+(210-i*15)+","+(190-i*5)+","+242+")";
@@ -249,6 +249,7 @@ btn_dni.onclick = function (){
                         ma.id="box_cliente";
                         e_info.appendChild(ma);
                         cli_g.innerHTML = (e['nombre']+" "+e['apellido']+" "+e['documento']);
+                        id_cliente = e['id'];
                         cli_grande.appendChild(cli_g);
                         ok = true;
                 }
@@ -355,7 +356,8 @@ boton_interesada.forEach (function(e){
                 
                 console.log (id_cl.value);
                 console.log (interested.checked);
-                set_updateinteresada(id_cl.value,interested.value);
+                console.log (id_cliente);
+                set_updateinteresada(id_cl.value,interested.value,id_cliente);
                 //console.log(id_id+"__"+inter_inter);
                 
         }
@@ -363,14 +365,17 @@ boton_interesada.forEach (function(e){
 }); 
                 //console.log ("a");
 
-function set_updateinteresada(id,val){
-        
+function set_updateinteresada(id,val,id_cliente){
+        if (!id_cliente){
+                console.log ("No selecciono cliente");
+                return 0;
+        }
         $.ajax({
                         url: '<?=base_url()?>Interesadas/updateInteresada',
                         type: 'POST',
                         dataType: 'json',
                         data:   {'rca_token'     : $("#token").val(),
-                                 'id_cliente'    : 1,
+                                 'id_cliente'    : id_cliente,
                                  'id_cabierto'   : id,
                                  'estado'        : val
                                 },

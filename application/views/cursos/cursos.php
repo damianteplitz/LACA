@@ -99,7 +99,11 @@
                                     </div>
                                     <input type="text" class="form-control" name="maximo" value = "<?php echo $materia[$w]['maximo']; ?>">
                                 </div>
+                                
                                 <div class="modal-footer">
+                                    <div class="checkbox">
+                                            <label><input type="checkbox" value="" id="<?php// echo $inters;?>">Abierto</label>
+                                    </div>
                                     <button type="submit" id="register" class="btn btn-primary">Guardar</button>
                                 </div>
                             <?php echo form_close(); ?>

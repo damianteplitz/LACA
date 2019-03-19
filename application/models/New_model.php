@@ -11,6 +11,12 @@ class New_model extends CI_Model {
                 $query = $this->db->get('Cursos');
                 return $query->result_array();
         }
+        public function get_det_cursos_abiertos()
+        {
+                //hacer
+                $query = $this->db->get('Cursos');
+                return $query->result_array();
+        }
 
         public function set_curso($data)
         {
@@ -33,6 +39,8 @@ class New_model extends CI_Model {
                         $this->db->_error_message();
                 }
                 else{
+                        //hacer
+                        //set_curso_abierto($data);
                         echo '<script type="text/javascript">
                                 alert("Curso nuevo creado");
                                 window.location.href="cursos";
@@ -100,5 +108,19 @@ class New_model extends CI_Model {
                 $resultado = $this->db->insert('Clientes_cursos',$data);
                 return $resultado;
         }
+        /*
+        public function set_curso_abierto($dato){
+                $dato['id'] = $id;
+                $date = date('Y/m/d');
+                $data = array(
+                        'id_curso' => $id,
+                        'f_inicio' => $date,
+                        'f_final' => '2019-12-31',
+                        'estado' => 1
+
+                );
+                $result = $this->db->insert('Cursos_abiertos', $data);
+        }
+        */
 }
 
