@@ -10,6 +10,10 @@ class Interesadas extends CI_Controller {
         
         public function interesadas()
         {
+                $data['csrf'] = array(
+			'name' => $this->security->get_csrf_token_name(),
+			'hash' => $this->security->get_csrf_hash()
+                );
                 $this->load->helper('form');
                 $this->load->library('form_validation');
 
@@ -45,6 +49,7 @@ class Interesadas extends CI_Controller {
         }
 
         public function getclientes (){
+                
                 $is_ajax = $this->input->is_ajax_request();
 
                 if($is_ajax)
@@ -57,9 +62,39 @@ class Interesadas extends CI_Controller {
         public function get_det_cursos (){
                 $data  = $this->New_model->get_det_cursos();
         }	
-        public function setInteresadas(){
-                
+        public function updateInteresada(){
+                $is_ajax = $this->input->is_ajax_request();
 
+                if($is_ajax)
+                {
+                        $id_cliente     = $this->input->post('id_cliente');
+                        $id_cabierto    = $this->input->post('id_cabierto');
+                        $estado         = $this->input->post('estado');
+                        $data = array(
+				'id_cliente'            => $id_cliente,
+				'id_cabierto'              => $id_cabierto,
+				'estado'        => $estado
+                        );
+                        $response = $this->new_model->setInteresada($data);
+                        if($response)
+			{
+				$message = "Curso asignado";
+				$type    = "success";
+			}
+			else
+			{
+				$message = "Error, verifique los datos.";
+				$type    = "warn";	
+			}
+
+			$result = array(
+				'message' => $message,
+				'type'    => $type
+			);
+
+			echo json_encode($result);
+			die;	
+		}	
         }
        
 }

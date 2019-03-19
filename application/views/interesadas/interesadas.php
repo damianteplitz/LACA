@@ -171,7 +171,7 @@
                 </div>
         </div>
     </body>
-
+    <input type="hidden" id="token" name="<?=$csrf['name'];?>" value="<?=$csrf['hash'];?>" />
 <script>
 
 $(document).ready(function(){
@@ -355,34 +355,34 @@ boton_interesada.forEach (function(e){
                 
                 console.log (id_cl.value);
                 console.log (interested.checked);
-               // set_updateinteresada();
+                set_updateinteresada(id_cl.value,interested.value);
                 //console.log(id_id+"__"+inter_inter);
                 
         }
         u++;
 }); 
                 //console.log ("a");
-                
 
-/*
-
-function set_updateinteresada(){
-               
+function set_updateinteresada(id,val){
+        
         $.ajax({
                         url: '<?=base_url()?>Interesadas/updateInteresada',
                         type: 'POST',
                         dataType: 'json',
-                        data: {},
+                        data:   {'rca_token'     : $("#token").val(),
+                                 'id_cliente'    : 1,
+                                 'id_cabierto'   : id,
+                                 'estado'        : val
+                                },
                         cache: false,
                         async: true,
                         success: function(data){
-
-                                console.log(data);
+                                console.log("data");
                         },
                         error: function (xhr, ajaxOptions, thrownError) {
-                                
+                                console.log ("xhr");
                         }
                 });
-};*/
+};
 
 </script>

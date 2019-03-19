@@ -65,17 +65,29 @@ class New_model extends CI_Model {
         public function set_clientes()
         {
                 $this->load->helper('url');
+/*
+                $clientesexistentes = $this->new_model->get_clientes();
 
-                $data = array(
-                    'nombre' => $this->input->post('nombre'),
-                    'apellido' => $this->input->post('apellido'),
-                    'documento' => $this->input->post('documento'),
-                    'direccion' => $this->input->post('direccion'),
-                    'mail' => $this->input->post('mail'),
-                    'f_alta' => $this->input->post('f_alta')       
-                );
-
-                return $this->db->insert('Clientes', $data);
+                foreach ($clientesexistentes as $cliente){
+                                
+                        if ($cliente['documento'] == $data['dni']){
+                                echo '<script type="text/javascript">
+                                alert("Documento ya existente, no se creo el cliente");
+                                window.location.href="interesadas";
+                                </script>';
+                                return -1;
+                        }
+                }
+                if ( ! $result = $this->db->insert('Clientes', $data)){
+                        $this->db->_error_message();
+                }
+                else{
+                        echo '<script type="text/javascript">
+                                alert("Cliente nuevo creado");
+                                window.location.href="interesadas";
+                                </script>';
+                        return $result;
+                }*/
         }
 
         public function get_clientes()
@@ -83,4 +95,10 @@ class New_model extends CI_Model {
                 $query = $this->db->get('Clientes');
                 return $query->result_array();
         }
+        public function setInteresada ($data)
+        {
+                $resultado = $this->db->insert('Clientes_cursos',$data);
+                return $resultado;
+        }
 }
+
