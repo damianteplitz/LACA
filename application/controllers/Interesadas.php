@@ -24,7 +24,7 @@ class Interesadas extends CI_Controller {
                 {
                         $this->new_model->set_clientes();  
                 
-                        $data['materia'] = $this->new_model->get_news();
+                        $data['materia'] = $this->new_model->get_det_cursos();
                         $data['persona'] = $this->new_model->get_clientes();
                         $data['title'] = 'Generar nuevo curso';
                               
@@ -35,7 +35,7 @@ class Interesadas extends CI_Controller {
                 }
 
 
-                $data['materia'] = $this->new_model->get_news();
+                $data['materia'] = $this->new_model->get_det_cursos();
                 $data['persona'] = $this->new_model->get_clientes();
                 $data['title'] = 'Generar nuevo curso';
         
@@ -53,5 +53,13 @@ class Interesadas extends CI_Controller {
                         echo json_encode($data);
                         die;
                 }
-        }		
+        }
+        public function get_det_cursos (){
+                $data  = $this->New_model->get_det_cursos();
+        }	
+        public function setInteresadas(){
+                
+
+        }
+       
 }
