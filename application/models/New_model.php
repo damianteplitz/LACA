@@ -88,6 +88,9 @@ class New_model extends CI_Model {
                 if(!$checked){
                         $checked = "0";
                 }
+                else{
+                        $checked ="1";
+                }
                 $this->db->where('id',$data['id']);
                 
                 if($this->db->update('Cursos', $data) )

@@ -57,8 +57,8 @@
             </div>
         </div>
         <?php $w = 0; ?>        
-        <?php foreach ($materia as $course): ?>
-        <?php $mod = "modal_editar_curso".$w; ?>
+        <?php foreach ($c_cerrados as $course): ?>
+        <?php $mod = "modal_editar_curso_cerrado".$w; ?>
             <div class="modal" id="<?php echo $mod;?>">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -71,38 +71,98 @@
                         <div class="modal-body">
 
                             <?php echo form_open('index.php/cursos/editar_Curso'); ?>
-                                <input type="hidden" name="id" value = "<?php echo $materia[$w]['id']; ?>">
+                                <input type="hidden" name="id" value = "<?php echo $c_cerrados[$w]['id']; ?>">
                                 <div class="input-group mb-3 input-group-lg" for="nombre">
-                                    <input type="input" class="form-control" name="nombre" value="<?php echo $materia[$w]['nombre']; ?>">
+                                    <input type="input" class="form-control" name="nombre" value="<?php echo $c_cerrados[$w]['nombre']; ?>">
                                 </div>
                                 <div class="input-group m-1 input-group-md">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" for="detalles">Detalles</span>
                                     </div>
-                                    <input type="text" class="form-control" name="detalles"  value = "<?php echo $materia[$w]['detalles']; ?>">
+                                    <input type="text" class="form-control" name="detalles"  value = "<?php echo $c_cerrados[$w]['detalles']; ?>">
                                 </div>
                                 <div class="input-group m-1 input-group-md">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" for="duracion" >Duracion</span>
                                     </div>
-                                    <input type="text" class="form-control" name="duracion" value = "<?php echo $materia[$w]['duracion']; ?>">
+                                    <input type="text" class="form-control" name="duracion" value = "<?php echo $c_cerrados[$w]['duracion']; ?>">
                                 </div>
                                 <div class="input-group m-1 input-group-md">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" for="minimo" >Minimo</span>
                                     </div>
-                                    <input type="text" class="form-control" name="minimo" value = "<?php echo $materia[$w]['minimo']; ?>">
+                                    <input type="text" class="form-control" name="minimo" value = "<?php echo $c_cerrados[$w]['minimo']; ?>">
                                 </div>
                                 <div class="input-group m-1 input-group-md">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" for="maximo" >Maximo</span>
                                     </div>
-                                    <input type="text" class="form-control" name="maximo" value = "<?php echo $materia[$w]['maximo']; ?>">
+                                    <input type="text" class="form-control" name="maximo" value = "<?php echo $c_cerrados[$w]['maximo']; ?>">
                                 </div>
                                 
                                 <div class="modal-footer">
                                     <div class="checkbox">
-                                            <label><input name="checked" type="checkbox" value="<?php echo $materia[$w]['id']; ?>" id="checkboxx">Abierto</label>
+                                            <label><input name="checked" type="checkbox" value="<?php echo $c_cerrados[$w]['id']; ?>" id="checkboxx">Abierto</label>
+                                    </div>
+                                    <button type="submit" id="register" class="btn btn-primary">Guardar</button>
+                                </div>
+                            <?php echo form_close(); ?>
+                        </div>
+                        <!-- Modal footer -->
+                    </div>
+                </div>
+            </div>
+            <?php $w++; ?>        
+        <?php endforeach; ?>
+
+
+        <?php $w = 0; ?>        
+        <?php foreach ($c_abiertos as $course): ?>
+        <?php $mod = "modal_editar_curso_abierto".$w; ?>
+            <div class="modal" id="<?php echo $mod;?>">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                            <h4 class="modal-title">Detalles del curso</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <!-- Modal body -->
+                        <div class="modal-body">
+
+                            <?php echo form_open('index.php/cursos/editar_Curso'); ?>
+                                <input type="hidden" name="id" value = "<?php echo $c_abiertos[$w]['id']; ?>">
+                                <div class="input-group mb-3 input-group-lg" for="nombre">
+                                    <input type="input" class="form-control" name="nombre" value="<?php echo $c_abiertos[$w]['nombre']; ?>">
+                                </div>
+                                <div class="input-group m-1 input-group-md">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" for="detalles">Detalles</span>
+                                    </div>
+                                    <input type="text" class="form-control" name="detalles"  value = "<?php echo $c_abiertos[$w]['detalles']; ?>">
+                                </div>
+                                <div class="input-group m-1 input-group-md">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" for="duracion" >Duracion</span>
+                                    </div>
+                                    <input type="text" class="form-control" name="duracion" value = "<?php echo $c_abiertos[$w]['duracion']; ?>">
+                                </div>
+                                <div class="input-group m-1 input-group-md">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" for="minimo" >Minimo</span>
+                                    </div>
+                                    <input type="text" class="form-control" name="minimo" value = "<?php echo $c_abiertos[$w]['minimo']; ?>">
+                                </div>
+                                <div class="input-group m-1 input-group-md">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" for="maximo" >Maximo</span>
+                                    </div>
+                                    <input type="text" class="form-control" name="maximo" value = "<?php echo $c_abiertos[$w]['maximo']; ?>">
+                                </div>
+                                
+                                <div class="modal-footer">
+                                    <div class="checkbox">
+                                            <label><input name="checked" type="checkbox" value="<?php echo $c_abiertos[$w]['id']; ?>" id="checkboxx">Abierto</label>
                                     </div>
                                     <button type="submit" id="register" class="btn btn-primary">Guardar</button>
                                 </div>
@@ -128,8 +188,8 @@
                 <h4 class="font-weight-light text-center">Cursos abiertos</h4>
             
             <?php $q = 0;?>
-            <?php foreach ($materia as $course): ?>
-            <?php $mod = "#modal_editar_curso".$q;?>
+            <?php foreach ($c_abiertos as $course): ?>
+            <?php $mod = "#modal_editar_curso_abierto".$q;?>
                     <div id="box" class="m-2 border border-secondary">    
                         <div class="m-2">
                             <h1><?php echo $course['nombre']; ?></h1>
@@ -144,10 +204,9 @@
             </div>
             <div class="col-sm-9 m-2 text border">
                 <h4 class="font-weight-light text-center">Cursos cerrados</h4>
-            
             <?php $q = 0;?>
-            <?php foreach ($materia as $course): ?>
-            <?php $mod = "#modal_editar_curso".$q;?>
+            <?php foreach ($c_cerrados as $course): ?>
+            <?php $mod = "#modal_editar_curso_cerrado".$q;?>
                     <div id="box" class="m-2 border border-secondary">    
                         <div class="m-2">
                             <h1><?php echo $course['nombre']; ?></h1>
