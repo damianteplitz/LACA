@@ -11,6 +11,7 @@ class Cursos extends CI_Controller {
         {
                 $this->load->helper('form');
                 $this->load->library('form_validation');
+                $data['abiertos'] = $this->new_model->get_det_cursos_abiertos();
                 $data['materia'] = $this->new_model->get_det_cursos();
                 $data['persona'] = $this->new_model->get_clientes();
                 $data['title'] = 'Create a news item';
@@ -117,6 +118,7 @@ class Cursos extends CI_Controller {
                         $duracion = $this->input->post('duracion');
                         $minimo = $this->input->post('minimo');
                         $maximo = $this->input->post('maximo'); 
+                        $checked = $this->input->post('checked');
                         
                         $data['title'] = 'Crear nuevo curso';
 
@@ -126,11 +128,12 @@ class Cursos extends CI_Controller {
                                 'detalles' => $detalles,
                                 'duracion' => $duracion,
                                 'minimo' => $minimo,
-                                'maximo' => $maximo       
+                                'maximo' => $maximo                         
                         );
+
                         
                         if($nombre && $detalles && $duracion && $minimo && $maximo){
-                                if($respuesta = $this->new_model->upload_curso($datos)){        
+                                if($respuesta = $this->new_model->upload_curso($datos,$checked)){        
                                         $message = "Orden Actualizado!";
                                         $type    = "success";			
                                 }	
@@ -163,5 +166,8 @@ class Cursos extends CI_Controller {
 
         public function get_det_cursos (){
                 $data  = $this->New_model->get_det_cursos();
+        }
+        public function get_det_cursos_abiertos (){
+                $data  = $this->New_model->get_det_cursos_abiertos();
         }
 }

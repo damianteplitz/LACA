@@ -102,7 +102,7 @@
                                 
                                 <div class="modal-footer">
                                     <div class="checkbox">
-                                            <label><input type="checkbox" value="" id="<?php// echo $inters;?>">Abierto</label>
+                                            <label><input name="checked" type="checkbox" value="<?php echo $materia[$w]['id']; ?>" id="checkboxx">Abierto</label>
                                     </div>
                                     <button type="submit" id="register" class="btn btn-primary">Guardar</button>
                                 </div>
@@ -124,11 +124,11 @@
             <button type="button" class="btn btn-primary mt-3 mb-5" data-toggle="modal" data-target="#modal_nuevo_curso">Nuevo</button>
         </div>
         <div class="row justify-content-md-center">
-            <div class="col-sm-9">
+            <div class="col-sm-9 m-2 text border">
+                <h4 class="font-weight-light text-center">Cursos abiertos</h4>
             
             <?php $q = 0;?>
             <?php foreach ($materia as $course): ?>
-            
             <?php $mod = "#modal_editar_curso".$q;?>
                     <div id="box" class="m-2 border border-secondary">    
                         <div class="m-2">
@@ -166,9 +166,27 @@ for (i = 0; i < box.length; i++) {
   box[i].id = i;
 }
 
+var materia = <?php echo json_encode($materia); ?>;
+var abiertos = <?php echo json_encode($abiertos); ?>;
 
+var ch = document.querySelectorAll("#checkboxx");
 
-
+for (i = 0; i < ch.length; i++) {
+    for (j = 0; j < materia.length; j++){
+        if (materia[j]['id']==ch[i].value){
+            for (h = 0; h < abiertos.length; h++){
+                if (abiertos[h]['id_curso'] == ch[i].value){
+                    if (abiertos[h]['estado']==1){
+                        ch[i].checked = true;
+                    }
+                    else{
+                        ch[i].checked = false;
+                    }
+                }
+            }
+        }
+    }
+}
 
 
 </script>

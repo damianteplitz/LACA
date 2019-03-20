@@ -12,6 +12,12 @@ class New_model extends CI_Model {
                 return $query->result_array();
         }
 
+        public function get_det_cursos_abiertos()
+        {
+                $query = $this->db->get('Cursos_abiertos');
+                return $query->result_array();
+        }
+
         public function set_curso($data)
         {
                 
@@ -49,20 +55,28 @@ class New_model extends CI_Model {
                 }
         }
 
-        
-
-
-        public function upload_curso($data)
+        public function upload_curso($data,$checked)
         {
+                if(!$checked){
+                        $checked = "0";
+                }
                 $this->db->where('id',$data['id']);
                 
                 if($this->db->update('Cursos', $data) )
                 {
-                        echo '<script type="text/javascript">
-                                alert("Curso actualizado");
-                                window.location.href="cursos";
-                                </script>';
-                        return $result;
+                        $sql = "UPDATE c_laca.Cursos_abiertos
+                                        SET estado = ".$checked." 
+                                        WHERE id_curso = ".$data['id'].";";
+                                if ( ! $result = $this->db->query($sql)){
+                                        $this->db->_error_message();
+                                }
+                                else{
+                                        echo '<script type="text/javascript">
+                                        alert("Curso actualizado");
+                                        window.location.href="cursos";
+                                        </script>';
+                                        return $result;
+                                }
                 }
                 else
                 {
