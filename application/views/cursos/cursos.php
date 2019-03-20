@@ -142,6 +142,24 @@
             <?php $q++;?>
             <?php endforeach; ?>
             </div>
+            <div class="col-sm-9 m-2 text border">
+                <h4 class="font-weight-light text-center">Cursos cerrados</h4>
+            
+            <?php $q = 0;?>
+            <?php foreach ($materia as $course): ?>
+            <?php $mod = "#modal_editar_curso".$q;?>
+                    <div id="box" class="m-2 border border-secondary">    
+                        <div class="m-2">
+                            <h1><?php echo $course['nombre']; ?></h1>
+                            <p><?php echo $course['detalles']; ?></p>
+                        </div>
+                        <div class="text-right">
+                            <button type="button" class="btn btn-primary m-1" data-toggle="modal" data-target="<?php echo $mod ;?>" id="button_edit">Ver detalles</button>
+                        </div>
+                    </div>
+            <?php $q++;?>
+            <?php endforeach; ?>
+            </div>
         </div>
         
     </body>
@@ -168,6 +186,10 @@ for (i = 0; i < box.length; i++) {
 
 var materia = <?php echo json_encode($materia); ?>;
 var abiertos = <?php echo json_encode($abiertos); ?>;
+var c_abiertos = <?php echo json_encode($c_abiertos); ?>;
+console.log (c_abiertos);
+
+
 
 var ch = document.querySelectorAll("#checkboxx");
 

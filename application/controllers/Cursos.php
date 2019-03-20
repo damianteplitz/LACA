@@ -12,6 +12,8 @@ class Cursos extends CI_Controller {
                 $this->load->helper('form');
                 $this->load->library('form_validation');
                 $data['abiertos'] = $this->new_model->get_det_cursos_abiertos();
+                $data['c_abiertos'] = $this->new_model->get_cursos_abiertos();
+                $data['c_cerrados'] = $this->new_model->get_cursos_cerrados();
                 $data['materia'] = $this->new_model->get_det_cursos();
                 $data['persona'] = $this->new_model->get_clientes();
                 $data['title'] = 'Create a news item';
@@ -169,5 +171,11 @@ class Cursos extends CI_Controller {
         }
         public function get_det_cursos_abiertos (){
                 $data  = $this->New_model->get_det_cursos_abiertos();
+        }
+        public function get_cursos_abiertos (){
+                $data  = $this->New_model->get_cursos_abiertos();
+        }
+        public function get_cursos_cerrados (){
+                $data  = $this->New_model->get_cursos_cerrados();
         }
 }

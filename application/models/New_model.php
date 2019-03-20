@@ -17,6 +17,34 @@ class New_model extends CI_Model {
                 $query = $this->db->get('Cursos_abiertos');
                 return $query->result_array();
         }
+        public function get_cursos_cerrados()
+        {
+                $sql = "SELECT Cursos.id, Cursos.nombre, Cursos.detalles, Cursos.duracion, Cursos.minimo, Cursos.maximo, Cursos_abiertos.estado
+                        FROM Cursos
+                        INNER JOIN Cursos_abiertos 
+                        ON Cursos.id=Cursos_abiertos.id_curso 
+                        WHERE Cursos_abiertos.estado = 0;";
+                if ( ! $result = $this->db->query($sql)){
+                        $this->db->_error_message();
+                }
+                else{
+                        return $result->result_array();
+                }
+        }
+        public function get_cursos_abiertos()
+        {
+                $sql = "SELECT Cursos.id, Cursos.nombre, Cursos.detalles, Cursos.duracion, Cursos.minimo, Cursos.maximo, Cursos_abiertos.estado
+                        FROM Cursos
+                        INNER JOIN Cursos_abiertos 
+                        ON Cursos.id=Cursos_abiertos.id_curso 
+                        WHERE Cursos_abiertos.estado = 1;";
+                if ( ! $result = $this->db->query($sql)){
+                        $this->db->_error_message();
+                }
+                else{
+                        return $result->result_array();
+                }
+        }
 
         public function set_curso($data)
         {
