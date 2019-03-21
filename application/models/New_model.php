@@ -115,15 +115,35 @@ class New_model extends CI_Model {
                 }
         }
 
-        public function set_clientes()
+        public function upload_cliente($data)
         {
-                $this->load->helper('url');
-/*
-                $clientesexistentes = $this->new_model->get_clientes();
+                $this->db->where('id',$data['id']);
+                
+                if($this->db->update('Clientes', $data) )
+                {
+                        echo '<script type="text/javascript">
+                        alert("Cliente actualizado");
+                        window.location.href="interesadas";
+                        </script>';
+                        return $result;
+                }
+                else
+                {
+                        $this->db->_error_message();
+                }
+        }
 
+        
+        public function set_cliente($data)
+        {
+                
+                $this->load->helper('url');
+                //chequear query antes en vez de esto que no sirve
+               
+                $clientesexistentes = $this->new_model->get_clientes();
+                
                 foreach ($clientesexistentes as $cliente){
-                                
-                        if ($cliente['documento'] == $data['dni']){
+                        if ($cliente['documento'] == $data['documento']){
                                 echo '<script type="text/javascript">
                                 alert("Documento ya existente, no se creo el cliente");
                                 window.location.href="interesadas";
@@ -140,9 +160,10 @@ class New_model extends CI_Model {
                                 window.location.href="interesadas";
                                 </script>';
                         return $result;
-                }*/
+                }
         }
-
+        
+        
         public function get_clientes()
         {
                 $query = $this->db->get('Clientes');

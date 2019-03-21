@@ -16,8 +16,8 @@
 
                                         <form class="form-inline mb-4" action="#">
                                                 <div class="form-group ml-2">
-                                                        <label for="dni">DNI: </label>
-                                                        <input type="dni" class="form-control ml-2" id="dni">
+                                                        <label for="documento">DNI: </label>
+                                                        <input type="number" class="form-control ml-2" id="documento">
                                                         <button type="submit" class="btn btn-primary  ml-2" id="btn_buscar_dni">Buscar</button>
                                                 </div>
                                                 
@@ -38,7 +38,7 @@
                                 <!-- Modal footer -->
                                 <div class="modal-footer">
                                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal_nuevo_cliente">Nuevo</button>
-                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal_editar_cliente">Editar</button>
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal_editar_cliente" id="editar_cliente" disabled="true">Editar</button>
                                         <button type="button" class="btn btn-success" data-dismiss="modal">Confirmar</button>
                                         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                                 </div>
@@ -108,9 +108,9 @@
                                         </div>
                                         <div class="input-group m-1 input-group-md">
                                                 <div class="input-group-prepend">
-                                                <span class="input-group-text" for="dni">DNI</span>
+                                                <span class="input-group-text" for="documento">DNI</span>
                                                 </div>
-                                                <input type="number" class="form-control" name="dni">
+                                                <input type="number" class="form-control" name="documento">
                                         </div>
                                         <div class="input-group m-1 input-group-md">
                                                 <div class="input-group-prepend">
@@ -133,7 +133,57 @@
                         </div>
                 </div>
         </div>
-
+        <div class="modal bg-secondary" id="modal_editar_cliente">
+                <div class="modal-dialog">
+                        <div class="modal-content">
+                                <!-- Modal Header -->
+                                <div class="modal-header">
+                                        <h4 class="modal-title">Editar Cliente</h4>
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
+                                <!-- Modal body -->
+                                <div class="modal-body">
+                                        <?php echo form_open('index.php/interesadas/editar_Cliente'); ?>
+                                        <input type="hidden" name="id" id= "e_id" value = "">
+                                        <div class="input-group m-1 input-group-md">
+                                                <div class="input-group-prepend">
+                                                        <span class="input-group-text" for="nombre">Nombre</span>
+                                                </div>
+                                                <input type="text" class="form-control" id="e_nombre" name="nombre" >
+                                        </div>
+                                        <div class="input-group m-1 input-group-md">
+                                                <div class="input-group-prepend">
+                                                        <span class="input-group-text" for="apellido">Apellido</span>
+                                                </div>
+                                                <input type="text" class="form-control" name="apellido" id="e_apellido" value = "">
+                                        </div>
+                                        <div class="input-group m-1 input-group-md">
+                                                <div class="input-group-prepend">
+                                                        <span class="input-group-text" for="documento">DNI</span>
+                                                </div>
+                                                <input type="number" class="form-control" name="documento" id="e_documento" value = "">
+                                        </div>
+                                        <div class="input-group m-1 input-group-md">
+                                                <div class="input-group-prepend">
+                                                        <span class="input-group-text" for="direccion">Direccion</span>
+                                                </div>
+                                                <input type="text" class="form-control" id="e_direccion" name="direccion" value = "">
+                                        </div>
+                                        <div class="input-group m-1 input-group-md">
+                                                <div class="input-group-prepend">
+                                                        <span class="input-group-text" for="mail">Mail</span>
+                                                </div>
+                                                <input type="text" class="form-control" name="mail" id="e_mail" value = "">
+                                        </div>
+                                        <div class="modal-footer">
+                                                <button type="submit" id="register" class="btn btn-primary">Guardar</button>
+                                        </div>
+                                        
+                                        <?php echo form_close(); ?>
+                                </div>
+                        </div>
+                </div>
+        </div>
         
 
 
@@ -180,6 +230,7 @@ $(document).ready(function(){
       
       
 });
+var id_edit;
 var id_cliente;
 var box = document.querySelectorAll("#box");
 for (i = 0; i < box.length; i++) {
@@ -206,22 +257,24 @@ for (i = 0; i < box.length; i++) {
 
 var btn_dni = document.getElementById('btn_buscar_dni');
 
-btn_dni.onclick = function (){
-
+btn_dni.onclick = function (a){
+        a.preventDefault();
+        var btn_edit = document.getElementById("editar_cliente");
+        btn_edit.disabled = true;
         var cli_grande = document.getElementById ("cliente_grande");
-        var dni_val = document.getElementById("dni");
-        //console.log (dni_val.value);
+        var dni_val = document.getElementById("documento");
         var e_h2 = document.getElementById("h nombre");
         var e_info = document.getElementById("info_cliente");
         e_h2.innerHTML = "Detalles del cliente";
         e_info.innerHTML = "";
         cli_grande.innerHTML = "";
-
         var data = <?php echo json_encode($persona, JSON_HEX_TAG); ?>;
         var ok = false;
         data.forEach(function(e){
                 
                 if(e['documento'] == dni_val.value){
+                        id_edit = dni_val.value;
+                        btn_edit.disabled = false;
                         var no = document.createElement("li");
                         var ap = document.createElement("li");
                         var doa = document.createElement("li");
@@ -267,7 +320,10 @@ btn_dni.onclick = function (){
 
 var btn_apellido = document.getElementById('btn_buscar_apellido');
 
-btn_apellido.onclick = function (){
+btn_apellido.onclick = function (a){
+        a.preventDefault();
+        var btn_edit = document.getElementById("editar_cliente");
+        btn_edit.disabled = true;
         var cli_grande = document.getElementById ("cliente_grande");
         var apellido_val = document.getElementById("apellido");
         var e_h2 = document.getElementById("h nombre");
@@ -284,6 +340,9 @@ btn_apellido.onclick = function (){
                 if(e['apellido'] == apellido_val.value){
                         //console.log (apellido_val.value);
                         repeat ++;
+                        id_edit = e['documento'];
+                        console.log (id_edit);
+                        btn_edit.disabled = false;
                         var no = document.createElement("li");
                         var ap = document.createElement("li");
                         var doa = document.createElement("li");
@@ -310,6 +369,7 @@ btn_apellido.onclick = function (){
                         ma.classList.add("list-group-item");
                         ma.id="box_cliente";
                         e_info.appendChild(ma);
+                        id_cliente = e['id'];
                         cli_g.innerHTML = (e['nombre']+" "+e['apellido']+" "+e['documento']);
                         cli_grande.appendChild(cli_g);
                         ok = true;
@@ -324,6 +384,7 @@ btn_apellido.onclick = function (){
                 e_h2.innerHTML = "Ups";
                 e_info.innerHTML = "Existen varios clientes con ese apellido, buscar por dni porfavor";
                 cli_grande.innerHTML = ""; 
+                btn_edit.disabled = true;
         }
         if(ok == false){
                 e_info.innerHTML = "El cliente no existe, debe crear uno nuevo";
@@ -389,5 +450,30 @@ function set_updateinteresada(id,val,id_cliente){
                         }
                 });
 };
+
+var btn_edit = document.getElementById('editar_cliente');
+
+btn_edit.onclick = function (a){
+        var e_id = document.getElementById ("e_id");
+        var e_nombre = document.getElementById ("e_nombre");
+        var e_apellido = document.getElementById ("e_apellido");
+        var e_dni = document.getElementById ("e_dni");
+        var e_direccion = document.getElementById ("e_direccion");
+        var e_mail = document.getElementById ("e_mail");
+
+        var data = <?php echo json_encode($persona, JSON_HEX_TAG); ?>;
+        var ok = false;
+        data.forEach(function(e){
+                if(e['documento'] == id_edit){
+                        e_id.value = e['id'];
+                        e_nombre.value = e['nombre'];
+                        e_apellido.value = e['apellido'];
+                        e_documento.value = e['documento'];
+                        e_direccion.value = e['direccion'];
+                        e_mail.value = e['mail'];
+                }
+        });
+}
+
 
 </script>

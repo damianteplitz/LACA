@@ -99,5 +99,122 @@ class Interesadas extends CI_Controller {
 			die;	
 		}	
         }
+
+        public function nuevo_Cliente()
+        {
+                       
+                if (!empty($_POST)) {
+                        $this->load->helper('form');
+                        $this->load->library('form_validation');
+                        
+                        $nombre = $this->input->post('nombre');
+                        $apellido = $this->input->post('apellido');
+                        $documento = $this->input->post('documento');
+                        $direccion = $this->input->post('direccion');
+                        $mail = $this->input->post('mail'); 
+                        
+                        $data['title'] = 'Crear nuevo curso';
+
+                        $datos = array(
+                                'nombre' => $nombre,
+                                'apellido' => $apellido,
+                                'documento' => $documento,
+                                'direccion' => $direccion,
+                                'mail' => $mail       
+                        );
+                        
+                        if($nombre && $apellido && $documento && $direccion && $mail){
+                                if($respuesta = $this->new_model->set_cliente($datos)){        
+                                        $message = "Orden Actualizado!";
+                                        $type    = "success";			
+                                }	
+                                else {
+                                        $message = "Error en BD.";
+                                        $type    = "warn";	
+                                }
+        
+                        }
+                        else {
+                                $message = "Error, verifique los datos.";
+                                $type    = "warn";	
+                        }
+                        
+
+                }
+
+                $data['c_abiertos'] = $this->new_model->get_cursos_abiertos();
+                $data['c_cerrados'] = $this->new_model->get_cursos_cerrados();
+                $data['materia'] = $this->new_model->get_det_cursos();
+                $data['persona'] = $this->new_model->get_clientes();
+                $this->load->view('templates/header', $data);
+                $this->load->view('interesadas/interesadas', $data);
+                $this->load->view('interesadas/modal_interesadas');
+                $this->load->view('templates/footer');
+                $result = array(
+                        'message' => $message,
+                        'type'    => $type
+                );
+                echo json_encode($result);
+        }
+
+        public function editar_Cliente()
+        {
+                       
+                if (!empty($_POST)) {
+                        $this->load->helper('form');
+                        $this->load->library('form_validation');
+                        
+                        $id = $this->input->post('id');
+                        $nombre = $this->input->post('nombre');
+                        $apellido = $this->input->post('apellido');
+                        $documento = $this->input->post('documento');
+                        $direccion = $this->input->post('direccion');
+                        $mail = $this->input->post('mail'); 
+                        
+                        $data['title'] = 'Crear nuevo curso';
+
+                        $datos = array(
+                                'id' => $id,
+                                'nombre' => $nombre,
+                                'apellido' => $apellido,
+                                'documento' => $documento,
+                                'direccion' => $direccion,
+                                'mail' => $mail                         
+                        );
+
+                        
+                        if($id && $nombre && $apellido && $documento && $direccion && $mail){
+                                if($respuesta = $this->new_model->upload_cliente($datos)){        
+                                        $message = "Orden Actualizado!";
+                                        $type    = "success";			
+                                }	
+                                else {
+                                        $message = "Error en BD.";
+                                        $type    = "warn";	
+                                }
+        
+                        }
+                        else {
+                                $message = "Error, verifique los datos.";
+                                $type    = "warn";	
+                        }
+                        
+
+                }
+
+                $data['c_abiertos'] = $this->new_model->get_cursos_abiertos();
+                $data['c_cerrados'] = $this->new_model->get_cursos_cerrados();
+                $data['materia'] = $this->new_model->get_det_cursos();
+                $data['persona'] = $this->new_model->get_clientes();
+                $this->load->view('templates/header', $data);
+                $this->load->view('interesadas/interesadas', $data);
+                $this->load->view('interesadas/modal_interesadas');
+                $this->load->view('templates/footer');
+                $result = array(
+                        'message' => $message,
+                        'type'    => $type
+                );
+                echo json_encode($result);
+        }
        
 }
