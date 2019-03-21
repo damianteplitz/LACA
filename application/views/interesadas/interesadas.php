@@ -39,8 +39,7 @@
                                 <div class="modal-footer">
                                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal_nuevo_cliente">Nuevo</button>
                                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal_editar_cliente" id="editar_cliente" disabled="true">Editar</button>
-                                        <button type="button" class="btn btn-success" data-dismiss="modal">Confirmar</button>
-                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-success" data-dismiss="modal" id="confirmar">Confirmar</button>
                                 </div>
                         </div>
                 </div>
@@ -71,7 +70,7 @@
                                 <div class="modal-footer">
                                         <input type="hidden" id="<?php echo $id_c;?>" value = "<?php echo $c_abiertos[$w]['id']; ?>">
                                         <div class="checkbox">
-                                                <label><input type="checkbox" value="" id="<?php echo $inters;?>">Interesada</label>
+                                                <label><input name="checked"  type="checkbox" value="<?php echo $c_abiertos[$w]['id'];?>"  id="checkboxx">Interesada</label>
                                         </div>
                                         <button type="button" class="btn btn-success" data-dismiss="modal" name="btn_interesada" id=<?php echo $btn_c;?> >Confirmar</button>
                                 </div>
@@ -187,7 +186,7 @@
         
 
 
-        <div class="row justify-content-md-center mt-5">
+        <div class="row justify-content-md-center mt-5" >
                 <h1>Clientes interesadas</h1>
         </div>
         <div class="row justify-content-md-center mt-2">
@@ -196,18 +195,18 @@
         </div>
 
         
-        <div class="row justify-content-md-center mt-5" >
-                <div class="col-sm-3" id="cliente_grande">
+        <div class="row justify-content-md-center mt-5">
+                <div class="col-sm-3" id="cliente_grande" style="display:none;">
                 
                 </div>
         </div>
-        <div class="row justify-content-md-center ">
-                <div class="col-sm-9 ">
+        <div class="row justify-content-md-center " id="row_cursos_abiertos"  style="display:none;">
+                <div class="col-sm-9 " >
                         <?php $q = 0;?>
                         <?php foreach ($c_abiertos as $course): ?>
                         
                         <?php $mod = "#modal_detalle_curso".$q;?>
-                                <div id="box" class="m-2 border border-secondary">    
+                                <div id="box" class="m-2 border border-secondary" >    
                                         <div class="m-2">
                                                 <h1><?php echo $course['nombre']; ?></h1>
                                                 <p><?php echo $course['detalles']; ?></p>
@@ -230,6 +229,10 @@ $(document).ready(function(){
       
       
 });
+
+var cliente_buscado_nombre;
+var cliente_buscado_dni;
+var cliente_buscado_apellido;
 var id_edit;
 var id_cliente;
 var box = document.querySelectorAll("#box");
@@ -259,20 +262,26 @@ var btn_dni = document.getElementById('btn_buscar_dni');
 
 btn_dni.onclick = function (a){
         a.preventDefault();
+        cliente_buscado_nombre = "";
+        cliente_buscado_dni = "";
+        cliente_buscado_apellido = "";
         var btn_edit = document.getElementById("editar_cliente");
+        var row_nombre_cliente = document.getElementById("cliente_grande");
+        var row_cursos = document.getElementById("row_cursos_abiertos");
+        row_nombre_cliente.style = "display:none;";
+        row_cursos.style = "display:none;" ;
         btn_edit.disabled = true;
-        var cli_grande = document.getElementById ("cliente_grande");
         var dni_val = document.getElementById("documento");
         var e_h2 = document.getElementById("h nombre");
         var e_info = document.getElementById("info_cliente");
         e_h2.innerHTML = "Detalles del cliente";
         e_info.innerHTML = "";
-        cli_grande.innerHTML = "";
         var data = <?php echo json_encode($persona, JSON_HEX_TAG); ?>;
         var ok = false;
         data.forEach(function(e){
                 
                 if(e['documento'] == dni_val.value){
+                        
                         id_edit = dni_val.value;
                         btn_edit.disabled = false;
                         var no = document.createElement("li");
@@ -280,7 +289,6 @@ btn_dni.onclick = function (a){
                         var doa = document.createElement("li");
                         var di = document.createElement("li");
                         var ma = document.createElement("li");
-                        var cli_g = document.createElement("h4");
                         no.textContent = "Nombre: "+e['nombre'];
                         no.classList.add("list-group-item");
                         no.id="box_cliente";
@@ -301,9 +309,9 @@ btn_dni.onclick = function (a){
                         ma.classList.add("list-group-item");
                         ma.id="box_cliente";
                         e_info.appendChild(ma);
-                        cli_g.innerHTML = (e['nombre']+" "+e['apellido']+" "+e['documento']);
-                        id_cliente = e['id'];
-                        cli_grande.appendChild(cli_g);
+                        cliente_buscado_nombre = e['nombre'];
+                        cliente_buscado_dni = e['documento'];
+                        cliente_buscado_apellido = e['apellido'];
                         ok = true;
                 }
         });
@@ -324,14 +332,18 @@ btn_apellido.onclick = function (a){
         a.preventDefault();
         var btn_edit = document.getElementById("editar_cliente");
         btn_edit.disabled = true;
-        var cli_grande = document.getElementById ("cliente_grande");
+        cliente_buscado_nombre = "";
+        cliente_buscado_dni = "";
+        cliente_buscado_apellido = "";
+        var row_nombre_cliente = document.getElementById("cliente_grande");
+        var row_cursos = document.getElementById("row_cursos_abiertos");
+        row_nombre_cliente.style = "display:none;";
+        row_cursos.style = "display:none;" ;
         var apellido_val = document.getElementById("apellido");
         var e_h2 = document.getElementById("h nombre");
         var e_info = document.getElementById("info_cliente");
         e_h2.innerHTML = "Detalles del cliente";
         e_info.innerHTML = "";
-        cli_grande.innerHTML = "";
-
         var data = <?php echo json_encode($persona, JSON_HEX_TAG); ?>;
         var ok = false;
         var repeat = 0;
@@ -348,7 +360,6 @@ btn_apellido.onclick = function (a){
                         var doa = document.createElement("li");
                         var di = document.createElement("li");
                         var ma = document.createElement("li");
-                        var cli_g = document.createElement("h4");
                         no.textContent = "Nombre: "+e['nombre'];
                         no.classList.add("list-group-item");
                         no.id="box_cliente";
@@ -370,8 +381,9 @@ btn_apellido.onclick = function (a){
                         ma.id="box_cliente";
                         e_info.appendChild(ma);
                         id_cliente = e['id'];
-                        cli_g.innerHTML = (e['nombre']+" "+e['apellido']+" "+e['documento']);
-                        cli_grande.appendChild(cli_g);
+                        cliente_buscado_nombre = e['nombre'];
+                        cliente_buscado_dni = e['documento'];
+                        cliente_buscado_apellido = e['apellido'];
                         ok = true;
                 }
         });
@@ -475,5 +487,49 @@ btn_edit.onclick = function (a){
         });
 }
 
+
+
+var c_abiertos = <?php echo json_encode($c_abiertos); ?>;
+var personas = <?php echo json_encode($persona); ?>;
+var interesadas = <?php echo json_encode($interesadas); ?>;
+
+var btn_conf = document.getElementById('confirmar');
+
+btn_conf.onclick = function (){
+
+        var cli_grande = document.getElementById ("cliente_grande");
+        cli_grande.innerHTML = "";
+
+        if (cliente_buscado_dni.length){
+                var row_nombre_cliente = document.getElementById("cliente_grande");
+                var row_cursos = document.getElementById("row_cursos_abiertos");
+                row_nombre_cliente.style = "";
+                row_cursos.style = "" ;
+                var cli_g = document.createElement("h4");
+                cli_g.innerHTML = (cliente_buscado_nombre+" "+cliente_buscado_apellido+" "+cliente_buscado_dni);
+                cli_grande.appendChild(cli_g);
+        }
+
+        var ch = document.querySelectorAll("#checkboxx");
+
+        for (i = 0; i < ch.length; i++) {
+                for (j = 0; j < c_abiertos.length; j++){
+                        if (c_abiertos[j]['id']==ch[i].value){
+                                for (h = 0; h < interesadas.length; h++){
+                                        if (interesadas[h]['id_cliente'] == id_cliente && c_abiertos[j]['id']== interesadas[h]['id_cabierto']){
+                                                if (interesadas[h]['estado']==1){
+                                                        ch[i].checked = true;
+                                                }
+                                                else
+                                                {
+                                                        console.log("a");
+                                                        ch[i].checked = false;
+                                                }
+                                        } 
+                                }
+                        }
+                }
+        }
+}
 
 </script>

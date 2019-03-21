@@ -174,5 +174,10 @@ class New_model extends CI_Model {
                 $resultado = $this->db->insert('Clientes_cursos',$data);
                 return $resultado;
         }
+        public function get_interesadas()
+        {
+                $query = $this->db->get('Clientes_cursos');
+                return $query->result_array();
+        }
 }
 

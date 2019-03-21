@@ -28,9 +28,10 @@ class Interesadas extends CI_Controller {
                 {
                         $this->new_model->set_clientes();  
                 
+                        $data['interesadas'] =  $this->new_model->get_interesadas();
                         $data['c_abiertos'] = $this->new_model->get_cursos_abiertos();
                         $data['c_cerrados'] = $this->new_model->get_cursos_cerrados();
-                        $data['materia'] = $this->new_model->get_det_cursos_abiertos();
+                        $data['materia'] = $this->new_model->get_det_cursos();
                         $data['persona'] = $this->new_model->get_clientes();
                         $data['title'] = 'Generar nuevo curso';
                               
@@ -40,6 +41,7 @@ class Interesadas extends CI_Controller {
                         $this->load->view('templates/footer');
                 }
 
+                $data['interesadas'] =  $this->new_model->get_interesadas();
                 $data['c_abiertos'] = $this->new_model->get_cursos_abiertos();
                 $data['c_cerrados'] = $this->new_model->get_cursos_cerrados();
                 $data['materia'] = $this->new_model->get_det_cursos();
@@ -142,10 +144,12 @@ class Interesadas extends CI_Controller {
 
                 }
 
+                $data['interesadas'] =  $this->new_model->get_interesadas();
                 $data['c_abiertos'] = $this->new_model->get_cursos_abiertos();
                 $data['c_cerrados'] = $this->new_model->get_cursos_cerrados();
                 $data['materia'] = $this->new_model->get_det_cursos();
                 $data['persona'] = $this->new_model->get_clientes();
+                $data['title'] = 'Generar nuevo curso';
                 $this->load->view('templates/header', $data);
                 $this->load->view('interesadas/interesadas', $data);
                 $this->load->view('interesadas/modal_interesadas');
@@ -202,10 +206,12 @@ class Interesadas extends CI_Controller {
 
                 }
 
+                $data['interesadas'] =  $this->new_model->get_interesadas();
                 $data['c_abiertos'] = $this->new_model->get_cursos_abiertos();
                 $data['c_cerrados'] = $this->new_model->get_cursos_cerrados();
                 $data['materia'] = $this->new_model->get_det_cursos();
                 $data['persona'] = $this->new_model->get_clientes();
+                $data['title'] = 'Generar nuevo curso';
                 $this->load->view('templates/header', $data);
                 $this->load->view('interesadas/interesadas', $data);
                 $this->load->view('interesadas/modal_interesadas');

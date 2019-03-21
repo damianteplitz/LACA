@@ -65,3 +65,24 @@ INSERT INTO Cursos_abiertos (id_curso,f_inicio,f_final,estado)
 VALUES ((SELECT id FROM Cursos WHERE id = 3),'2019-02-01','2019-02-28',1);
 INSERT INTO Cursos_abiertos (id_curso,f_inicio,f_final,estado)
 VALUES ((SELECT id FROM Cursos WHERE id = 4),'2019-02-01','2019-02-28',1);
+
+
+
+INSERT INTO Clientes_cursos (id_cliente,id_cabierto,estado,f_consulta,f_inscripcion)
+VALUES ((SELECT id FROM Clientes WHERE id = 1),(SELECT id FROM Cursos_abiertos WHERE id = 1),1,CURDATE(),CURDATE());
+INSERT INTO Clientes_cursos (id_cliente,id_cabierto,estado,f_consulta,f_inscripcion)
+VALUES ((SELECT id FROM Clientes WHERE id = 1),(SELECT id FROM Cursos_abiertos WHERE id = 3),1,CURDATE(),CURDATE());
+INSERT INTO Clientes_cursos (id_cliente,id_cabierto,estado,f_consulta,f_inscripcion)
+VALUES ((SELECT id FROM Clientes WHERE id = 2),(SELECT id FROM Cursos_abiertos WHERE id = 1),1,CURDATE(),CURDATE());
+INSERT INTO Clientes_cursos (id_cliente,id_cabierto,estado,f_consulta,f_inscripcion)
+VALUES ((SELECT id FROM Clientes WHERE id = 2),(SELECT id FROM Cursos_abiertos WHERE id = 3),1,CURDATE(),CURDATE());
+INSERT INTO Clientes_cursos (id_cliente,id_cabierto,estado,f_consulta,f_inscripcion)
+VALUES ((SELECT id FROM Clientes WHERE id = 3),(SELECT id FROM Cursos_abiertos WHERE id = 1),1,CURDATE(),CURDATE());
+INSERT INTO Clientes_cursos (id_cliente,id_cabierto,estado,f_consulta,f_inscripcion)
+VALUES ((SELECT id FROM Clientes WHERE id = 3),(SELECT id FROM Cursos_abiertos WHERE id = 3),1,CURDATE(),CURDATE());
+INSERT INTO Clientes_cursos (id_cliente,id_cabierto,estado,f_consulta,f_inscripcion)
+VALUES ((SELECT id FROM Clientes WHERE id = 4),(SELECT id FROM Cursos_abiertos WHERE id = 1),1,CURDATE(),CURDATE());
+INSERT INTO Clientes_cursos (id_cliente,id_cabierto,estado,f_consulta,f_inscripcion)
+VALUES ((SELECT id FROM Clientes WHERE id = 4),(SELECT id FROM Cursos_abiertos WHERE id = 3),1,CURDATE(),CURDATE());
+
+
