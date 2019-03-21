@@ -46,7 +46,7 @@
                 </div>
         </div>
         <?php $w = 0; ?>        
-        <?php foreach ($materia as $course): ?>
+        <?php foreach ($c_abiertos as $course): ?>
         <?php $mod = "modal_detalle_curso".$w; ?>
         <?php $id_c = "id".$w; ?>
         <?php $btn_c = "btn_id".$w; ?>
@@ -62,14 +62,14 @@
                         <!-- Modal body -->
                         <div class="modal-body">
                                 <ul class="list-group">
-                                        <li class="list-group-item" id="curso_det_box">Nombre: <?php echo $materia[$w]['nombre']; ?></li>
-                                        <li class="list-group-item" id="curso_det_box">Detalles: <?php echo $materia[$w]['detalles']; ?></li>
-                                        <li class="list-group-item" id="curso_det_box">Duracion: <?php echo $materia[$w]['duracion']; ?></li>
-                                        <li class="list-group-item" id="curso_det_box">Minimo: <?php echo $materia[$w]['minimo']; ?></li>
-                                        <li class="list-group-item" id="curso_det_box">Maximo: <?php echo $materia[$w]['maximo']; ?></li>
+                                        <li class="list-group-item" id="curso_det_box">Nombre: <?php echo $c_abiertos[$w]['nombre']; ?></li>
+                                        <li class="list-group-item" id="curso_det_box">Detalles: <?php echo $c_abiertos[$w]['detalles']; ?></li>
+                                        <li class="list-group-item" id="curso_det_box">Duracion: <?php echo $c_abiertos[$w]['duracion']; ?></li>
+                                        <li class="list-group-item" id="curso_det_box">Minimo: <?php echo $c_abiertos[$w]['minimo']; ?></li>
+                                        <li class="list-group-item" id="curso_det_box">Maximo: <?php echo $c_abiertos[$w]['maximo']; ?></li>
                                 </ul>
                                 <div class="modal-footer">
-                                        <input type="hidden" id="<?php echo $id_c;?>" value = "<?php echo $materia[$w]['id']; ?>">
+                                        <input type="hidden" id="<?php echo $id_c;?>" value = "<?php echo $c_abiertos[$w]['id']; ?>">
                                         <div class="checkbox">
                                                 <label><input type="checkbox" value="" id="<?php echo $inters;?>">Interesada</label>
                                         </div>
@@ -154,7 +154,7 @@
         <div class="row justify-content-md-center ">
                 <div class="col-sm-9 ">
                         <?php $q = 0;?>
-                        <?php foreach ($materia as $course): ?>
+                        <?php foreach ($c_abiertos as $course): ?>
                         
                         <?php $mod = "#modal_detalle_curso".$q;?>
                                 <div id="box" class="m-2 border border-secondary">    
