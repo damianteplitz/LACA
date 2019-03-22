@@ -67,13 +67,18 @@
                                         <li class="list-group-item" id="curso_det_box">Minimo: <?php echo $c_abiertos[$w]['minimo']; ?></li>
                                         <li class="list-group-item" id="curso_det_box">Maximo: <?php echo $c_abiertos[$w]['maximo']; ?></li>
                                 </ul>
-                                <div class="modal-footer">
-                                        <input type="hidden" id="<?php echo $id_c;?>" value = "<?php echo $c_abiertos[$w]['id']; ?>">
-                                        <div class="checkbox">
-                                                <label><input name="checked"  type="checkbox" value="<?php echo $c_abiertos[$w]['id'];?>"  id="checkboxx">Interesada</label>
+                                <?php echo form_open('index.php/interesadas/actualizar_Interesada'); ?>
+                                        <div class="modal-footer">
+                                                
+                                                <input name="id_cabierto" type="hidden" id="id_cabierto" value = "<?php echo $c_abiertos[$w]['id']; ?>">
+                                                <input name="id_cliente" type="hidden" id="id_cliente_form" value = "">
+                                                <div class="checkbox">
+                                                        <label><input name="checked"  type="checkbox" value="<?php echo $c_abiertos[$w]['id']; ?>"  id="checkboxx">Interesada</label>
+                                                </div>
+                                                <button type="submit" id="register" class="btn btn-primary">Guardar</button>
+                                        
                                         </div>
-                                        <button type="button" class="btn btn-success" data-dismiss="modal" name="btn_interesada" id=<?php echo $btn_c;?> >Confirmar</button>
-                                </div>
+                                <?php echo form_close(); ?>
                         </div>
                         <!-- Modal footer -->
                     </div>
@@ -212,7 +217,7 @@
                                                 <p><?php echo $course['detalles']; ?></p>
                                         </div>
                                         <div class="text-right">
-                                                <button type="button" class="btn btn-primary m-1" data-toggle="modal" data-target="<?php echo $mod ;?>" id="button_edit">Ver detalles</button>
+                                                <button type="button" class="btn btn-primary m-1" data-toggle="modal" data-target="<?php echo $mod ;?>" id="button_detalles">Ver detalles</button>
                                         </div>
                                 </div>
                         <?php $q++;?>
@@ -220,7 +225,6 @@
                 </div>
         </div>
     </body>
-    <input type="hidden" id="token" name="<?=$csrf['name'];?>" value="<?=$csrf['hash'];?>" />
 <script>
 
 $(document).ready(function(){
@@ -230,11 +234,18 @@ $(document).ready(function(){
       
 });
 
+//variables globales
+var c_abiertos = <?php echo json_encode($c_abiertos); ?>;
+var personas = <?php echo json_encode($persona); ?>;
+var interesadas = <?php echo json_encode($interesadas); ?>;
 var cliente_buscado_nombre;
 var cliente_buscado_dni;
 var cliente_buscado_apellido;
+var cliente_buscado_id;
 var id_edit;
 var id_cliente;
+
+///colores degrade
 var box = document.querySelectorAll("#box");
 for (i = 0; i < box.length; i++) {
   box[i].style.backgroundColor = "rgb("+(210-i*15)+","+(190-i*5)+","+242+")";
@@ -258,37 +269,48 @@ for (i = 0; i < box.length; i++) {
   }
 }
 
+
+//boton buscar por dni
 var btn_dni = document.getElementById('btn_buscar_dni');
 
 btn_dni.onclick = function (a){
         a.preventDefault();
-        cliente_buscado_nombre = "";
-        cliente_buscado_dni = "";
-        cliente_buscado_apellido = "";
+
         var btn_edit = document.getElementById("editar_cliente");
         var row_nombre_cliente = document.getElementById("cliente_grande");
         var row_cursos = document.getElementById("row_cursos_abiertos");
-        row_nombre_cliente.style = "display:none;";
-        row_cursos.style = "display:none;" ;
-        btn_edit.disabled = true;
         var dni_val = document.getElementById("documento");
         var e_h2 = document.getElementById("h nombre");
         var e_info = document.getElementById("info_cliente");
-        e_h2.innerHTML = "Detalles del cliente";
-        e_info.innerHTML = "";
         var data = <?php echo json_encode($persona, JSON_HEX_TAG); ?>;
         var ok = false;
+
+        cliente_buscado_nombre = "";
+        cliente_buscado_dni = "";
+        cliente_buscado_apellido = "";
+        row_nombre_cliente.style = "display:none;";
+        row_cursos.style = "display:none;" ;
+        e_h2.innerHTML = "Detalles del cliente";
+        e_info.innerHTML = "";
+        btn_edit.disabled = true;
+
         data.forEach(function(e){
                 
                 if(e['documento'] == dni_val.value){
-                        
-                        id_edit = dni_val.value;
-                        btn_edit.disabled = false;
                         var no = document.createElement("li");
                         var ap = document.createElement("li");
                         var doa = document.createElement("li");
                         var di = document.createElement("li");
                         var ma = document.createElement("li");
+                        
+                        id_edit = dni_val.value;
+                        btn_edit.disabled = false;
+                        ok = true;
+                        cliente_buscado_nombre = e['nombre'];
+                        cliente_buscado_dni = e['documento'];
+                        cliente_buscado_apellido = e['apellido'];
+                        cliente_buscado_id = e['id'];                        
+                        
                         no.textContent = "Nombre: "+e['nombre'];
                         no.classList.add("list-group-item");
                         no.id="box_cliente";
@@ -309,10 +331,7 @@ btn_dni.onclick = function (a){
                         ma.classList.add("list-group-item");
                         ma.id="box_cliente";
                         e_info.appendChild(ma);
-                        cliente_buscado_nombre = e['nombre'];
-                        cliente_buscado_dni = e['documento'];
-                        cliente_buscado_apellido = e['apellido'];
-                        ok = true;
+                        
                 }
         });
         if(ok == false){
@@ -326,40 +345,50 @@ btn_dni.onclick = function (a){
 }
 
 
+//boton buscar por apellido
 var btn_apellido = document.getElementById('btn_buscar_apellido');
 
 btn_apellido.onclick = function (a){
         a.preventDefault();
+
         var btn_edit = document.getElementById("editar_cliente");
+        var row_nombre_cliente = document.getElementById("cliente_grande");
+        var row_cursos = document.getElementById("row_cursos_abiertos");
+        var apellido_val = document.getElementById("apellido");
+        var e_h2 = document.getElementById("h nombre");
+        var e_info = document.getElementById("info_cliente");
+        var data = <?php echo json_encode($persona, JSON_HEX_TAG); ?>;
+        var ok = false;
+        var repeat = 0;
+
         btn_edit.disabled = true;
         cliente_buscado_nombre = "";
         cliente_buscado_dni = "";
         cliente_buscado_apellido = "";
-        var row_nombre_cliente = document.getElementById("cliente_grande");
-        var row_cursos = document.getElementById("row_cursos_abiertos");
         row_nombre_cliente.style = "display:none;";
         row_cursos.style = "display:none;" ;
-        var apellido_val = document.getElementById("apellido");
-        var e_h2 = document.getElementById("h nombre");
-        var e_info = document.getElementById("info_cliente");
         e_h2.innerHTML = "Detalles del cliente";
         e_info.innerHTML = "";
-        var data = <?php echo json_encode($persona, JSON_HEX_TAG); ?>;
-        var ok = false;
-        var repeat = 0;
+       
         data.forEach(function(e){
                 
                 if(e['apellido'] == apellido_val.value){
-                        //console.log (apellido_val.value);
-                        repeat ++;
-                        id_edit = e['documento'];
-                        console.log (id_edit);
-                        btn_edit.disabled = false;
                         var no = document.createElement("li");
                         var ap = document.createElement("li");
                         var doa = document.createElement("li");
                         var di = document.createElement("li");
                         var ma = document.createElement("li");
+                        //console.log (apellido_val.value);
+                        //console.log (id_edit);
+                        repeat ++;
+                        id_edit = e['documento'];
+                        btn_edit.disabled = false;
+                        cliente_buscado_nombre = e['nombre'];
+                        cliente_buscado_dni = e['documento'];
+                        cliente_buscado_apellido = e['apellido'];
+                        cliente_buscado_id = e['id'];
+                        ok = true;
+
                         no.textContent = "Nombre: "+e['nombre'];
                         no.classList.add("list-group-item");
                         no.id="box_cliente";
@@ -381,10 +410,7 @@ btn_apellido.onclick = function (a){
                         ma.id="box_cliente";
                         e_info.appendChild(ma);
                         id_cliente = e['id'];
-                        cliente_buscado_nombre = e['nombre'];
-                        cliente_buscado_dni = e['documento'];
-                        cliente_buscado_apellido = e['apellido'];
-                        ok = true;
+                      
                 }
         });
         var box = document.querySelectorAll("#box_cliente");
@@ -403,66 +429,7 @@ btn_apellido.onclick = function (a){
         }
 }
 
-       
-var box = document.querySelectorAll("#box");
-
-for (i = 0; i < box.length; i++) {
-        box[i].style.backgroundColor = "rgb("+(210-i*15)+","+(190-i*5)+","+242+")";
-        box[i].id = i;
-}
-
-
-
-var boton_interesada = document.querySelectorAll('[name="btn_interesada"]');
-var u = 0;
-boton_interesada.forEach (function(e){
-        var id_id = "id"+u;
-        var inter_inter = "interesada"+u;
-        var btn_id = "btn_id"+u;
-        //console.log(boton_interesada[i]);
-        var btn = document.getElementById(btn_id);
-        //console.log (btn);
-        btn.onclick = function (h){
-               // console.log(h);
-                var interested = document.getElementById(inter_inter);
-                var id_cl = document.getElementById(id_id);
-                
-                console.log (id_cl.value);
-                console.log (interested.checked);
-                console.log (id_cliente);
-                set_updateinteresada(id_cl.value,interested.value,id_cliente);
-                //console.log(id_id+"__"+inter_inter);
-                
-        }
-        u++;
-}); 
-                //console.log ("a");
-
-function set_updateinteresada(id,val,id_cliente){
-        if (!id_cliente){
-                console.log ("No selecciono cliente");
-                return 0;
-        }
-        $.ajax({
-                        url: '<?=base_url()?>Interesadas/updateInteresada',
-                        type: 'POST',
-                        dataType: 'json',
-                        data:   {'rca_token'     : $("#token").val(),
-                                 'id_cliente'    : id_cliente,
-                                 'id_cabierto'   : id,
-                                 'estado'        : val
-                                },
-                        cache: false,
-                        async: true,
-                        success: function(data){
-                                console.log("data");
-                        },
-                        error: function (xhr, ajaxOptions, thrownError) {
-                                console.log ("xhr");
-                        }
-                });
-};
-
+//boton editar cliente
 var btn_edit = document.getElementById('editar_cliente');
 
 btn_edit.onclick = function (a){
@@ -489,13 +456,16 @@ btn_edit.onclick = function (a){
 
 
 
-var c_abiertos = <?php echo json_encode($c_abiertos); ?>;
-var personas = <?php echo json_encode($persona); ?>;
-var interesadas = <?php echo json_encode($interesadas); ?>;
-
+//boton confirmar cliente
 var btn_conf = document.getElementById('confirmar');
 
 btn_conf.onclick = function (){
+
+        var id_cli_form = document.querySelectorAll ("#id_cliente_form");
+        for (i = 0; i < id_cli_form.length; i++) {
+                id_cli_form[i].value = cliente_buscado_id;
+                console.log (cliente_buscado_id);
+        }
 
         var cli_grande = document.getElementById ("cliente_grande");
         cli_grande.innerHTML = "";
@@ -511,7 +481,6 @@ btn_conf.onclick = function (){
         }
 
         var ch = document.querySelectorAll("#checkboxx");
-
         for (i = 0; i < ch.length; i++) {
                 for (j = 0; j < c_abiertos.length; j++){
                         if (c_abiertos[j]['id']==ch[i].value){
@@ -522,7 +491,6 @@ btn_conf.onclick = function (){
                                                 }
                                                 else
                                                 {
-                                                        console.log("a");
                                                         ch[i].checked = false;
                                                 }
                                         } 
@@ -531,5 +499,16 @@ btn_conf.onclick = function (){
                 }
         }
 }
+
+
+var btn_det = document.querySelectorAll('#button_detalles');
+/*
+btn_det.forEach (function(a){
+        a.onclick = function (e){
+                console.log(e);
+                console.log($(this).attr("data-target"));
+                
+        }       
+});*/
 
 </script>

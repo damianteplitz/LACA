@@ -153,6 +153,9 @@ class Cursos extends CI_Controller {
 
                 }
 
+                $data['interesadas'] =  $this->new_model->get_interesadas();
+                $data['c_abiertos'] = $this->new_model->get_cursos_abiertos();
+                $data['c_cerrados'] = $this->new_model->get_cursos_cerrados();
                 $data['materia'] = $this->new_model->get_det_cursos();
                 $data['persona'] = $this->new_model->get_clientes();
                 $this->load->view('templates/header', $data);

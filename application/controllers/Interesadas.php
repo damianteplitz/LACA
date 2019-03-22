@@ -67,40 +67,6 @@ class Interesadas extends CI_Controller {
         public function get_det_cursos (){
                 $data  = $this->New_model->get_det_cursos();
         }	
-        public function updateInteresada(){
-                $is_ajax = $this->input->is_ajax_request();
-
-                if($is_ajax)
-                {
-                        $id_cliente     = $this->input->post('id_cliente');
-                        $id_cabierto    = $this->input->post('id_cabierto');
-                        $estado         = $this->input->post('estado');
-                        $data = array(
-				'id_cliente'            => $id_cliente,
-				'id_cabierto'              => $id_cabierto,
-				'estado'        => $estado
-                        );
-                        $response = $this->new_model->setInteresada($data);
-                        if($response)
-			{
-				$message = "Curso asignado";
-				$type    = "success";
-			}
-			else
-			{
-				$message = "Error, verifique los datos.";
-				$type    = "warn";	
-			}
-
-			$result = array(
-				'message' => $message,
-				'type'    => $type
-			);
-
-			echo json_encode($result);
-			die;	
-		}	
-        }
 
         public function nuevo_Cliente()
         {
@@ -188,7 +154,7 @@ class Interesadas extends CI_Controller {
 
                         
                         if($id && $nombre && $apellido && $documento && $direccion && $mail){
-                                if($respuesta = $this->new_model->upload_cliente($datos)){        
+                                if($respuesta = $this->new_model->upload_cliente($datos,$data['interesadas'])){        
                                         $message = "Orden Actualizado!";
                                         $type    = "success";			
                                 }	
@@ -200,6 +166,69 @@ class Interesadas extends CI_Controller {
                         }
                         else {
                                 $message = "Error, verifique los datos.";
+                                $type    = "warn";	
+                        }
+                        
+
+                }
+
+                $data['interesadas'] =  $this->new_model->get_interesadas();
+                $data['c_abiertos'] = $this->new_model->get_cursos_abiertos();
+                $data['c_cerrados'] = $this->new_model->get_cursos_cerrados();
+                $data['materia'] = $this->new_model->get_det_cursos();
+                $data['persona'] = $this->new_model->get_clientes();
+                $data['title'] = 'Generar nuevo curso';
+                $this->load->view('templates/header', $data);
+                $this->load->view('interesadas/interesadas', $data);
+                $this->load->view('interesadas/modal_interesadas');
+                $this->load->view('templates/footer');
+                $result = array(
+                        'message' => $message,
+                        'type'    => $type
+                );
+                echo json_encode($result);
+        }
+
+        public function actualizar_Interesada()
+        {
+                       
+                if (!empty($_POST)) {
+                        $this->load->helper('form');
+                        $this->load->library('form_validation');
+                        
+                        $id_cliente = $this->input->post('id_cliente');
+                        $id_cabierto = $this->input->post('id_cabierto');
+                        $estado = $this->input->post('checked');
+                        
+                        if($estado){
+                                $estado = "1";
+                        }
+                        else{
+                                $estado = "0";
+                        }
+
+                        $data['title'] = 'Crear nuevo curso';
+
+                        $datos = array(
+                                'id_cliente' => $id_cliente,
+                                'id_cabierto' => $id_cabierto,
+                                'estado' => $estado                      
+                        );
+
+                        
+                        if($id_cliente && $id_cabierto){
+                                if($respuesta = $this->new_model->upload_interesada($datos)){        
+                                        $message = "Orden Actualizado!";
+                                        $type    = "success";			
+                                }	
+                                else {
+                                        $message = "Error en BD.";
+                                        $type    = "warn";	
+                                }
+        
+                        }
+                        else {
+                                $message = "Error, verifique los datos";
                                 $type    = "warn";	
                         }
                         
