@@ -133,7 +133,7 @@ class Interesadas extends CI_Controller {
                 if (!empty($_POST)) {
                         $this->load->helper('form');
                         $this->load->library('form_validation');
-                        
+                        $data['interesadas'] =  $this->new_model->get_interesadas();
                         $id = $this->input->post('id');
                         $nombre = $this->input->post('nombre');
                         $apellido = $this->input->post('apellido');
