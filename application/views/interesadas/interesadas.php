@@ -467,7 +467,7 @@ btn_conf.onclick = function (){
         var id_cli_form = document.querySelectorAll ("#id_cliente_form");
         for (i = 0; i < id_cli_form.length; i++) {
                 id_cli_form[i].value = cliente_buscado_id;
-                console.log (cliente_buscado_id);
+                //console.log (cliente_buscado_id);
         }
 
         var cli_grande = document.getElementById ("cliente_grande");
@@ -490,12 +490,12 @@ btn_conf.onclick = function (){
                                 for (h = 0; h < interesadas.length; h++){
                                         if (interesadas[h]['id_cliente'] == id_cliente && c_abiertos[j]['id']== interesadas[h]['id_cabierto']){
                                                 if (interesadas[h]['estado']==1){
-                                                        console.log ("id_ cliente es : "+id_cliente+" id c_abierto es : "+c_abiertos[j]['id']+" y esta interesado");
+                                                        //console.log ("id_ cliente es : "+id_cliente+" id c_abierto es : "+c_abiertos[j]['id']+" y esta interesado");
                                                         ch[i].checked = true;
                                                 }
                                                 else
                                                 {
-                                                        console.log ("id_ cliente es : "+id_cliente+" id c_abierto es : "+c_abiertos[j]['id']+" y no esta interesado");
+                                                       // console.log ("id_ cliente es : "+id_cliente+" id c_abierto es : "+c_abiertos[j]['id']+" y no esta interesado");
                                                         ch[i].checked = false;
                                                 }
                                         } 
@@ -504,16 +504,5 @@ btn_conf.onclick = function (){
                 }
         }
 }
-
-
-var btn_det = document.querySelectorAll('#button_detalles');
-/*
-btn_det.forEach (function(a){
-        a.onclick = function (e){
-                console.log(e);
-                console.log($(this).attr("data-target"));
-                
-        }       
-});*/
 
 </script>
