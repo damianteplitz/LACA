@@ -285,6 +285,7 @@ btn_dni.onclick = function (a){
         var data = <?php echo json_encode($persona, JSON_HEX_TAG); ?>;
         var ok = false;
 
+        cliente_buscado_id = "";
         cliente_buscado_nombre = "";
         cliente_buscado_dni = "";
         cliente_buscado_apellido = "";
@@ -331,6 +332,7 @@ btn_dni.onclick = function (a){
                         ma.classList.add("list-group-item");
                         ma.id="box_cliente";
                         e_info.appendChild(ma);
+                        id_cliente = e['id'];
                         
                 }
         });
@@ -362,6 +364,7 @@ btn_apellido.onclick = function (a){
         var repeat = 0;
 
         btn_edit.disabled = true;
+        cliente_buscado_id = "";
         cliente_buscado_nombre = "";
         cliente_buscado_dni = "";
         cliente_buscado_apellido = "";
@@ -487,10 +490,12 @@ btn_conf.onclick = function (){
                                 for (h = 0; h < interesadas.length; h++){
                                         if (interesadas[h]['id_cliente'] == id_cliente && c_abiertos[j]['id']== interesadas[h]['id_cabierto']){
                                                 if (interesadas[h]['estado']==1){
+                                                        console.log ("id_ cliente es : "+id_cliente+" id c_abierto es : "+c_abiertos[j]['id']+" y esta interesado");
                                                         ch[i].checked = true;
                                                 }
                                                 else
                                                 {
+                                                        console.log ("id_ cliente es : "+id_cliente+" id c_abierto es : "+c_abiertos[j]['id']+" y no esta interesado");
                                                         ch[i].checked = false;
                                                 }
                                         } 
