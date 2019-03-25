@@ -114,6 +114,7 @@ class New_model extends CI_Model {
                         $this->db->_error_message();
                 }
         }
+        
 
         public function upload_cliente($data)
         {
@@ -132,6 +133,43 @@ class New_model extends CI_Model {
                         $this->db->_error_message();
                 }
         }
+
+        public function upload_interesada($data)
+        {
+                $this->db->where('id_cliente',$data['id_cliente']);
+                $this->db->where('id_cabierto',$data['id_cabierto']);
+                $query = $this->db->get('Clientes_cursos');
+                if ($query->num_rows() > 0){
+                        $sql = "UPDATE Clientes_cursos
+                        SET estado = ".$data['estado']." 
+                        WHERE id_cliente = ".$data['id_cliente']." AND id_cabierto = ".$data['id_cabierto'].";";
+                        if ( ! $result = $this->db->query($sql)){
+                                $this->db->_error_message();
+                        }
+                        else{
+                                echo '<script type="text/javascript">
+                                        alert("Cliente actualizada");
+                                        window.location.href="interesadas";
+                                        </script>';
+                                        return $result;
+                        }
+                }
+                else{
+                        $sql = "INSERT INTO Clientes_cursos (id_cliente,id_cabierto,estado,f_consulta,f_inscripcion) 
+                                VALUES (".$data['id_cliente'].",".$data['id_cabierto'].",".$data['estado'].",CURDATE(),CURDATE());";
+                        if ( ! $result = $this->db->query($sql)){
+                                $this->db->_error_message();
+                        }
+                        else{
+                                echo '<script type="text/javascript">
+                                        alert("Cliente agregada");
+                                        </script>';
+                                        return $result;
+                        }
+                }
+        }
+
+        
 
         
         public function set_cliente($data)
