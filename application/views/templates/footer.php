@@ -9,7 +9,7 @@
 </html>
 
 <script>
-let footer = document.getElementById("footer");
-footer.style.bottom = "0px";  
-footer.style.position = "fixed"; 
+/*let footer = document.getElementById("footer");
+footer.style.bottom = 0;  
+footer.style.position = "fixed";*/ 
 </script>
