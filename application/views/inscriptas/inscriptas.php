@@ -27,150 +27,92 @@
                             <button type="submit" class="btn btn-primary  ml-2" id="btn_buscar_dni">Buscar</button>
                         </div>
                     </form>
-                    
-                    <h2 id="h nombre"></h2>
-                    <ul class="list-group" id="info_cliente"></ul>
+                    <?php echo form_open('index.php/inscriptas/update_inscriptas'); ?>
+                        <h2 id="h nombre"></h2>
+                        <ul class="list-group" id="info_cliente"></ul>
 
-                    <h2 id="h cursos"></h2>
-                    <ul class="list-group" id="lista_cursos"></ul>
-
-                    <h2 id="sel cursos">Seleccione curso</h2>
-                    <div class="row" id="select_curso">
-                        <select class="form-control" id="sel_curso">
-                           
-                        </select>
-                    </div>
-
-                    <?php $w = 0; ?> 
-                    <?php foreach ($c_abiertos as $course): ?>
-                        <?php echo form_open('index.php/inscriptas/actualizar_inscriptas'); ?>
-                            <ul class="list-group" id="lista_cursos_abiertos">
-                                <li class="list-group-item">
-                                    <div class="row"><?php echo $c_abiertos[$w]['nombre']; ?></div>
-                                    <div class="float-right">
-                                    <input name="id_cabierto" type="hidden" id="id_cabierto" value = "<?php echo $c_abiertos[$w]['id']; ?>">
-                                        <div class="form-check">
-                                            <label class="form-check-label">
-                                                <input type="radio" class="form-check-input " name="interesada" id="interesada">Interesada
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <label class="form-check-label">
-                                                <input type="radio" class="form-check-input" name="rechazada" id="rechazada">Rechazada
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <label class="form-check-label">
-                                                <input type="radio" class="form-check-input" name="reservada" id="reservada">Reservada
-                                            </label>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                            <!-- Modal footer -->
-                            <div class="modal-footer">   
-                                <button type="submit" id="register" class="btn btn-primary">Guardar</button>
-                                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                        <h2 id="h cursos"></h2>
+                        <ul class="list-group" id="lista_cursos"></ul>
+                        <div class="container" id="select_box">
+                            <div class="row">
+                                <h2 id="sel cursos">Seleccione curso</h2>
                             </div>
-                        <?php echo form_close(); ?>
-                    <?php $w++; ?>    
-                    <?php endforeach; ?>
-                </div>
+                            <div class="row">
+                                <select class="form-control" id="sel_curso">
+                                    <option disabled selected value> -- Seleccione un curso -- </option>
+                                </select>
+                            </div>
+                            <div class="float-center mt-5" id="sel_interesada">
+                                <div class="form-check">
+                                    <label class="checkbox-inline mr-4">
+                                        <input type="checkbox" name="interesada" id="interesada">Interesada 
+                                    </label>
+                                    <label class="checkbox-inline mr-4">
+                                        <input type="checkbox" name="rechazada" id="rechazada">Rechazada
+                                    </label>
+                                    <label class="checkbox-inline mr-4">
+                                        <input type="checkbox" name="confirmada" id="confirmada">Confirmada
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">  
+                        <input type="hidden" name="id_curso" id= "id_curso" value = "">
+                        <input type="hidden" name="id_cliente" id= "id_cliente" value = "">
+                        <button type="submit" id="register" class="btn btn-primary">Guardar</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                    </div>
+                <?php echo form_close(); ?>
             </div>
         </div>
     </div>
     <div class="modal" id="modal_buscar_curso">
         <div class="modal-dialog">
             <div class="modal-content">
-                <!-- Modal Header -->
-                <div class="modal-header">
-                    <h4 class="modal-title">Detalles del curso</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <!-- Modal body -->
-                <div class="modal-body">
-                    <label for="sel1">Seleccione curso</label>
-                    <form action="#">
-                        <select class="form-control" id="sel1">
-                            <option>Curso 1</option>
-                            <option>Curso 2</option>
-                            <option>Curso 3</option>
-                            <option>Curso 4</option>
-                        </select>
-                        <div class="text-right">
-                                <button type="submit" class="btn btn-primary  mt-2 mb-3">Buscar (sacar)</button>
+                <?php echo form_open('index.php/inscriptas/update_inscriptas'); ?>
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Buscar por curso</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <div class="row">
+                            <select class="form-control mt-2" id="select_buscar_curso">
+                                <option disabled selected value> -- Seleccione un curso -- </option>
+                            </select>
                         </div>
-                    </form>
-                    <ul class="list-group">
-                        <li class="list-group-item " id="curso_box3">
-                            <div class="row">Persona 1</div>
-                            <div class="float-right">
+                        <div class="row">
+                            <select class="form-control mt-2" id="select_buscar_persona">
+                                <option disabled selected value> -- Seleccione persona -- </option>
+                            </select>
+                        </div>
+                        <div class="row">
+                            <div class="float-center mt-5" id="sel_buscar_interesada">
                                 <div class="form-check">
-                                    <label class="form-check-label">
-                                        <input type="radio" class="form-check-input " name="optradio">Option 1
+                                    <label class="checkbox-inline mr-4">
+                                        <input type="checkbox" name="interesada" id="interesada_buscar">Interesada 
                                     </label>
-                                </div>
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                        <input type="radio" class="form-check-input" name="optradio">Option 2
+                                    <label class="checkbox-inline mr-4">
+                                        <input type="checkbox" name="rechazada" id="rechazada_buscar">Rechazada
                                     </label>
-                                </div>
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                        <input type="radio" class="form-check-input" name="optradio" >Option 3
-                                    </label>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="list-group-item" id="curso_box2">
-                            <div class="row">Persona 2</div>
-                            <div class="float-right">
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                        <input type="radio" class="form-check-input " name="optradio">Option 1
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                        <input type="radio" class="form-check-input" name="optradio">Option 2
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                        <input type="radio" class="form-check-input" name="optradio" >Option 3
+                                    <label class="checkbox-inline mr-4">
+                                        <input type="checkbox" name="confirmada" id="confirmada_buscar">Confirmada
                                     </label>
                                 </div>
                             </div>
-                        </li>
-                        <li class="list-group-item " id="curso_box1">
-                            <div class="row">Persona 3</div>
-                            <div class="float-right">
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                        <input type="radio" class="form-check-input " name="optradio">Option 1
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                        <input type="radio" class="form-check-input" name="optradio">Option 2
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                        <input type="radio" class="form-check-input" name="optradio" >Option 3
-                                    </label>
-                                </div>
-                            </div>    
-                        </li>
-                    </ul>
+                        </div>
 
-                </div>
-                <!-- Modal footer -->
-                <div class="modal-footer">
-                    
-                    <button type="button" class="btn btn-success" data-dismiss="modal">Guardar</button>
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-                </div>
+                    </div>
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <input type="hidden" name="id_curso" id= "id_curso_buscar" value = "">
+                        <input type="hidden" name="id_cliente" id= "id_cliente_buscar" value = "">
+                        <button type="submit" id="register" class="btn btn-primary">Guardar</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                    </div>
+                <?php echo form_close(); ?> 
             </div>
         </div>
     </div>
@@ -206,12 +148,27 @@ var c_abiertos = <?php echo json_encode($c_abiertos, JSON_HEX_TAG); ?>;
 
 var btn_nombre_apellido = document.getElementById('btn_buscar_nombre_apellido');
 var btn_buscar_dni = document.getElementById('btn_buscar_dni');
+var sel_cursos = document.getElementById("select_box");
+var sel_interesada = document.getElementById("sel_interesada");
+var ch_interesada = document.getElementById("interesada");
+var ch_rechazada = document.getElementById("rechazada");
+var ch_confirmada = document.getElementById("confirmada");
+var id_curso_form = document.getElementById("id_curso");
+var id_cliente_form = document.getElementById("id_cliente");
+var id_curso_form_buscar = document.getElementById("id_curso_buscar");
+var id_cliente_form_buscar = document.getElementById("id_cliente_buscar");
+var select_buscar_persona = document.getElementById("select_buscar_persona");
+var sel_buscar_curso = document.getElementById("select_buscar_curso");
+var select_buscar_interesada = document.getElementById("sel_buscar_interesada");
+var ch_interesada_buscar = document.getElementById("interesada_buscar");
+var ch_rechazada_buscar = document.getElementById("rechazada_buscar");
+var ch_confirmada_buscar = document.getElementById("confirmada_buscar");
 
-var lista_cursos_abiertos = document.querySelectorAll("#lista_cursos_abiertos");
-for(i=0;i<lista_cursos_abiertos.length;i++){
-    lista_cursos_abiertos[i].style = "display:none;";
-}
 
+sel_cursos.style = "display:none;";
+sel_interesada.style = "display:none;";
+select_buscar_persona.style = "display:none;";
+select_buscar_interesada.style = "display:none;";
 
 btn_nombre_apellido.onclick = function (a){
         a.preventDefault();
@@ -223,13 +180,16 @@ btn_nombre_apellido.onclick = function (a){
         var e_lista = document.getElementById("h cursos");
         var ok = false;
         var cant_nombre =0;
+    
+
 
         cliente_buscado_id = "";
         cliente_buscado_nombre = "";
         cliente_buscado_dni = "";
         cliente_buscado_apellido = "";
         info_cliente.style = "display:none;";
-        
+        sel_cursos.style = "display:none;";
+
         e_nombre.innerHTML = "Detalles del cliente";
         e_lista.innerHTML = "";
 
@@ -245,13 +205,12 @@ btn_nombre_apellido.onclick = function (a){
                         id_edit = dni_val.value;
                         btn_edit.disabled = false;
                         */
+                        id_cliente_form.value = e['id'];
                         cant_nombre++;
+                        sel_cursos.style = "";
                         info_cliente.style = "";
-                        e_nombre.innerHTML = "El cliente existe y se llama "+e['nombre']+" "+e['apellido'];            
+                        e_nombre.innerHTML = e['documento']+" "+e['nombre']+" "+e['apellido'];            
                         ok = true;
-                        for(i=0;i<lista_cursos_abiertos.length;i++){
-                            lista_cursos_abiertos[i].style = "";
-                        }
                         /*
                         cliente_buscado_nombre = e['nombre'];
                         cliente_buscado_dni = e['documento'];
@@ -285,16 +244,14 @@ btn_nombre_apellido.onclick = function (a){
         if(ok == false){
             info_cliente.style = "";
             e_nombre.innerHTML = "El cliente no existe, debe crear uno nuevo";
-            for(i=0;i<lista_cursos_abiertos.length;i++){
-                lista_cursos_abiertos[i].style = "display:none;";
-            }
+            
         }
         if(cant_nombre > 1){
+            id_cliente_form.value = -1;
+            sel_cursos.style = "display:none;";
             info_cliente.style = "";
             e_nombre.innerHTML = "Hay varios clientes con ese nombre, busque por dni porfavor";
-            for(i=0;i<lista_cursos_abiertos.length;i++){
-                lista_cursos_abiertos[i].style = "display:none;";
-            }
+            
         }
         var box = document.querySelectorAll("#box_cliente");
         for (i = 0; i < box.length; i++) {
@@ -311,6 +268,7 @@ btn_buscar_dni.onclick = function (a){
         var apellido = document.getElementById("apellido");
         var e_nombre = document.getElementById("h nombre");
         var e_lista = document.getElementById("h cursos");
+
         var ok = false;
         var cant_nombre =0;
 
@@ -319,6 +277,7 @@ btn_buscar_dni.onclick = function (a){
         cliente_buscado_dni = "";
         cliente_buscado_apellido = "";
         info_cliente.style = "display:none;";
+        sel_cursos.style = "display:none;";
         
         e_nombre.innerHTML = "Detalles del cliente";
         e_lista.innerHTML = "";
@@ -335,13 +294,13 @@ btn_buscar_dni.onclick = function (a){
                         id_edit = dni_val.value;
                         btn_edit.disabled = false;
                         */
+                        id_cliente_form.value = e['id'];
                         cant_nombre++;
+                        sel_cursos.style = "";
                         info_cliente.style = "";
-                        e_nombre.innerHTML = "El cliente existe y se llama "+e['nombre']+" "+e['apellido'];            
+                        e_nombre.innerHTML = e['documento']+" "+e['nombre']+" "+e['apellido'];             
                         ok = true;
-                        for(i=0;i<lista_cursos_abiertos.length;i++){
-                            lista_cursos_abiertos[i].style = "";
-                        }
+                        
                         /*
                         cliente_buscado_nombre = e['nombre'];
                         cliente_buscado_dni = e['documento'];
@@ -375,16 +334,12 @@ btn_buscar_dni.onclick = function (a){
         if(ok == false){
             info_cliente.style = "";
             e_nombre.innerHTML = "El cliente no existe, debe crear uno nuevo";
-            for(i=0;i<lista_cursos_abiertos.length;i++){
-                lista_cursos_abiertos[i].style = "display:none;";
-            }
         }
         if(cant_nombre > 1){
+            id_cliente_form.value = -1;
+            sel_cursos.style = "display:none;";
             info_cliente.style = "";
-            e_nombre.innerHTML = "Hay varios clientes con ese nombre, busque por dni porfavor";
-            for(i=0;i<lista_cursos_abiertos.length;i++){
-                lista_cursos_abiertos[i].style = "display:none;";
-            }
+            e_nombre.innerHTML = "Error en la busqueda, disculpe las molestias";
         }
         var box = document.querySelectorAll("#box_cliente");
         for (i = 0; i < box.length; i++) {
@@ -409,8 +364,96 @@ for (i=0;i<c_abiertos.length;i++){
 
 
 sel_curso.onchange = function(e){
+    sel_interesada.style = "";
+    id_curso_form.value = this.value;
     console.log(this.value);
 }
 
+ch_interesada.onclick = function(){
+    if (ch_interesada.checked == true){
+        ch_rechazada.checked = false;
+        ch_confirmada.checked = false;
+        console.log(ch_interesada.checked);
+    }
+    else{
+        console.log(ch_interesada.checked);
+    }
+}
+ch_rechazada.onclick = function(){
+    if (ch_rechazada.checked == true){
+        ch_interesada.checked = false;
+        ch_confirmada.checked = false;
+        console.log(ch_rechazada.checked);
+    }
+    else{
+        console.log(ch_rechazada.checked);
+    }
+}
+ch_confirmada.onclick = function(){
+    if (ch_confirmada.checked == true){
+        ch_rechazada.checked = false;
+        ch_interesada.checked = false;
+        console.log(ch_confirmada.checked);
+    }
+    else{
+        console.log(ch_confirmada.checked);
+    }
+}
+
+for (i=0;i<c_abiertos.length;i++){
+    var option = document.createElement("option");
+    option.text = c_abiertos[i]['nombre'];
+    option.value = c_abiertos[i]['id'];
+    sel_buscar_curso.add(option);
+}
+
+sel_buscar_curso.onchange = function(e){
+    select_buscar_persona.style = "";
+    console.log(this.value);
+    id_curso_form_buscar.value = this.value;
+    //hacer con personas inscriptas no todas
+    for (i=0;i<personas.length;i++){
+        var option = document.createElement("option");
+        option.text = personas[i]['nombre']+" "+personas[i]['apellido'];
+        option.value = personas[i]['id'];
+        select_buscar_persona.add(option);
+    }
+}
+
+select_buscar_persona.onchange = function(e){
+    select_buscar_interesada.style = "";
+    id_cliente_form_buscar.value = this.value;
+}
+
+ch_interesada_buscar.onclick = function(){
+    if (ch_interesada_buscar.checked == true){
+        ch_rechazada_buscar.checked = false;
+        ch_confirmada_buscar.checked = false;
+        console.log(ch_interesada_buscar.checked);
+    }
+    else{
+        console.log(ch_interesada_buscar.checked);
+    }
+}
+ch_rechazada_buscar.onclick = function(){
+    if (ch_rechazada_buscar.checked == true){
+        ch_interesada_buscar.checked = false;
+        ch_confirmada_buscar.checked = false;
+        console.log(ch_rechazada_buscar.checked);
+    }
+    else{
+        console.log(ch_rechazada_buscar.checked);
+    }
+}
+ch_confirmada_buscar.onclick = function(){
+    if (ch_confirmada_buscar.checked == true){
+        ch_rechazada_buscar.checked = false;
+        ch_interesada_buscar.checked = false;
+        console.log(ch_confirmada_buscar.checked);
+    }
+    else{
+        console.log(ch_confirmada_buscar.checked);
+    }
+}
 
 </script>
