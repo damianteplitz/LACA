@@ -214,8 +214,27 @@ class New_model extends CI_Model {
         }
         public function get_interesadas()
         {
+
                 $query = $this->db->get('Clientes_cursos');
                 return $query->result_array();
+        }
+        public function upload_inscripta($data)
+        {
+                
+                $sql = "UPDATE Clientes_cursos
+                SET estado = ".$data['estado']." 
+                WHERE id_cliente = ".$data['id_cliente']." AND id_cabierto = ".$data['id_curso'].";";
+                if ( ! $result = $this->db->query($sql)){
+                        $this->db->_error_message();
+                }
+                else{
+                        echo '<script type="text/javascript">
+                                alert("Cliente actualizada");
+                                window.location.href="inscriptas";
+                                </script>';
+                                return $result;
+                }
+               
         }
 }
 
