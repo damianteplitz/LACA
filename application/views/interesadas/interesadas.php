@@ -211,13 +211,15 @@
                         <?php foreach ($c_abiertos as $course): ?>
                         
                         <?php $mod = "#modal_detalle_curso".$q;?>
-                                <div id="box" class="m-2 border border-secondary" >    
-                                        <div class="m-2">
-                                                <h1><?php echo $course['nombre']; ?></h1>
-                                                <p><?php echo $course['detalles']; ?></p>
-                                        </div>
-                                        <div class="text-right">
-                                                <button type="button" class="btn btn-primary m-1" data-toggle="modal" data-target="<?php echo $mod ;?>" id="button_detalles">Ver detalles</button>
+                                <div id="div_cursos" value="<?php echo $c_abiertos[$q]['id']; ?>">
+                                        <div id="box" class="m-2 border border-secondary">    
+                                                <div class="m-2">
+                                                        <h1><?php echo $course['nombre']; ?></h1>
+                                                        <p><?php echo $course['detalles']; ?></p>
+                                                </div>
+                                                <div class="text-right">
+                                                        <button type="button" class="btn btn-primary m-1" data-toggle="modal" data-target="<?php echo $mod ;?>" id="button_detalles">Ver detalles</button>
+                                                </div>
                                         </div>
                                 </div>
                         <?php $q++;?>
@@ -499,6 +501,27 @@ btn_conf.onclick = function (){
                                                         ch[i].checked = false;
                                                 }
                                         } 
+                                }
+                        }
+                }
+        }
+
+        //Hay problemas pq me esta cambiando el id nose quien fue el bobo que hizo eso
+        //console.log("a");
+        var div_cursos = document.querySelectorAll("#div_cursos");
+        //console.log(div_cursos);
+        for (i = 0; i < div_cursos.length; i++) {
+                //console.log("a");
+                for(j=0;j<interesadas.length;j++){
+                        //console.log("oa");
+                        //console.log ("id curso "+div_cursos[i].getAttribute("value"));
+                        //console.log ("id cliente "+id_cliente);
+                        if(div_cursos[i].getAttribute("value") == interesadas[j]['id_cabierto'] && id_cliente == interesadas[j]['id_cliente'])
+                        {
+                                //console.log("a");
+                                if(interesadas[j]['estado'] > 1){
+                                        //console.log(div_cursos[i].getAttribute("value")+id_cliente+interesadas[j]['estado']);
+                                        div_cursos[i].style =  "display:none;" ;
                                 }
                         }
                 }
