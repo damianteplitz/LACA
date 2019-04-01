@@ -138,6 +138,7 @@ $(document).ready(function(){
   });
 });
 
+var curso_buscado_id;
 var cliente_buscado_nombre;
 var cliente_buscado_dni;
 var cliente_buscado_apellido;
@@ -172,7 +173,7 @@ select_buscar_interesada.style = "display:none;";
 
 btn_nombre_apellido.onclick = function (a){
         a.preventDefault();
-
+        var sel = document.getElementById("sel_interesada");
         var info_cliente = document.getElementById("info_cliente");
         var nombre = document.getElementById("nombre");
         var apellido = document.getElementById("apellido");
@@ -182,14 +183,14 @@ btn_nombre_apellido.onclick = function (a){
         var cant_nombre =0;
     
 
-
+       
         cliente_buscado_id = "";
         cliente_buscado_nombre = "";
         cliente_buscado_dni = "";
         cliente_buscado_apellido = "";
         info_cliente.style = "display:none;";
         sel_cursos.style = "display:none;";
-
+        sel.style = "display:none;";
         e_nombre.innerHTML = "Detalles del cliente";
         e_lista.innerHTML = "";
 
@@ -266,6 +267,7 @@ btn_nombre_apellido.onclick = function (a){
 btn_buscar_dni.onclick = function (a){
         a.preventDefault();
 
+        var sel = document.getElementById("sel_interesada");
         var info_cliente = document.getElementById("info_cliente");
         var nombre = document.getElementById("nombre");
         var apellido = document.getElementById("apellido");
@@ -281,7 +283,8 @@ btn_buscar_dni.onclick = function (a){
         cliente_buscado_apellido = "";
         info_cliente.style = "display:none;";
         sel_cursos.style = "display:none;";
-        
+        sel.style = "display:none;";
+
         e_nombre.innerHTML = "Detalles del cliente";
         e_lista.innerHTML = "";
 
@@ -361,15 +364,15 @@ for (i = 0; i < box.length; i++) {
 
 function cargar_select_cursos (){
     var sel_curso = document.getElementById("sel_curso");
-        var init = sel_curso.options.length - 1; 
-        for(i = init ; i >= 0 ; i--){
-            sel_curso.remove(i);
-        }
-        var option = document.createElement("option");
-        option.text = "-- Seleccione un curso --";
-        option.disabled = true;
-        option.selected = "selected";
-        sel_curso.add(option);
+    var init = sel_curso.options.length - 1; 
+    for(i = init ; i >= 0 ; i--){
+        sel_curso.remove(i);
+    }
+    var option = document.createElement("option");
+    option.text = "-- Seleccione un curso --";
+    option.disabled = true;
+    option.selected = "selected";
+    sel_curso.add(option);
 
 
     console.log (sel_curso.options);
@@ -395,10 +398,70 @@ function cargar_select_cursos (){
 }
 
 
+function cargar_select_personas (id_curso){
+        var init = select_buscar_persona.options.length - 1; 
+        for(i = init ; i >= 0 ; i--){
+            select_buscar_persona.remove(i);
+        }
+        var option = document.createElement("option");
+        option.text = "-- Seleccione un curso --";
+        option.disabled = true;
+        option.selected = "selected";
+        select_buscar_persona.add(option);
+        for(j=0;j<interesadas.length;j++){
+           // console.log("interesada_cabierto "+interesadas[j]['id_cabierto'] );
+           // console.log("id_curso "+id_curso);
+           // console.log("estado_interesada "+interesadas[j]['estado'])
+
+            if(interesadas[j]['id_cabierto'] == id_curso && interesadas[j]['estado'] != 0){
+                console.log("interesada_cabierto "+interesadas[j]['id_cabierto'] );
+                console.log("id_curso "+id_curso);
+                console.log("estado_interesada "+interesadas[j]['estado']);
+                console.log("id_persona_interesada "+interesadas[j]['id_cliente'])
+                var text;
+                var text_val;
+                for (i=0;i<personas.length;i++){
+                    if(personas[i]['id'] == interesadas[j]['id_cliente']){
+                        text = personas[i]['nombre']+" "+personas[i]['apellido'];
+                        text_val = personas[i]['id'];
+                    }
+                }
+                var option = document.createElement("option");
+                option.text = text;
+                option.value = text_val;
+                select_buscar_persona.add(option);
+            }  
+    }
+}
+
+
 sel_curso.onchange = function(e){
     sel_interesada.style = "";
     id_curso_form.value = this.value;
-    console.log(this.value);
+    console.log("id_curso: "+this.value);
+    console.log("cargar cual esta seleccionado");
+    for(i=0;i<interesadas.length;i++){
+        if (interesadas[i]['id_cabierto'] == this.value && interesadas[i]['id_cliente'] == cliente_buscado_id){
+          
+            if (interesadas[i]['estado'] == 1){
+                console.log("a");
+                ch_interesada.checked = true;
+                ch_confirmada.checked = false;
+                ch_rechazada.checked = false;
+            }
+            if (interesadas[i]['estado'] == 2){
+                ch_confirmada.checked = true;
+                ch_interesada.checked = false;
+                ch_rechazada.checked = false;
+            }
+            if (interesadas[i]['estado'] == 3){
+                ch_rechazada.checked = true;
+                ch_interesada.checked = false;
+                ch_confirmada.checked = false;
+            }
+        }
+    }
+   
 }
 
 ch_interesada.onclick = function(){
@@ -440,21 +503,44 @@ for (i=0;i<c_abiertos.length;i++){
 }
 
 sel_buscar_curso.onchange = function(e){
+    select_buscar_interesada.style = "display:none;";
     select_buscar_persona.style = "";
-    console.log(this.value);
+    //console.log(this.value);
     id_curso_form_buscar.value = this.value;
+    cargar_select_personas(this.value);
+    curso_buscado_id = (this.value);
     //hacer con personas inscriptas no todas
-    for (i=0;i<personas.length;i++){
-        var option = document.createElement("option");
-        option.text = personas[i]['nombre']+" "+personas[i]['apellido'];
-        option.value = personas[i]['id'];
-        select_buscar_persona.add(option);
-    }
 }
 
 select_buscar_persona.onchange = function(e){
     select_buscar_interesada.style = "";
     id_cliente_form_buscar.value = this.value;
+    //console.log("cabierto "+curso_buscado_id);
+    console.log("idcli "+this.value);
+    for(i=0;i<interesadas.length;i++){
+        
+        if (interesadas[i]['id_cabierto'] == curso_buscado_id && interesadas[i]['id_cliente'] == this.value){
+            console.log("s");
+            console.log(interesadas[i]['estado'])
+            if (interesadas[i]['estado'] == 1){
+                //console.log("a");
+                ch_interesada_buscar.checked = true;
+                ch_confirmada_buscar.checked = false;
+                ch_rechazada_buscar.checked = false;
+            }
+            if (interesadas[i]['estado'] == 2){
+                ch_confirmada_buscar.checked = true;
+                ch_interesada_buscar.checked = false;
+                ch_rechazada_buscar.checked = false;
+            }
+            if (interesadas[i]['estado'] == 3){
+                ch_rechazada_buscar.checked = true;
+                ch_interesada_buscar.checked = false;
+                ch_confirmada_buscar.checked = false;
+            }
+        }
+    }
+
 }
 
 ch_interesada_buscar.onclick = function(){
