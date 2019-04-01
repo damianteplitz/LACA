@@ -205,12 +205,14 @@ btn_nombre_apellido.onclick = function (a){
                         id_edit = dni_val.value;
                         btn_edit.disabled = false;
                         */
+                        cliente_buscado_id = e['id'];
                         id_cliente_form.value = e['id'];
                         cant_nombre++;
                         sel_cursos.style = "";
                         info_cliente.style = "";
                         e_nombre.innerHTML = e['documento']+" "+e['nombre']+" "+e['apellido'];            
                         ok = true;
+                        cargar_select_cursos();
                         /*
                         cliente_buscado_nombre = e['nombre'];
                         cliente_buscado_dni = e['documento'];
@@ -247,6 +249,7 @@ btn_nombre_apellido.onclick = function (a){
             
         }
         if(cant_nombre > 1){
+            cliente_buscado_id = "";
             id_cliente_form.value = -1;
             sel_cursos.style = "display:none;";
             info_cliente.style = "";
@@ -294,13 +297,14 @@ btn_buscar_dni.onclick = function (a){
                         id_edit = dni_val.value;
                         btn_edit.disabled = false;
                         */
+                        cliente_buscado_id = e['id'];
                         id_cliente_form.value = e['id'];
                         cant_nombre++;
                         sel_cursos.style = "";
                         info_cliente.style = "";
                         e_nombre.innerHTML = e['documento']+" "+e['nombre']+" "+e['apellido'];             
                         ok = true;
-                        
+                        cargar_select_cursos();
                         /*
                         cliente_buscado_nombre = e['nombre'];
                         cliente_buscado_dni = e['documento'];
@@ -336,6 +340,7 @@ btn_buscar_dni.onclick = function (a){
             e_nombre.innerHTML = "El cliente no existe, debe crear uno nuevo";
         }
         if(cant_nombre > 1){
+            cliente_buscado_id = "";
             id_cliente_form.value = -1;
             sel_cursos.style = "display:none;";
             info_cliente.style = "";
@@ -354,12 +359,39 @@ for (i = 0; i < box.length; i++) {
         box[i].id = i;
 }
 
-var sel_curso = document.getElementById("sel_curso");
-for (i=0;i<c_abiertos.length;i++){
-    var option = document.createElement("option");
-    option.text = c_abiertos[i]['nombre'];
-    option.value = c_abiertos[i]['id'];
-    sel_curso.add(option);
+function cargar_select_cursos (){
+    var sel_curso = document.getElementById("sel_curso");
+        var init = sel_curso.options.length - 1; 
+        for(i = init ; i >= 0 ; i--){
+            sel_curso.remove(i);
+        }
+        var option = document.createElement("option");
+        option.text = "-- Seleccione un curso --";
+        option.disabled = true;
+        option.selected = "selected";
+        sel_curso.add(option);
+
+
+    console.log (sel_curso.options);
+    for (i=0;i<c_abiertos.length;i++){
+        for(j=0;j<interesadas.length;j++){
+            /*console.log("a");
+            console.log("id cliente interesada: "+interesadas[j]['id_cliente']);
+            console.log ("id cliente buscado: "+cliente_buscado_id);
+            console.log ("id interesada cabierto: "+interesadas[j]['id_cabierto']);
+            console.log ("id c_abierto: "+c_abiertos[i]['id']);
+            *///console.log(c_abiertos[i]);
+            if(interesadas[j]['id_cliente'] == cliente_buscado_id && interesadas[j]['id_cabierto'] == c_abiertos[i]['id']){
+                //console.log("q");
+                if(interesadas[j]['estado'] != 0){
+                    var option = document.createElement("option");
+                    option.text = c_abiertos[i]['nombre'];
+                    option.value = c_abiertos[i]['id'];
+                    sel_curso.add(option);
+                }
+            }
+        }
+    }
 }
 
 
