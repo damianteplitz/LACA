@@ -404,7 +404,7 @@ function cargar_select_personas (id_curso){
             select_buscar_persona.remove(i);
         }
         var option = document.createElement("option");
-        option.text = "-- Seleccione un curso --";
+        option.text = "-- Seleccione una persona --";
         option.disabled = true;
         option.selected = "selected";
         select_buscar_persona.add(option);

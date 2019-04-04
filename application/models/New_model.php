@@ -162,7 +162,8 @@ class New_model extends CI_Model {
                         }
                         else{
                                 echo '<script type="text/javascript">
-                                        alert("Cliente agregada");
+                                        alert("Cliente actualizada");
+                                        window.location.href="interesadas";
                                         </script>';
                                         return $result;
                         }
