@@ -1,4 +1,4 @@
-<nav class="footer fixed-bottom container" id="footer">
+<nav class="navbar navbar-fixed-bottom" id="footer">
   <em>&copy; Designed by Damian Teplitz & Co.</em>
   </div>
 </nav>
