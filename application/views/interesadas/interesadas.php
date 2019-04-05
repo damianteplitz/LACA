@@ -226,7 +226,7 @@
                         <?php endforeach; ?>           
                 </div>
         </div>
-    </body>
+</body>
 <script>
 
 $(document).ready(function(){
