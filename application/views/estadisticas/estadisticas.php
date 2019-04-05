@@ -115,36 +115,54 @@ select_cursos_abiertos.onchange = function(e){
                 for (j=0;j<personas.length;j++){
                     if(personas[j]['id'] == interesadas[i]['id_cliente']){
                         nombre_tabla = personas[j]['nombre'];
+                        apellido_tabla = personas[j]['apellido'];
+                        mail_tabla = personas[j]['mail'];
                         //console.log(nombre_tabla);
                     }
                 }
                 var row = table_interesadas_body.insertRow(0);
                 var cell1 = row.insertCell(0);
+                var cell2 = row.insertCell(1);
+                var cell3 = row.insertCell(2);
                 cell1.innerHTML = nombre_tabla;
+                cell2.innerHTML = apellido_tabla;
+                cell3.innerHTML = mail_tabla;
             }
             if (interesadas[i]['estado'] == 2){
                 var nombre_tabla;
                 for (j=0;j<personas.length;j++){
                     if(personas[j]['id'] == interesadas[i]['id_cliente']){
                         nombre_tabla = personas[j]['nombre'];
+                        apellido_tabla = personas[j]['apellido'];
+                        mail_tabla = personas[j]['mail'];
                         //console.log(nombre_tabla);
                     }
                 }
                 var row = table_confirmadas_body.insertRow(0);
                 var cell1 = row.insertCell(0);
+                var cell2 = row.insertCell(1);
+                var cell3 = row.insertCell(2);
                 cell1.innerHTML = nombre_tabla;
+                cell2.innerHTML = apellido_tabla;
+                cell3.innerHTML = mail_tabla;
             }
             if (interesadas[i]['estado'] == 3){
                 var nombre_tabla;
                 for (j=0;j<personas.length;j++){
                     if(personas[j]['id'] == interesadas[i]['id_cliente']){
                         nombre_tabla = personas[j]['nombre'];
+                        apellido_tabla = personas[j]['apellido'];
+                        mail_tabla = personas[j]['mail'];
                         //console.log(nombre_tabla);
                     }
                 }
                 var row = table_rechazadas_body.insertRow(0);
                 var cell1 = row.insertCell(0);
+                var cell2 = row.insertCell(1);
+                var cell3 = row.insertCell(2);
                 cell1.innerHTML = nombre_tabla;
+                cell2.innerHTML = apellido_tabla;
+                cell3.innerHTML = mail_tabla;
             }
         }
     }
