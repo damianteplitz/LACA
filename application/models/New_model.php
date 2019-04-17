@@ -136,42 +136,27 @@ class New_model extends CI_Model {
 
         public function upload_interesada($data)
         {
-                $this->db->where('id_cliente',$data['id_cliente']);
-                $this->db->where('id_cabierto',$data['id_cabierto']);
-                $query = $this->db->get('Clientes_cursos');
-                if ($query->num_rows() > 0){
-                        $sql = "UPDATE Clientes_cursos
-                        SET estado = ".$data['estado']." 
-                        WHERE id_cliente = ".$data['id_cliente']." AND id_cabierto = ".$data['id_cabierto'].";";
-                        if ( ! $result = $this->db->query($sql)){
-                                $this->db->_error_message();
-                        }
-                        else{
-                                echo '<script type="text/javascript">
-                                        alert("Cliente actualizada");
-                                        window.location.href="interesadas";
-                                        </script>';
-                                        return $result;
-                        }
+                $sql = "UPDATE Clientes_cursos
+                SET estado = ".$data['estado']." 
+                WHERE id_cliente = ".$data['id_cliente']." AND id_cabierto = ".$data['id_cabierto'].";";
+                if ( ! $result = $this->db->query($sql)){
+                        $this->db->_error_message();
                 }
                 else{
-                        $sql = "INSERT INTO Clientes_cursos (id_cliente,id_cabierto,estado,f_consulta,f_inscripcion) 
-                                VALUES (".$data['id_cliente'].",".$data['id_cabierto'].",".$data['estado'].",CURDATE(),CURDATE());";
-                        if ( ! $result = $this->db->query($sql)){
-                                $this->db->_error_message();
-                        }
-                        else{
-                                echo '<script type="text/javascript">
-                                        alert("Cliente actualizada");
-                                        window.location.href="interesadas";
-                                        </script>';
-                                        return $result;
-                        }
+                        return $result;
                 }
         }
 
-        
-
+        public function new_interesada($data){
+                $sql = "INSERT INTO Clientes_cursos (id_cliente,id_cabierto,estado,f_consulta,f_inscripcion) 
+                VALUES (".$data['id_cliente'].",".$data['id_cabierto'].",".$data['estado'].",CURDATE(),CURDATE());";
+                if ( ! $result = $this->db->query($sql)){
+                        $this->db->_error_message();
+                }
+                else{
+                        return $result;
+                }
+        }
         
         public function set_cliente($data)
         {
@@ -236,6 +221,46 @@ class New_model extends CI_Model {
                                 return $result;
                 }
                
+        }
+
+        public function get_det_cliente_dni ($dni){
+                $sql = "SELECT id, nombre, apellido, documento, direccion, mail
+                FROM Clientes
+                WHERE documento = $dni;";
+                if ( ! $result = $this->db->query($sql)){
+                        $this->db->_error_message();
+                }
+                else{
+                        return $result->result_array();
+                }
+        }
+        public function get_det_cliente_apellido ($apellido){
+                $sql = "SELECT id, nombre, apellido, documento, direccion, mail
+                FROM Clientes
+                WHERE apellido = '$apellido';";
+                if ( ! $result = $this->db->query($sql)){
+                        $this->db->_error_message();
+                }
+                else{
+                        return $result->result_array();
+                }
+        }
+
+        public function get_cursos_disponibles_abiertos($id){
+
+                $sql = "SELECT Cursos.id, Cursos.nombre, Cursos.detalles, Cursos.duracion, Cursos.minimo, Cursos.maximo, Clientes_cursos.estado
+                FROM Cursos
+                INNER JOIN Cursos_abiertos
+                ON Cursos_abiertos.id_curso=Cursos.id
+                LEFT JOIN Clientes_cursos 
+                ON (Clientes_cursos.id_cabierto = Cursos.id AND Clientes_cursos.id_cliente=".$id.") 
+                WHERE Cursos_abiertos.estado = 1 AND (Clientes_cursos.estado IS NULL OR Clientes_cursos.estado < 2);";
+                if ( ! $result = $this->db->query($sql)){
+                        $this->db->_error_message();
+                }
+                else{
+                        return $result->result_array();
+                }
         }
 }
 
