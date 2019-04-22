@@ -33,7 +33,7 @@ class New_model extends CI_Model {
         }
         public function get_cursos_abiertos()
         {
-                $sql = "SELECT Cursos.id, Cursos.nombre, Cursos.detalles, Cursos.duracion, Cursos.minimo, Cursos.maximo, Cursos_abiertos.estado
+                $sql = "SELECT Cursos.id, Cursos.nombre, Cursos.detalles, Cursos.duracion, Cursos.minimo, Cursos.maximo, Cursos_abiertos.estado, Cursos.profesor, Cursos.modalidad, Cursos.objetivo, Cursos.programa, Cursos.materiales, Cursos.requisitos, Cursos.kit_inicio
                         FROM Cursos
                         INNER JOIN Cursos_abiertos 
                         ON Cursos.id=Cursos_abiertos.id_curso 
@@ -224,7 +224,7 @@ class New_model extends CI_Model {
         }
 
         public function get_det_cliente_dni ($dni){
-                $sql = "SELECT id, nombre, apellido, documento, direccion, mail
+                $sql = "SELECT id, nombre, apellido, documento, direccion, mail, telefono, localidad
                 FROM Clientes
                 WHERE documento = $dni;";
                 if ( ! $result = $this->db->query($sql)){
@@ -235,7 +235,7 @@ class New_model extends CI_Model {
                 }
         }
         public function get_det_cliente_apellido ($apellido){
-                $sql = "SELECT id, nombre, apellido, documento, direccion, mail
+                $sql = "SELECT id, nombre, apellido, documento, direccion, mail, telefono, localidad
                 FROM Clientes
                 WHERE apellido = '$apellido';";
                 if ( ! $result = $this->db->query($sql)){

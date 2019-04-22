@@ -31,7 +31,9 @@
                                                 <li class="list-group-item" id="curso_det_box" name="cli_nombre"></li>
                                                 <li class="list-group-item" id="curso_det_box" name="cli_apellido"></li>
                                                 <li class="list-group-item" id="curso_det_box" name="cli_documento"></li>
+                                                <li class="list-group-item" id="curso_det_box" name="cli_telefono"></li>
                                                 <li class="list-group-item" id="curso_det_box" name="cli_direccion"></li>
+                                                <li class="list-group-item" id="curso_det_box" name="cli_localidad"></li>
                                                 <li class="list-group-item" id="curso_det_box" name="cli_mail"></li>
                                         </ul>
                                         
@@ -108,6 +110,12 @@
                                         </div>
                                         <div class="input-group m-1 input-group-md">
                                                 <div class="input-group-prepend">
+                                                <span class="input-group-text" for="telefono">Telefono</span>
+                                                </div>
+                                                <input type="number" class="form-control" name="telefono">
+                                        </div>
+                                        <div class="input-group m-1 input-group-md">
+                                                <div class="input-group-prepend">
                                                 <span class="input-group-text" for="documento">DNI</span>
                                                 </div>
                                                 <input type="number" class="form-control" name="documento">
@@ -117,6 +125,12 @@
                                                 <span class="input-group-text" for="direccion">Direccion</span>
                                                 </div>
                                                 <input type="text" class="form-control" name="direccion">
+                                        </div>
+                                        <div class="input-group m-1 input-group-md">
+                                                <div class="input-group-prepend">
+                                                <span class="input-group-text" for="localidad">Localidad</span>
+                                                </div>
+                                                <input type="text" class="form-control" name="localidad">
                                         </div>
                                         <div class="input-group m-1 input-group-md">
                                                 <div class="input-group-prepend">
@@ -159,6 +173,12 @@
                                         </div>
                                         <div class="input-group m-1 input-group-md">
                                                 <div class="input-group-prepend">
+                                                        <span class="input-group-text" for="telefono">Telefono</span>
+                                                </div>
+                                                <input type="number" class="form-control" name="telefono" id="e_telefono" value = "">
+                                        </div>
+                                        <div class="input-group m-1 input-group-md">
+                                                <div class="input-group-prepend">
                                                         <span class="input-group-text" for="documento">DNI</span>
                                                 </div>
                                                 <input type="number" class="form-control" name="documento" id="e_documento" value = "">
@@ -168,6 +188,12 @@
                                                         <span class="input-group-text" for="direccion">Direccion</span>
                                                 </div>
                                                 <input type="text" class="form-control" id="e_direccion" name="direccion" value = "">
+                                        </div>
+                                        <div class="input-group m-1 input-group-md">
+                                                <div class="input-group-prepend">
+                                                        <span class="input-group-text" for="localidad">Localidad</span>
+                                                </div>
+                                                <input type="text" class="form-control" id="e_localidad" name="localidad" value = "">
                                         </div>
                                         <div class="input-group m-1 input-group-md">
                                                 <div class="input-group-prepend">
@@ -337,6 +363,8 @@ $(document).ready(function(){
                 $("#e_apellido").val(cliente_seleccionado['apellido']);
                 $("#e_documento").val(cliente_seleccionado['documento']);
                 $("#e_direccion").val(cliente_seleccionado['direccion']);
+                $("#e_localidad").val(cliente_seleccionado['localidad']);
+                $("#e_telefono").val(cliente_seleccionado['telefono']);
                 $("#e_mail").val(cliente_seleccionado['mail']);
                 $("#e_id").val(cliente_seleccionado['id']);
                 
@@ -416,6 +444,8 @@ function cargar_detalle_cliente (cliente){
         $('li[name=cli_documento]').html("DNI: "+cliente['documento']);
         $('li[name=cli_direccion]').html("Direccion: "+cliente['direccion']);
         $('li[name=cli_mail]').html("Mail: "+cliente['mail']);
+        $('li[name=cli_telefono]').html("Telefono: "+cliente['telefono']);
+        $('li[name=cli_localidad]').html("Localidad: "+cliente['localidad']);
         
         cliente_seleccionado = cliente;
 }

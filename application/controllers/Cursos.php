@@ -64,7 +64,14 @@ class Cursos extends CI_Controller {
                         $duracion = $this->input->post('duracion');
                         $minimo = $this->input->post('minimo');
                         $maximo = $this->input->post('maximo'); 
-                        
+                        $profesor = $this->input->post('profesor');
+                        $modalidad = $this->input->post('modalidad');
+                        $objetivo = $this->input->post('objetivo');
+                        $programa = $this->input->post('programa');
+                        $materiales = $this->input->post('materiales');
+                        $requisitos = $this->input->post('requisitos');
+                        $kit_inicio = $this->input->post('kit_inicio');
+
                         $data['title'] = 'Crear nuevo curso';
 
                         $datos = array(
@@ -72,7 +79,14 @@ class Cursos extends CI_Controller {
                                 'detalles' => $detalles,
                                 'duracion' => $duracion,
                                 'minimo' => $minimo,
-                                'maximo' => $maximo       
+                                'maximo' => $maximo,
+                                'profesor' => $profesor,
+                                'modalidad' => $modalidad,
+                                'objetivo' => $objetivo,
+                                'programa' => $programa,
+                                'materiales' => $materiales,
+                                'requisitos' => $requisitos,
+                                'kit_inicio' => $kit_inicio             
                         );
                         
                         if($nombre && $detalles && $duracion && $minimo && $maximo){
@@ -121,6 +135,13 @@ class Cursos extends CI_Controller {
                         $minimo = $this->input->post('minimo');
                         $maximo = $this->input->post('maximo'); 
                         $checked = $this->input->post('checked');
+                        $profesor = $this->input->post('profesor');
+                        $modalidad = $this->input->post('modalidad');
+                        $objetivo = $this->input->post('objetivo');
+                        $programa = $this->input->post('programa');
+                        $materiales = $this->input->post('materiales');
+                        $requisitos = $this->input->post('requisitos');
+                        $kit_inicio = $this->input->post('kit_inicio');
                         
                         $data['title'] = 'Crear nuevo curso';
 
@@ -130,7 +151,14 @@ class Cursos extends CI_Controller {
                                 'detalles' => $detalles,
                                 'duracion' => $duracion,
                                 'minimo' => $minimo,
-                                'maximo' => $maximo                         
+                                'maximo' => $maximo,
+                                'profesor' => $profesor,
+                                'modalidad' => $modalidad,
+                                'objetivo' => $objetivo,
+                                'programa' => $programa,
+                                'materiales' => $materiales,
+                                'requisitos' => $requisitos,
+                                'kit_inicio' => $kit_inicio                         
                         );
 
                         

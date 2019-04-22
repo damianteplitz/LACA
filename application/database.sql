@@ -6,6 +6,13 @@ DROP TABLE Cursos;
 CREATE TABLE Cursos (
     id int NOT NULL AUTO_INCREMENT,
     nombre varchar(255),
+	profesor varchar(255),
+	modalidad varchar(255),
+	objetivo varchar(255),
+	programa varchar(255),
+	materiales varchar(255),
+	requisitos varchar(255),
+	kit_inicio varchar(255),
     detalles varchar(255),
     duracion int,
     minimo int,
@@ -27,8 +34,10 @@ CREATE TABLE Clientes (
     id int NOT NULL AUTO_INCREMENT,
     nombre varchar (255),
     apellido varchar (255),
+	telefono int,
     documento int,
     direccion varchar (255),
+	localidad varchar (255),
     mail varchar (255),
     f_alta date,
     PRIMARY KEY (id)
@@ -46,15 +55,15 @@ CREATE TABLE Clientes_cursos (
     PRIMARY KEY (id)
 );
 
-INSERT INTO Cursos (nombre,detalles,duracion,minimo,maximo) VALUES ('Cosmetologia', 'Curso de belleza de la piel',10,5,10);
-INSERT INTO Cursos (nombre,detalles,duracion,minimo,maximo) VALUES ('Peeling','Curso de belleza de pestañas',10,5,10);
-INSERT INTO Cursos (nombre,detalles,duracion,minimo,maximo) VALUES ('Maquillaje', 'Aprende a maquillarte como una reina',10,5,10);
-INSERT INTO Cursos (nombre,detalles,duracion,minimo,maximo) VALUES ('Depilacion', 'Depilate y deja tus piernas sedosas',10,5,10);
+INSERT INTO Cursos (nombre,detalles,duracion,minimo,maximo,profesor,modalidad,objetivo,programa,materiales,requisitos,kit_inicio) VALUES ('Cosmetologia', 'Curso de belleza de la piel',10,5,10,'Eli','practica','ganar plata','muuuchas cosas copadas','cremas y cosas caras','tener plata para pagarlo','muchas cosas que no vas a usar');
+INSERT INTO Cursos (nombre,detalles,duracion,minimo,maximo,profesor,modalidad,objetivo,programa,materiales,requisitos,kit_inicio) VALUES ('Peeling','Curso de belleza de pestañas',10,5,10,'Eli','practica','ganar plata','muuuchas cosas copadas','cremas y cosas caras','tener plata para pagarlo','muchas cosas que no vas a usar');
+INSERT INTO Cursos (nombre,detalles,duracion,minimo,maximo,profesor,modalidad,objetivo,programa,materiales,requisitos,kit_inicio) VALUES ('Maquillaje', 'Aprende a maquillarte como una reina',10,5,10,'Eli','practica','ganar plata','muuuchas cosas copadas','cremas y cosas caras','tener plata para pagarlo','muchas cosas que no vas a usar');
+INSERT INTO Cursos (nombre,detalles,duracion,minimo,maximo,profesor,modalidad,objetivo,programa,materiales,requisitos,kit_inicio) VALUES ('Depilacion', 'Depilate y deja tus piernas sedosas',10,5,10,'Eli','practica','ganar plata','muuuchas cosas copadas','cremas y cosas caras','tener plata para pagarlo','muchas cosas que no vas a usar');
 
-INSERT INTO Clientes (nombre,apellido,documento,direccion,mail,f_alta) VALUES ('Damian', 'Teplitz',39482778,'Bonifacio 2444 1º','damitepl@hotmail.com',CURDATE());
-INSERT INTO Clientes (nombre,apellido,documento,direccion,mail,f_alta) VALUES ('Karina', 'Kohen',20053087,'Bonifacio 2444 1º','karikohen@hotmail.com',CURDATE());
-INSERT INTO Clientes (nombre,apellido,documento,direccion,mail,f_alta) VALUES ('Laila', 'Teplitz',40187965,'Bonifacio 2444 1º','laitepl@hotmail.com',CURDATE());
-INSERT INTO Clientes (nombre,apellido,documento,direccion,mail,f_alta) VALUES ('Ariel', 'Teplitz',43256984,'Bonifacio 2444 1º','aritepl@hotmail.com',CURDATE());
+INSERT INTO Clientes (nombre,apellido,documento,direccion,mail,f_alta,telefono,localidad) VALUES ('Damian', 'Teplitz',39482778,'Bonifacio 2444 1º','damitepl@hotmail.com',CURDATE(),1131822452,'CABA');
+INSERT INTO Clientes (nombre,apellido,documento,direccion,mail,f_alta,telefono,localidad) VALUES ('Karina', 'Kohen',20053087,'Bonifacio 2444 1º','karikohen@hotmail.com',CURDATE(),1123745926,'CABA');
+INSERT INTO Clientes (nombre,apellido,documento,direccion,mail,f_alta,telefono,localidad) VALUES ('Laila', 'Teplitz',40187965,'Bonifacio 2444 1º','laitepl@hotmail.com',CURDATE(),1158162395,'CABA');
+INSERT INTO Clientes (nombre,apellido,documento,direccion,mail,f_alta,telefono,localidad) VALUES ('Ariel', 'Teplitz',43256984,'Bonifacio 2444 1º','aritepl@hotmail.com',CURDATE(),1155986485,'CABA');
 
 
 INSERT INTO Cursos_abiertos (id_curso,f_inicio,f_final,estado)

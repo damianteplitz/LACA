@@ -115,6 +115,8 @@ class Interesadas extends CI_Controller {
                         $apellido = $this->input->post('apellido');
                         $documento = $this->input->post('documento');
                         $direccion = $this->input->post('direccion');
+                        $localidad = $this->input->post('localidad');
+                        $telefono = $this->input->post('telefono');
                         $mail = $this->input->post('mail'); 
                         
                         $data['title'] = 'Crear nuevo curso';
@@ -124,6 +126,8 @@ class Interesadas extends CI_Controller {
                                 'apellido' => $apellido,
                                 'documento' => $documento,
                                 'direccion' => $direccion,
+                                'telefono' => $telefono,
+                                'localidad' => $localidad,
                                 'mail' => $mail       
                         );
                         

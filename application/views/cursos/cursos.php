@@ -22,6 +22,12 @@
                             </div>
                             <div class="input-group m-1 input-group-md">
                                 <div class="input-group-prepend">
+                                    <span class="input-group-text" for="profesor">Profesor</span>
+                                </div>
+                                <input type="text" class="form-control" name="profesor">
+                            </div>
+                            <div class="input-group m-1 input-group-md">
+                                <div class="input-group-prepend">
                                     <span class="input-group-text" for="detalles">Detalles</span>
                                 </div>
                                 <input type="text" class="form-control" name="detalles">
@@ -31,6 +37,42 @@
                                     <span class="input-group-text" for="duracion">Duracion</span>
                                 </div>
                                 <input type="number" class="form-control" name="duracion">
+                            </div>
+                            <div class="input-group m-1 input-group-md">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" for="modalidad">Modalidad</span>
+                                </div>
+                                <input type="text" class="form-control" name="modalidad">
+                            </div>
+                            <div class="input-group m-1 input-group-md">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" for="objetivo">Objetivo</span>
+                                </div>
+                                <input type="text" class="form-control" name="objetivo">
+                            </div>
+                            <div class="input-group m-1 input-group-md">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" for="programa">Programa</span>
+                                </div>
+                                <input type="text" class="form-control" name="programa">
+                            </div>
+                            <div class="input-group m-1 input-group-md">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" for="materiales">Materiales</span>
+                                </div>
+                                <input type="text" class="form-control" name="materiales">
+                            </div>
+                            <div class="input-group m-1 input-group-md">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" for="requisitos">Requisitos</span>
+                                </div>
+                                <input type="text" class="form-control" name="requisitos">
+                            </div>
+                            <div class="input-group m-1 input-group-md">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" for="kit_inicio">Kit de inicio</span>
+                                </div>
+                                <input type="text" class="form-control" name="kit_inicio">
                             </div>
                             <div class="input-group m-1 input-group-md">
                                 <div class="input-group-prepend">
@@ -137,9 +179,51 @@
                                 </div>
                                 <div class="input-group m-1 input-group-md">
                                     <div class="input-group-prepend">
+                                        <span class="input-group-text" for="profesor">Profesor</span>
+                                    </div>
+                                    <input type="text" class="form-control" name="profesor"  value = "<?php echo $c_abiertos[$w]['profesor']; ?>">
+                                </div>
+                                <div class="input-group m-1 input-group-md">
+                                    <div class="input-group-prepend">
                                         <span class="input-group-text" for="detalles">Detalles</span>
                                     </div>
                                     <input type="text" class="form-control" name="detalles"  value = "<?php echo $c_abiertos[$w]['detalles']; ?>">
+                                </div>
+                                <div class="input-group m-1 input-group-md">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" for="modalidad">Modalidad</span>
+                                    </div>
+                                    <input type="text" class="form-control" name="modalidad"  value = "<?php echo $c_abiertos[$w]['modalidad']; ?>">
+                                </div>
+                                <div class="input-group m-1 input-group-md">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" for="objetivo">Objetivo</span>
+                                    </div>
+                                    <input type="text" class="form-control" name="objetivo"  value = "<?php echo $c_abiertos[$w]['objetivo']; ?>">
+                                </div>
+                                <div class="input-group m-1 input-group-md">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" for="programa">Programa</span>
+                                    </div>
+                                    <input type="text" class="form-control" name="programa"  value = "<?php echo $c_abiertos[$w]['programa']; ?>">
+                                </div>
+                                <div class="input-group m-1 input-group-md">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" for="materiales">Materiales</span>
+                                    </div>
+                                    <input type="text" class="form-control" name="materiales"  value = "<?php echo $c_abiertos[$w]['materiales']; ?>">
+                                </div>
+                                <div class="input-group m-1 input-group-md">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" for="requisitos">Requisitos</span>
+                                    </div>
+                                    <input type="text" class="form-control" name="requisitos"  value = "<?php echo $c_abiertos[$w]['requisitos']; ?>">
+                                </div>
+                                <div class="input-group m-1 input-group-md">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" for="kit_inicio">Kit de inicio</span>
+                                    </div>
+                                    <input type="text" class="form-control" name="kit_inicio"  value = "<?php echo $c_abiertos[$w]['kit_inicio']; ?>">
                                 </div>
                                 <div class="input-group m-1 input-group-md">
                                     <div class="input-group-prepend">
