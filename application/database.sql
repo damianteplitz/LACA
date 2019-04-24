@@ -50,6 +50,9 @@ CREATE TABLE Clientes_cursos (
     estado int,
     f_consulta date,
     f_inscripcion date,
+	t_m tinyint(1),
+	t_t tinyint(1),
+	t_n tinyint(1)
     FOREIGN KEY (id_cliente) REFERENCES Clientes(id),
     FOREIGN KEY (id_cabierto) REFERENCES Cursos_abiertos(id),
     PRIMARY KEY (id)

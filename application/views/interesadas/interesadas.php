@@ -61,23 +61,42 @@
                                 <div class="modal-body">
                                         <ul class="list-group">
                                                 <li class="list-group-item" id="curso_det_box" name="det_nombre"></li>
+                                                <li class="list-group-item" id="curso_det_box" name="det_profesor"></li>
                                                 <li class="list-group-item" id="curso_det_box" name="det_detalles"></li>
                                                 <li class="list-group-item" id="curso_det_box" name="det_duracion"></li>
+                                                <li class="list-group-item" id="curso_det_box" name="det_modalidad"></li>
+                                                <li class="list-group-item" id="curso_det_box" name="det_objetivo"></li>
+                                                <li class="list-group-item" id="curso_det_box" name="det_programa"></li>
+                                                <li class="list-group-item" id="curso_det_box" name="det_materiales"></li>
+                                                <li class="list-group-item" id="curso_det_box" name="det_requisitos"></li>
+                                                <li class="list-group-item" id="curso_det_box" name="det_kit_inicio"></li>
                                                 <li class="list-group-item" id="curso_det_box" name="det_minimo"></li>
                                                 <li class="list-group-item" id="curso_det_box" name="det_maximo"></li>
                                         </ul>
                                         <form action="#">
-                                                <div class="modal-footer">
-                                                        
-                                                        <input name="id_cabierto" type="hidden" id="id_cabierto" value = "">
-                                                        <input name="id_cliente" type="hidden" id="id_cliente_form" value = "">
-                                                        <input name="estado" type="hidden" id="estado" value = "">
-                                                        <div class="checkbox">
-                                                                <label><input name="interesada"  type="checkbox" value=""  id="interesada">Interesada</label>
-                                                        </div>
-                                                        <button type="submit" id="btn_actualizar_interesada" class="btn btn-primary">Guardar</button>
                                                 
+                                        <div class="row justify-content-end">
+                                                <input name="id_cabierto" type="hidden" id="id_cabierto" value = "">
+                                                <input name="id_cliente" type="hidden" id="id_cliente_form" value = "">
+                                                <input name="estado" type="hidden" id="estado" value = "">
+                                                <div class="col-4">
+                                                        <label><input name="interesada"  type="checkbox" value=""  id="interesada">Interesada</label>
                                                 </div>
+                                                <div class="col-4">
+                                                        <div class="checkbox">
+                                                                <label><input type="checkbox" value="" id="t_mañana" disabled="disabled">Mañana</label>
+                                                        </div>
+                                                        <div class="checkbox">
+                                                                <label><input type="checkbox" value="" id="t_tarde" disabled="disabled">Tarde</label>
+                                                        </div>
+                                                        <div class="checkbox">
+                                                                <label><input type="checkbox" value="" id="t_noche" disabled="disabled">Noche</label>
+                                                        </div>
+                                                </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                                <button type="submit" id="btn_actualizar_interesada" class="btn btn-primary">Guardar</button>
+                                        </div>
                                         </form>
                                 </div>
                                 <!-- Modal footer -->
@@ -337,13 +356,16 @@ $(document).ready(function(){
                         'id_cabierto' : $("#id_cabierto").val(),
                         'id_cliente'  : $("#id_cliente_form").val(),
                         'checked'   :  $('#interesada').is(':checked'),
+                        't_mañana'   :  $('#t_mañana').is(':checked'),
+                        't_tarde'   :  $('#t_tarde').is(':checked'),
+                        't_noche'   :  $('#t_noche').is(':checked'),
                         'rca_token' : $("#token").val()
                 },
                 dataType: 'json',  
                 cache: false,
                 async: true,
                 success: function(data){
-                        //console.log("interesada actualizada success")
+                        pedir_cursos_disponibles(cliente_seleccionado['id']);
                         alert("Cliente actualizada correctamente!"); 
                         $("#modal_detalle_curso").modal('hide');
                         },
@@ -377,6 +399,23 @@ $(document).ready(function(){
                 $("#row_cursos_abiertos").empty();
                 cargar_nombre_principal();
                 cargar_cursos_disponibles();
+        });
+
+        $("#interesada").click(function(){
+                if($('#interesada').is(':checked')){
+                        $("#t_mañana").attr('disabled',false);
+                        $("#t_tarde").attr('disabled',false);
+                        $("#t_noche").attr('disabled',false);
+                }
+                else{
+                        $("#t_mañana").prop("checked", false);
+                        $("#t_tarde").prop("checked", false);
+                        $("#t_noche").prop("checked", false);
+                        $("#t_mañana").attr('disabled',true);
+                        $("#t_tarde").attr('disabled',true);
+                        $("#t_noche").attr('disabled',true);
+                }
+               
         });
 
 });
@@ -420,18 +459,49 @@ function cargar_lista_curso (id){
         cursos_disponibles.forEach(function(e) {
                 if(e['id']==id){
                         $('li[name=det_nombre]').html("Nombre: "+e['nombre']);
+                        $('li[name=det_profesor]').html("Profesor: "+e['profesor']);
                         $('li[name=det_detalles]').html("Detalles: "+e['detalles']);
                         $('li[name=det_duracion]').html("Duracion: "+e['duracion']);
+                        $('li[name=det_modalidad]').html("Modalidad: "+e['modalidad']);
+                        $('li[name=det_objetivo]').html("Objetivo: "+e['objetivo']);
+                        $('li[name=det_programa]').html("Programa: "+e['programa']);
+                        $('li[name=det_materiales]').html("Materiales: "+e['materiales']);
+                        $('li[name=det_requisitos]').html("Requisitos: "+e['requisitos']);
+                        $('li[name=det_kit_inicio]').html("Kit de inicio: "+e['kit_inicio']);
                         $('li[name=det_minimo]').html("Minimo: "+e['minimo']);
                         $('li[name=det_maximo]').html("Maximo: "+e['maximo']);
                         $("#id_cabierto").val(id);
                         $("#estado").val(e['estado']);
                         $("#id_cliente_form").val(cliente_seleccionado['id']);
                         if (e['estado']==1){
+                                $("#t_mañana").attr('disabled',false);
+                                $("#t_tarde").attr('disabled',false);
+                                $("#t_noche").attr('disabled',false);
                                 $("#interesada").prop("checked", true);
                         }
                         else{
+                                $("#t_mañana").attr('disabled',true);
+                                $("#t_tarde").attr('disabled',true);
+                                $("#t_noche").attr('disabled',true);
                                 $("#interesada").prop("checked", false);
+                        }
+                        if (e['t_m']==1){
+                                $("#t_mañana").prop("checked", true);
+                        }
+                        else{
+                                $("#t_mañana").prop("checked", false);
+                        }
+                        if (e['t_t']==1){
+                                $("#t_tarde").prop("checked", true);
+                        }
+                        else{
+                                $("#t_tarde").prop("checked", false);
+                        }
+                        if (e['t_n']==1){
+                                $("#t_noche").prop("checked", true);
+                        }
+                        else{
+                                $("#t_noche").prop("checked", false);
                         }
                 }
         });

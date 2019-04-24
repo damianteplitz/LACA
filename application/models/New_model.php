@@ -137,7 +137,7 @@ class New_model extends CI_Model {
         public function upload_interesada($data)
         {
                 $sql = "UPDATE Clientes_cursos
-                SET estado = ".$data['estado']." 
+                SET estado = ".$data['estado']." , t_m = ".$data['t_mañana']." , t_t = ".$data['t_tarde']." , t_n = ".$data['t_noche']." 
                 WHERE id_cliente = ".$data['id_cliente']." AND id_cabierto = ".$data['id_cabierto'].";";
                 if ( ! $result = $this->db->query($sql)){
                         $this->db->_error_message();
@@ -148,8 +148,8 @@ class New_model extends CI_Model {
         }
 
         public function new_interesada($data){
-                $sql = "INSERT INTO Clientes_cursos (id_cliente,id_cabierto,estado,f_consulta,f_inscripcion) 
-                VALUES (".$data['id_cliente'].",".$data['id_cabierto'].",".$data['estado'].",CURDATE(),CURDATE());";
+                $sql = "INSERT INTO Clientes_cursos (id_cliente,id_cabierto,estado,f_consulta,f_inscripcion,t_m,t_t,t_n) 
+                VALUES (".$data['id_cliente'].",".$data['id_cabierto'].",".$data['estado'].",CURDATE(),CURDATE(),".$data['t_mañana'].",".$data['t_tarde'].",".$data['t_noche'].");";
                 if ( ! $result = $this->db->query($sql)){
                         $this->db->_error_message();
                 }
@@ -248,7 +248,7 @@ class New_model extends CI_Model {
 
         public function get_cursos_disponibles_abiertos($id){
 
-                $sql = "SELECT Cursos.id, Cursos.nombre, Cursos.detalles, Cursos.duracion, Cursos.minimo, Cursos.maximo, Clientes_cursos.estado
+                $sql = "SELECT Cursos.id, Cursos.nombre, Cursos.detalles, Cursos.duracion, Cursos.minimo, Cursos.maximo, Clientes_cursos.estado, Clientes_cursos.t_m, Clientes_cursos.t_t, Clientes_cursos.t_n, Cursos.profesor, Cursos.modalidad, Cursos.objetivo, Cursos.programa, Cursos.materiales, Cursos.requisitos, Cursos.kit_inicio
                 FROM Cursos
                 INNER JOIN Cursos_abiertos
                 ON Cursos_abiertos.id_curso=Cursos.id

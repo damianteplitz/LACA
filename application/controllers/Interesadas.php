@@ -239,6 +239,9 @@ class Interesadas extends CI_Controller {
                         $id_cabierto = $this->input->post('id_cabierto');
                         $creado = $this->input->post('estado');
                         $estado = $this->input->post('checked');
+                        $t_mañana = $this->input->post('t_mañana');
+                        $t_tarde = $this->input->post('t_tarde');
+                        $t_noche = $this->input->post('t_noche');
                         
                         if($estado == 'true'){
                                 $estado = "1";
@@ -246,10 +249,32 @@ class Interesadas extends CI_Controller {
                         if($estado=='false'){
                                 $estado = "0";
                         }
+                        if($t_mañana == 'true'){
+                                $t_mañana = "1";
+                        }
+                        if($t_mañana=='false'){
+                                $t_mañana = "0";
+                        }
+                        if($t_tarde == 'true'){
+                                $t_tarde = "1";
+                        }
+                        if($t_tarde=='false'){
+                                $t_tarde = "0";
+                        }
+                        if($t_noche == 'true'){
+                                $t_noche = "1";
+                        }
+                        if($t_noche=='false'){
+                                $t_noche = "0";
+                        }
+
 
                         $datos = array(
                                 'id_cliente' => $id_cliente,
                                 'id_cabierto' => $id_cabierto,
+                                't_mañana' => $t_mañana,
+                                't_tarde' => $t_tarde,
+                                't_noche' => $t_noche,
                                 'estado' => $estado                      
                         );
 
