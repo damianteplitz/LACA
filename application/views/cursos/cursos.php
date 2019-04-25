@@ -3,355 +3,323 @@
     </head>
     
     <body>
-    
-        <div class="modal" id="modal_nuevo_curso">
+        <div class="modal" id="modal_detalle_curso">
             <div class="modal-dialog">
                 <div class="modal-content">
                 <!-- Modal Header -->
                     <div class="modal-header">
-                        <h4 class="modal-title">Nuevo curso</h4>
+                        <h4 class="modal-title">Detalles del curso</h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
                     <!-- Modal body -->
                     <div class="modal-body">
-
-                        <?php echo form_open('index.php/cursos/nuevo_Curso'); ?>
-
+                        <form action="#">
                             <div class="input-group mb-3 input-group-lg" for="nombre">
-                                <input type="input" class="form-control" name="nombre" placeholder="Nombre del curso">
+                                <input type="input" class="form-control" name="nombre" value="" id="det_nombre">
                             </div>
                             <div class="input-group m-1 input-group-md">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" for="profesor">Profesor</span>
                                 </div>
-                                <input type="text" class="form-control" name="profesor">
+                                <input type="text" class="form-control" name="profesor"  value = "" id="det_profesor">
                             </div>
                             <div class="input-group m-1 input-group-md">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" for="detalles">Detalles</span>
                                 </div>
-                                <input type="text" class="form-control" name="detalles">
-                            </div>
-                            <div class="input-group m-1 input-group-md">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" for="duracion">Duracion</span>
-                                </div>
-                                <input type="number" class="form-control" name="duracion">
-                            </div>
-                            <div class="input-group m-1 input-group-md">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" for="modalidad">Modalidad</span>
-                                </div>
-                                <input type="text" class="form-control" name="modalidad">
+                                <input type="text" class="form-control" name="detalles"  value = "" id="det_detalles">
                             </div>
                             <div class="input-group m-1 input-group-md">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" for="objetivo">Objetivo</span>
                                 </div>
-                                <input type="text" class="form-control" name="objetivo">
+                                <input type="text" class="form-control" name="objetivo"  value = "" id="det_objetivo">
                             </div>
                             <div class="input-group m-1 input-group-md">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" for="programa">Programa</span>
                                 </div>
-                                <input type="text" class="form-control" name="programa">
+                                <input type="text" class="form-control" name="programa"  value = "" id="det_programa" >
                             </div>
                             <div class="input-group m-1 input-group-md">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" for="materiales">Materiales</span>
                                 </div>
-                                <input type="text" class="form-control" name="materiales">
+                                <input type="text" class="form-control" name="materiales"  value = ""id="det_materiales">
                             </div>
                             <div class="input-group m-1 input-group-md">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" for="requisitos">Requisitos</span>
                                 </div>
-                                <input type="text" class="form-control" name="requisitos">
+                                <input type="text" class="form-control" name="requisitos"  value = "" id="det_requisitos">
                             </div>
                             <div class="input-group m-1 input-group-md">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" for="kit_inicio">Kit de inicio</span>
                                 </div>
-                                <input type="text" class="form-control" name="kit_inicio">
+                                <input type="text" class="form-control" name="kit_inicio"  value = "" id="det_kit_inicio">
                             </div>
                             <div class="input-group m-1 input-group-md">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text" for="minimo">Minimo</span>
+                                    <span class="input-group-text" for="duracion" >Duracion</span>
                                 </div>
-                                <input type="number" class="form-control" name="minimo">
+                                <input type="number" class="form-control" name="duracion" value = "" id="det_duracion">
                             </div>
                             <div class="input-group m-1 input-group-md">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text" for="maximo">Maximo</span>
+                                    <span class="input-group-text" for="minimo" >Minimo</span>
                                 </div>
-                                <input type="number" class="form-control" name="maximo">
+                                <input type="number" class="form-control" name="minimo" value = "" id="det_minimo"> 
                             </div>
-                            <div class="modal-footer">
-                                <button type="submit" id="register" class="btn btn-primary">Guardar</button>
+                            <div class="input-group m-1 input-group-md">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" for="maximo" >Maximo</span>
+                                </div>
+                                <input type="number" class="form-control" name="maximo" value = "" id="det_maximo">
+                            </div>
+                            <div class="container">
+                                <label class="radio-inline">
+                                    <input type="radio" name="taller" id="det_taller" value="">Taller
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="curso" id="det_curso" value="">Curso
+                                </label>
+                            </div>
+                            <div class="row justify-content-end">
+                                <input name="id_cabierto" type="hidden" id="id_cabierto" value = "">
+                                <input name="actualizar" type="hidden" id="actualizar" value = "">
                             </div>
                             
-                        <?php echo form_close(); ?>
-
+                            <div class="modal-footer">
+                                <div class="checkbox">
+                                        <label><input name="abierto" type="checkbox" value="" id="det_abierto">Abierto</label>
+                                </div>
+                                <button type="submit" id="btn_actualizar_curso" class="btn btn-primary">Guardar</button>
+                            </div>
+                        </form>
                     </div>
-                    <!-- Modal footer -->
-                    
+                        <!-- Modal footer -->
                 </div>
             </div>
         </div>
-        <?php $w = 0; ?>        
-        <?php foreach ($c_cerrados as $course): ?>
-        <?php $mod = "modal_editar_curso_cerrado".$w; ?>
-            <div class="modal" id="<?php echo $mod;?>">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <!-- Modal Header -->
-                        <div class="modal-header">
-                            <h4 class="modal-title">Detalles del curso</h4>
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        </div>
-                        <!-- Modal body -->
-                        <div class="modal-body">
-
-                            <?php echo form_open('index.php/cursos/editar_Curso'); ?>
-                                <input type="hidden" name="id" value = "<?php echo $c_cerrados[$w]['id']; ?>">
-                                <div class="input-group mb-3 input-group-lg" for="nombre">
-                                    <input type="input" class="form-control" name="nombre" value="<?php echo $c_cerrados[$w]['nombre']; ?>">
-                                </div>
-                                <div class="input-group m-1 input-group-md">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" for="detalles">Detalles</span>
-                                    </div>
-                                    <input type="text" class="form-control" name="detalles"  value = "<?php echo $c_cerrados[$w]['detalles']; ?>">
-                                </div>
-                                <div class="input-group m-1 input-group-md">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" for="duracion" >Duracion</span>
-                                    </div>
-                                    <input type="text" class="form-control" name="duracion" value = "<?php echo $c_cerrados[$w]['duracion']; ?>">
-                                </div>
-                                <div class="input-group m-1 input-group-md">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" for="minimo" >Minimo</span>
-                                    </div>
-                                    <input type="text" class="form-control" name="minimo" value = "<?php echo $c_cerrados[$w]['minimo']; ?>">
-                                </div>
-                                <div class="input-group m-1 input-group-md">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" for="maximo" >Maximo</span>
-                                    </div>
-                                    <input type="text" class="form-control" name="maximo" value = "<?php echo $c_cerrados[$w]['maximo']; ?>">
-                                </div>
-                                
-                                <div class="modal-footer">
-                                    <div class="checkbox">
-                                            <label><input name="checked" type="checkbox" value="<?php echo $c_cerrados[$w]['id']; ?>" id="checkboxx">Abierto</label>
-                                    </div>
-                                    <button type="submit" id="register" class="btn btn-primary">Guardar</button>
-                                </div>
-                            <?php echo form_close(); ?>
-                        </div>
-                        <!-- Modal footer -->
-                    </div>
-                </div>
-            </div>
-            <?php $w++; ?>        
-        <?php endforeach; ?>
-
-
-        <?php $w = 0; ?>        
-        <?php foreach ($c_abiertos as $course): ?>
-        <?php $mod = "modal_editar_curso_abierto".$w; ?>
-            <div class="modal" id="<?php echo $mod;?>">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <!-- Modal Header -->
-                        <div class="modal-header">
-                            <h4 class="modal-title">Detalles del curso</h4>
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        </div>
-                        <!-- Modal body -->
-                        <div class="modal-body">
-
-                            <?php echo form_open('index.php/cursos/editar_Curso'); ?>
-                                <input type="hidden" name="id" value = "<?php echo $c_abiertos[$w]['id']; ?>">
-                                <div class="input-group mb-3 input-group-lg" for="nombre">
-                                    <input type="input" class="form-control" name="nombre" value="<?php echo $c_abiertos[$w]['nombre']; ?>">
-                                </div>
-                                <div class="input-group m-1 input-group-md">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" for="profesor">Profesor</span>
-                                    </div>
-                                    <input type="text" class="form-control" name="profesor"  value = "<?php echo $c_abiertos[$w]['profesor']; ?>">
-                                </div>
-                                <div class="input-group m-1 input-group-md">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" for="detalles">Detalles</span>
-                                    </div>
-                                    <input type="text" class="form-control" name="detalles"  value = "<?php echo $c_abiertos[$w]['detalles']; ?>">
-                                </div>
-                                <div class="input-group m-1 input-group-md">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" for="modalidad">Modalidad</span>
-                                    </div>
-                                    <input type="text" class="form-control" name="modalidad"  value = "<?php echo $c_abiertos[$w]['modalidad']; ?>">
-                                </div>
-                                <div class="input-group m-1 input-group-md">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" for="objetivo">Objetivo</span>
-                                    </div>
-                                    <input type="text" class="form-control" name="objetivo"  value = "<?php echo $c_abiertos[$w]['objetivo']; ?>">
-                                </div>
-                                <div class="input-group m-1 input-group-md">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" for="programa">Programa</span>
-                                    </div>
-                                    <input type="text" class="form-control" name="programa"  value = "<?php echo $c_abiertos[$w]['programa']; ?>">
-                                </div>
-                                <div class="input-group m-1 input-group-md">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" for="materiales">Materiales</span>
-                                    </div>
-                                    <input type="text" class="form-control" name="materiales"  value = "<?php echo $c_abiertos[$w]['materiales']; ?>">
-                                </div>
-                                <div class="input-group m-1 input-group-md">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" for="requisitos">Requisitos</span>
-                                    </div>
-                                    <input type="text" class="form-control" name="requisitos"  value = "<?php echo $c_abiertos[$w]['requisitos']; ?>">
-                                </div>
-                                <div class="input-group m-1 input-group-md">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" for="kit_inicio">Kit de inicio</span>
-                                    </div>
-                                    <input type="text" class="form-control" name="kit_inicio"  value = "<?php echo $c_abiertos[$w]['kit_inicio']; ?>">
-                                </div>
-                                <div class="input-group m-1 input-group-md">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" for="duracion" >Duracion</span>
-                                    </div>
-                                    <input type="text" class="form-control" name="duracion" value = "<?php echo $c_abiertos[$w]['duracion']; ?>">
-                                </div>
-                                <div class="input-group m-1 input-group-md">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" for="minimo" >Minimo</span>
-                                    </div>
-                                    <input type="text" class="form-control" name="minimo" value = "<?php echo $c_abiertos[$w]['minimo']; ?>">
-                                </div>
-                                <div class="input-group m-1 input-group-md">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" for="maximo" >Maximo</span>
-                                    </div>
-                                    <input type="text" class="form-control" name="maximo" value = "<?php echo $c_abiertos[$w]['maximo']; ?>">
-                                </div>
-                                
-                                <div class="modal-footer">
-                                    <div class="checkbox">
-                                            <label><input name="checked" type="checkbox" value="<?php echo $c_abiertos[$w]['id']; ?>" id="checkboxx">Abierto</label>
-                                    </div>
-                                    <button type="submit" id="register" class="btn btn-primary">Guardar</button>
-                                </div>
-                            <?php echo form_close(); ?>
-                        </div>
-                        <!-- Modal footer -->
-                    </div>
-                </div>
-            </div>
-            <?php $w++; ?>        
-        <?php endforeach; ?>
-
         
         <div class="row justify-content-md-center mt-5">
             <h1>Cargar cursos</h1>
         </div>
         <div class="row justify-content-md-center mt-2">
             <!-- Button to Open the Modal -->
-            <button type="button" class="btn btn-primary mt-3 mb-5" data-toggle="modal" data-target="#modal_nuevo_curso">Nuevo</button>
+            <button type="button" class="btn btn-primary mt-3 mb-5" data-toggle="modal" data-target="#modal_detalle_curso">Nuevo</button>
         </div>
-        <div class="row justify-content-md-center">
-            <div class="col-sm-9 m-2 text border">
-                <h4 class="font-weight-light text-center">Cursos abiertos</h4>
-            
-            <?php $q = 0;?>
-            <?php foreach ($c_abiertos as $course): ?>
-            <?php $mod = "#modal_editar_curso_abierto".$q;?>
-                    <div id="box" class="m-2 border border-secondary">    
-                        <div class="m-2">
-                            <h1><?php echo $course['nombre']; ?></h1>
-                            <p><?php echo $course['detalles']; ?></p>
-                        </div>
-                        <div class="text-right">
-                            <button type="button" class="btn btn-primary m-1" data-toggle="modal" data-target="<?php echo $mod ;?>" id="button_edit">Ver detalles</button>
-                        </div>
-                    </div>
-            <?php $q++;?>
-            <?php endforeach; ?>
+        <div class="row justify-content-md-center" >
+            <div class="col-sm-9 m-2 text border" style="display:none;" id="row_cursos_abiertos">
+                <h4 class="font-weight-light text-center" >Cursos abiertos</h4>
             </div>
-            <div class="col-sm-9 m-2 text border">
-                <h4 class="font-weight-light text-center">Cursos cerrados</h4>
-            <?php $q = 0;?>
-            <?php foreach ($c_cerrados as $course): ?>
-            <?php $mod = "#modal_editar_curso_cerrado".$q;?>
-                    <div id="box" class="m-2 border border-secondary">    
-                        <div class="m-2">
-                            <h1><?php echo $course['nombre']; ?></h1>
-                            <p><?php echo $course['detalles']; ?></p>
-                        </div>
-                        <div class="text-right">
-                            <button type="button" class="btn btn-primary m-1" data-toggle="modal" data-target="<?php echo $mod ;?>" id="button_edit">Ver detalles</button>
-                        </div>
-                    </div>
-            <?php $q++;?>
-            <?php endforeach; ?>
+            <div class="col-sm-9 m-2 text border" style="display:none;" id="row_cursos_cerrados">
+                <h4 class="font-weight-light text-center" >Cursos cerrados</h4>
             </div>
         </div>
-        
+        <input type="hidden" id="token" name="<?=$csrf['name'];?>" value="<?=$csrf['hash'];?>" />
     </body>
 </html>
 
 <script>
 $(document).ready(function(){
-
-    //hacer una funcion que me cargue los detalles de todas los cursos y despues con el index cambio el valor de cada modal (ver como hacer)
-    //Basicamente la variable dinamica NO TIENE QUE SER EN PHP
-    $("#myInput").on("keyup", function() {
-        var value = $(this).val().toLowerCase();
-        $(".dropdown-menu li").filter(function() {
-        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-        });
+    get_cursos();
+    $("#det_taller").click(function(){
+        if ($("#det_taller").is(':checked')){
+            $("#det_curso").prop('checked',false);
+        }
     });
+    $("#det_curso").click(function(){
+        if ($("#det_curso").is(':checked')){
+            $("#det_taller").prop('checked',false);
+        }
+    });
+    $("#btn_actualizar_curso").click(function(){
+        var es_curso;
+        if ($('#det_curso').is(':checked')==true){
+            es_curso = 1;
+        }
+        else{
+            es_curso = 0;
+        }
+        
+        $.ajax({
+                type: 'POST',
+                url: '<?=base_url()?>index.php/Cursos/actualizar_Curso', 
+                data: {
+                        'id'        : $("#id_cabierto").val(),
+                        'nombre'        : $("#det_nombre").val(),
+                        'profesor'      : $("#det_profesor").val(),
+                        'detalles'      : $("#det_detalles").val(),
+                        'objetivo'      : $("#det_objetivo").val(),
+                        'programa'      : $("#det_programa").val(),
+                        'materiales'    : $("#det_materiales").val(),
+                        'requisitos'    : $("#det_requisitos").val(),
+                        'kit_inicio'    : $("#det_kit_inicio").val(),
+                        'duracion'      : $("#det_duracion").val(),
+                        'minimo'        : $("#det_minimo").val(),
+                        'maximo'        : $("#det_maximo").val(),
+                        'curso'         : es_curso,
+                        'abierto'       :  $('#det_abierto').is(':checked'),
+                        'actualizar'         : $("#actualizar").val(),
+                        'rca_token'     : $("#token").val()
+                },
+                dataType: 'json',  
+                cache: false,
+                async: true,
+                success: function(data){
+                        //pedir_cursos_disponibles(cliente_seleccionado['id']);
+                        alert("Curso actualizado correctamente!"); 
+                        $("#row_cursos_abiertos").empty();
+                        $("#row_cursos_cerrados").empty();
+                        get_cursos();
+                        $("#modal_detalle_curso").modal('hide');
+                        },
+                error: function (xhr, ajaxOptions, thrownError) {
+                        //onsole.log("algo malo")
+                        console.log(xhr);
+                        
+                        }
+                });
+                return false;
+    });
+    
+
+
 });
 
-var box = document.querySelectorAll("#box");
-for (i = 0; i < box.length; i++) {
-  box[i].style.backgroundColor = "rgb("+(220-i*15)+","+(200-i*5)+","+242+")";
-  box[i].id = i;
+var cursos = {};
+
+function get_cursos (){
+        $.ajax({
+                type: 'POST',
+                url: '<?=base_url()?>index.php/Cursos/get_cursos', 
+                data: {
+                        'rca_token' : $("#token").val()
+                },
+                dataType: 'json',  
+                cache: false,
+                async: true,
+                success: function(data){
+                        cursos = data;
+                        //console.log("aa")
+                        //console.log(data);
+                        mostrar_cursos();
+                        //console.log("cursos disponibles");
+                        //console.log (cursos_disponibles);
+                        },
+                error: function () {
+			console.log("Error en busqueda de cliente");
+                        }
+                });
+        return 1;
 }
 
-var materia = <?php echo json_encode($materia); ?>;
-var abiertos = <?php echo json_encode($abiertos); ?>;
-var c_abiertos = <?php echo json_encode($c_abiertos); ?>;
-console.log (c_abiertos);
+function mostrar_cursos () {
 
+    $("#row_cursos_abiertos").css('display','none');
+    $("#row_cursos_cerrados").css('display','none');
 
-
-var ch = document.querySelectorAll("#checkboxx");
-
-for (i = 0; i < ch.length; i++) {
-    for (j = 0; j < materia.length; j++){
-        if (materia[j]['id']==ch[i].value){
-            for (h = 0; h < abiertos.length; h++){
-                if (abiertos[h]['id_curso'] == ch[i].value){
-                    if (abiertos[h]['estado']==1){
-                        ch[i].checked = true;
-                    }
-                    else{
-                        ch[i].checked = false;
-                    }
-                }
+    cursos.forEach(function(e){
+        var modalidad;
+        if(e['estado']==1){
+            $("#row_cursos_abiertos").css('display','');
+            if (e['modalidad'] == 1){
+                modalidad = "Curso";
             }
+            else{
+                modalidad = "Taller"
+            }
+            var elm =   '<div id="box" class="m-2 border border-secondary"> ' +
+                            '<div class="m-2"> '+
+                                '<h1>'+e['nombre']+'</h1> '+
+                                '<h5>Modalidad: '+modalidad+'</h5> '+
+                                '<p>'+e['detalles']+'</p> '+
+                            '</div> '+
+                            '<div class="text-right">'+
+                                '<button type="button" class="btn btn-primary m-1" data-toggle="modal" data-target="#modal_detalle_curso" id="button_detalles" onclick="cargar_lista_curso('+e['id']+')">Ver detalles</button>'+
+                            '</div>'+
+                        '</div> ';
+            $(elm).appendTo($("#row_cursos_abiertos"));
         }
-    }
+        if(e['estado']==0){
+            $("#row_cursos_cerrados").css('display','');
+            if (e['modalidad'] == 1){
+                modalidad = "Curso";
+            }
+            else{
+                modalidad = "Taller"
+            }
+            var elm =   '<div id="box" class="m-2 border border-secondary"> ' +
+                            '<div class="m-2"> '+
+                                '<h1>'+e['nombre']+'</h1> '+
+                                '<h5>Modalidad: '+modalidad+'</h5> '+
+                                '<p>'+e['detalles']+'</p> '+
+                            '</div> '+
+                            '<div class="text-right">'+
+                                '<button type="button" class="btn btn-primary m-1" data-toggle="modal" data-target="#modal_detalle_curso" id="button_detalles" onclick="cargar_lista_curso('+e['id']+')">Ver detalles</button>'+
+                            '</div>'+
+                        '</div> ';
+            $(elm).appendTo($("#row_cursos_cerrados"));
+        }
+    });
+    pintar ("#box");
 }
 
+//colores degrade
+function pintar (id){
+        var box = document.querySelectorAll(id);
+        for (i = 0; i < box.length; i++) {
+                box[i].style.backgroundColor = "rgb("+(210-i*10)+","+(190-i*5)+","+242+")";
+                box[i].id = i;
+        }
+}
+
+function cargar_lista_curso (id){
+        cursos.forEach(function(e) {
+                if(e['id']==id){
+                    //console.log(e)
+                        var modalidad;
+                        if (e['modalidad']==1){
+                            modalidad = "Curso"
+                        }
+                        else{
+                            modalidad = "Taller"
+                        }
+                        
+                        $('#actualizar').val(true);
+                        $('#det_nombre').val(e['nombre']);
+                        $('#det_profesor').val(e['profesor']);
+                        $('#det_detalles').val(e['detalles']);
+                        $('#det_duracion').val(e['duracion']);
+                        $('#det_modalidad').val(modalidad);
+                        $('#det_objetivo').val(e['objetivo']);
+                        $('#det_programa').val(e['programa']);
+                        $('#det_materiales').val(e['materiales']);
+                        $('#det_requisitos').val(e['requisitos']);
+                        $('#det_kit_inicio').val(e['kit_inicio']);
+                        $('#det_minimo').val(e['minimo']);
+                        $('#det_maximo').val(e['maximo']);
+                        $("#id_cabierto").val(id);
+                        if (e['estado']==1){
+                            $("#det_abierto").prop('checked',true);
+                        }
+                        else{
+                            $("#det_abierto").prop('checked',false);
+                        }
+                        if(e['modalidad'] == 1){
+                            $("#det_taller").prop('checked',false);
+                            $("#det_curso").prop('checked',true);
+                        }
+                        else{
+                            $("#det_taller").prop('checked',true);
+                            $("#det_curso").prop('checked',false);
+                        }
+                        
+                }
+        });
+        pintar ("#curso_det_box");
+}
 
 </script>

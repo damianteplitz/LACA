@@ -7,7 +7,7 @@ CREATE TABLE Cursos (
     id int NOT NULL AUTO_INCREMENT,
     nombre varchar(255),
 	profesor varchar(255),
-	modalidad varchar(255),
+	modalidad tinyint(1),
 	objetivo varchar(255),
 	programa varchar(255),
 	materiales varchar(255),
@@ -52,16 +52,16 @@ CREATE TABLE Clientes_cursos (
     f_inscripcion date,
 	t_m tinyint(1),
 	t_t tinyint(1),
-	t_n tinyint(1)
+	t_n tinyint(1),
     FOREIGN KEY (id_cliente) REFERENCES Clientes(id),
     FOREIGN KEY (id_cabierto) REFERENCES Cursos_abiertos(id),
     PRIMARY KEY (id)
 );
 
-INSERT INTO Cursos (nombre,detalles,duracion,minimo,maximo,profesor,modalidad,objetivo,programa,materiales,requisitos,kit_inicio) VALUES ('Cosmetologia', 'Curso de belleza de la piel',10,5,10,'Eli','practica','ganar plata','muuuchas cosas copadas','cremas y cosas caras','tener plata para pagarlo','muchas cosas que no vas a usar');
-INSERT INTO Cursos (nombre,detalles,duracion,minimo,maximo,profesor,modalidad,objetivo,programa,materiales,requisitos,kit_inicio) VALUES ('Peeling','Curso de belleza de pestañas',10,5,10,'Eli','practica','ganar plata','muuuchas cosas copadas','cremas y cosas caras','tener plata para pagarlo','muchas cosas que no vas a usar');
-INSERT INTO Cursos (nombre,detalles,duracion,minimo,maximo,profesor,modalidad,objetivo,programa,materiales,requisitos,kit_inicio) VALUES ('Maquillaje', 'Aprende a maquillarte como una reina',10,5,10,'Eli','practica','ganar plata','muuuchas cosas copadas','cremas y cosas caras','tener plata para pagarlo','muchas cosas que no vas a usar');
-INSERT INTO Cursos (nombre,detalles,duracion,minimo,maximo,profesor,modalidad,objetivo,programa,materiales,requisitos,kit_inicio) VALUES ('Depilacion', 'Depilate y deja tus piernas sedosas',10,5,10,'Eli','practica','ganar plata','muuuchas cosas copadas','cremas y cosas caras','tener plata para pagarlo','muchas cosas que no vas a usar');
+INSERT INTO Cursos (nombre,detalles,duracion,minimo,maximo,profesor,modalidad,objetivo,programa,materiales,requisitos,kit_inicio) VALUES ('Cosmetologia', 'Curso de belleza de la piel',10,5,10,'Eli',1,'ganar plata','muuuchas cosas copadas','cremas y cosas caras','tener plata para pagarlo','muchas cosas que no vas a usar');
+INSERT INTO Cursos (nombre,detalles,duracion,minimo,maximo,profesor,modalidad,objetivo,programa,materiales,requisitos,kit_inicio) VALUES ('Peeling','Curso de belleza de pestañas',10,5,10,'Eli',0,'ganar plata','muuuchas cosas copadas','cremas y cosas caras','tener plata para pagarlo','muchas cosas que no vas a usar');
+INSERT INTO Cursos (nombre,detalles,duracion,minimo,maximo,profesor,modalidad,objetivo,programa,materiales,requisitos,kit_inicio) VALUES ('Maquillaje', 'Aprende a maquillarte como una reina',10,5,10,'Eli',1,'ganar plata','muuuchas cosas copadas','cremas y cosas caras','tener plata para pagarlo','muchas cosas que no vas a usar');
+INSERT INTO Cursos (nombre,detalles,duracion,minimo,maximo,profesor,modalidad,objetivo,programa,materiales,requisitos,kit_inicio) VALUES ('Depilacion', 'Depilate y deja tus piernas sedosas',10,5,10,'Eli',0,'ganar plata','muuuchas cosas copadas','cremas y cosas caras','tener plata para pagarlo','muchas cosas que no vas a usar');
 
 INSERT INTO Clientes (nombre,apellido,documento,direccion,mail,f_alta,telefono,localidad) VALUES ('Damian', 'Teplitz',39482778,'Bonifacio 2444 1º','damitepl@hotmail.com',CURDATE(),1131822452,'CABA');
 INSERT INTO Clientes (nombre,apellido,documento,direccion,mail,f_alta,telefono,localidad) VALUES ('Karina', 'Kohen',20053087,'Bonifacio 2444 1º','karikohen@hotmail.com',CURDATE(),1123745926,'CABA');

@@ -526,8 +526,8 @@ function borrar_id (){
 
 function cargar_cursos_disponibles (s){
 
-        console.log("cursos a imprimir")
-        console.log(cursos_disponibles)
+        //console.log("cursos a imprimir")
+        //console.log(cursos_disponibles)
         
         if (cursos_disponibles.length){
                 $("#row_cursos_abiertos").css('display','');
@@ -537,7 +537,7 @@ function cargar_cursos_disponibles (s){
         }
 
         cursos_disponibles.forEach(function(e) {
-                console.log(e);
+                //console.log(e);
                 var elm = '<div class="col-sm-9"> ' +
                                 '<div id="div_cursos"> '+
                                         '<div id="box" class="m-2 border border-secondary"> '+
