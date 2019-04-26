@@ -345,5 +345,32 @@ class New_model extends CI_Model {
                                 return $result;
                         }
         }
+        public function get_cursos_estadisticas (){
+                $sql =  'UPDATE Clientes
+                        SET nombre = "'.$data['nombre'].'",apellido = "'.$data['apellido'].'",telefono = '.$data['telefono'].',documento = '.$data['documento'].',direccion = "'.$data['direccion'].'",localidad = "'.$data['localidad'].'",mail = "'.$data['mail'].'"
+                        WHERE id = '.$data['id'].';';
+                        if ( ! $result = $this->db->query($sql)){
+                                $this->db->_error_message();
+                        }
+                        else{
+                                return $result;
+                        }
+        }
+
+        public function get_cursos_clientes(){
+                
+                $sql = "SELECT Clientes_cursos.id_cabierto, Clientes_cursos.estado, Clientes_cursos.t_m, Clientes_cursos.t_t, Clientes_cursos.t_n, Clientes.nombre, Clientes.apellido, Clientes.telefono, Clientes.mail, Clientes.id
+                FROM Clientes_cursos
+                LEFT JOIN Clientes 
+                ON Clientes_cursos.id_cliente=Clientes.id order by Clientes_cursos.id_cabierto, Clientes_cursos.estado;";
+                if ( ! $result = $this->db->query($sql)){
+                        $this->db->_error_message();
+                }
+                else{
+                        return $result->result_array();
+                }
+        }
+        
+        
 }
 

@@ -4,13 +4,13 @@
 </head>
 
 <body>
-    <div class="modal bg-secondary" id="modal_est_abiertos">
-        <div class="modal-dialog">
-            <div class="modal-content">
+    <div class="modal bg-secondary " id="modal_est_abiertos">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content ">
                 <!-- Modal Header -->
                 <div class="modal-header">
                     <h4 class="modal-title">Estadisticas cursos abiertos</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <button type="button" class="close" data-dismiss="modal" id="btn_cursos_abiertos">&times;</button>
                 </div>
                 <!-- Modal body -->
                 <div class="modal-body">
@@ -56,21 +56,6 @@
             </div>
         </div>
     </div>
-    <div class="modal bg-secondary" id="modal_est_gral">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <!-- Modal Header -->
-                <div class="modal-header">
-                    <h4 class="modal-title">Estadisticas generales</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <!-- Modal body -->
-                <div class="modal-body">
-                </div>
-            </div>
-        </div>
-    </div>
-
     <div class="row justify-content-md-center mt-5" >
                 <h1>Estadisticas</h1>
     </div>
@@ -80,93 +65,141 @@
         <button type="button" class="btn btn-primary mr-3" data-toggle="modal" data-target="#" id="">Historial x curso (proximamente)</button>
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal_est_gral" id="btn_gral">General</button>
     </div>
+    <input type="hidden" id="token" name="<?=$csrf['name'];?>" value="<?=$csrf['hash'];?>" />
 </body>
 
 <script>
-var c_abiertos = <?php echo json_encode($c_abiertos); ?>;
-var personas = <?php echo json_encode($persona); ?>;
-var interesadas = <?php echo json_encode($interesadas); ?>;
-var curso_abierto_seleccionado_id;
 
-var table_interesadas_body = document.getElementById("table_interesadas_body");
-var table_confirmadas_body = document.getElementById("table_confirmadas_body");
-var table_rechazadas_body = document.getElementById("table_rechazadas_body");
-var select_cursos_abiertos = document.getElementById("select_cursos_abiertos");
 
-for (i=0;i<c_abiertos.length;i++){
-    var option = document.createElement("option");
-    option.text = c_abiertos[i]['nombre'];
-    option.value = c_abiertos[i]['id'];
-    select_cursos_abiertos.add(option);
+$(document).ready(function(){
+    
+    get_cursos_abiertos();
+    get_clientes_cursos();
+    $("#select_cursos_abiertos").on('change', function(e) {
+        completar_estadistica_abiertos(this.value);
+    });
+
+
+});
+var cursos_abiertos;
+var clientes_cursos;
+
+function get_cursos_abiertos (){
+    $.ajax({
+                type: 'POST',
+                url: '<?=base_url()?>index.php/Estadisticas/get_cursos_abiertos', 
+                data: {
+                        'rca_token' : $("#token").val()
+                },
+                dataType: 'json',  
+                cache: false,
+                async: true,
+                success: function(data){
+                        cursos_abiertos = data;
+                        cargar_select_abiertos(data);
+                        //cargar el select
+
+                        },
+                error: function () {
+			            console.log("Error en busqueda de cursos abiertos");
+                        }
+                });
+    return false;
+}
+function get_clientes_cursos (){
+    $.ajax({
+                type: 'POST',
+                url: '<?=base_url()?>index.php/Estadisticas/get_clientes_cursos', 
+                data: {
+                        'rca_token' : $("#token").val()
+                },
+                dataType: 'json',  
+                cache: false,
+                async: true,
+                success: function(data){
+                        clientes_cursos = data;
+                        
+                        },
+                error: function () {
+			            console.log("Error en busqueda de clientes_cursos");
+                        }
+                });
+    return false;
 }
 
-select_cursos_abiertos.onchange = function(e){
+function cargar_select_abiertos (cursos){
+    //cargar select
+    $('#select_cursos_abiertos')
+        .find('option')
+        .remove()
+        .end()
+        .append('<option disabled selected value> -- Seleccione un curso -- </option>')
+    ;
+    cursos.forEach(function(e){
+        $('#select_cursos_abiertos').append($('<option>', {
+            value: e['id'],
+            text: e['nombre']
+        }));
+    });
+}
+
+function completar_estadistica_abiertos (id){
     tdd = document.querySelectorAll("td");
     tdd.forEach(function(e) {
         e.remove();
-    }); 
-   // curso_abierto_seleccionado_id=this.value;
-    for (i=0;i<interesadas.length;i++){
-        if (interesadas[i]['id_cabierto'] == this.value){
-            if (interesadas[i]['estado'] == 1){
-                var nombre_tabla;
-                var apellido_tabla;
-                var mail_tabla;
-                for (j=0;j<personas.length;j++){
-                    if(personas[j]['id'] == interesadas[i]['id_cliente']){
-                        nombre_tabla = personas[j]['nombre'];
-                        apellido_tabla = personas[j]['apellido'];
-                        mail_tabla = personas[j]['mail'];
-                        //console.log(nombre_tabla);
-                    }
-                }
-                var row = table_interesadas_body.insertRow(0);
-                var cell1 = row.insertCell(0);
-                var cell2 = row.insertCell(1);
-                var cell3 = row.insertCell(2);
-                cell1.innerHTML = nombre_tabla;
-                cell2.innerHTML = apellido_tabla;
-                cell3.innerHTML = mail_tabla;
+    });  
+    clientes_cursos.forEach(function(e){
+        if (e['id_cabierto']==id){
+            if (e['estado']==1){
+                agregar_a_tabla(e,"#table_interesadas_body");
             }
-            if (interesadas[i]['estado'] == 2){
-                var nombre_tabla;
-                for (j=0;j<personas.length;j++){
-                    if(personas[j]['id'] == interesadas[i]['id_cliente']){
-                        nombre_tabla = personas[j]['nombre'];
-                        apellido_tabla = personas[j]['apellido'];
-                        mail_tabla = personas[j]['mail'];
-                        //console.log(nombre_tabla);
-                    }
-                }
-                var row = table_confirmadas_body.insertRow(0);
-                var cell1 = row.insertCell(0);
-                var cell2 = row.insertCell(1);
-                var cell3 = row.insertCell(2);
-                cell1.innerHTML = nombre_tabla;
-                cell2.innerHTML = apellido_tabla;
-                cell3.innerHTML = mail_tabla;
+            if (e['estado']==2){
+                agregar_a_tabla(e,"#table_confirmadas_body");
             }
-            if (interesadas[i]['estado'] == 3){
-                var nombre_tabla;
-                for (j=0;j<personas.length;j++){
-                    if(personas[j]['id'] == interesadas[i]['id_cliente']){
-                        nombre_tabla = personas[j]['nombre'];
-                        apellido_tabla = personas[j]['apellido'];
-                        mail_tabla = personas[j]['mail'];
-                        //console.log(nombre_tabla);
-                    }
-                }
-                var row = table_rechazadas_body.insertRow(0);
-                var cell1 = row.insertCell(0);
-                var cell2 = row.insertCell(1);
-                var cell3 = row.insertCell(2);
-                cell1.innerHTML = nombre_tabla;
-                cell2.innerHTML = apellido_tabla;
-                cell3.innerHTML = mail_tabla;
+            if (e['estado']==3){
+                agregar_a_tabla(e,"#table_rechazadas_body");
             }
         }
-    }
+    });
 }
 
+function agregar_a_tabla (datos,tabla){
+    var row = ($(tabla)[0]).insertRow(0);
+    var tm;
+    var tt;
+    var tn;
+    if(datos['t_m']){
+        tm = "Mañana";
+    }
+    else{
+        tm = "";
+    }
+    if(datos['t_t']){
+        tt = "Tarde";
+    }
+    else{
+        tt = "";
+    }
+    if(datos['t_n']){
+        tn = "Noche";
+    }
+    else{
+        tn = "";
+    }
+    var cell1 = row.insertCell(0);
+    var cell2 = row.insertCell(1);
+    var cell3 = row.insertCell(2);
+    var cell4 = row.insertCell(3);
+    var cell5 = row.insertCell(4);
+    var cell6 = row.insertCell(5);
+    var cell7 = row.insertCell(6);
+    cell1.innerHTML = datos['nombre'];
+    cell2.innerHTML = datos['apellido'];
+    cell3.innerHTML = datos['telefono'];
+    cell4.innerHTML = datos['mail'];
+    cell5.innerHTML = tm;
+    cell6.innerHTML = tt;
+    cell7.innerHTML = tn;
+}
 
 </script>
