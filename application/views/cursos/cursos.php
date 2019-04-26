@@ -148,7 +148,7 @@ $(document).ready(function(){
                 type: 'POST',
                 url: '<?=base_url()?>index.php/Cursos/actualizar_Curso', 
                 data: {
-                        'id'        : $("#id_cabierto").val(),
+                        'id'            : $("#id_cabierto").val(),
                         'nombre'        : $("#det_nombre").val(),
                         'profesor'      : $("#det_profesor").val(),
                         'detalles'      : $("#det_detalles").val(),
@@ -162,7 +162,7 @@ $(document).ready(function(){
                         'maximo'        : $("#det_maximo").val(),
                         'curso'         : es_curso,
                         'abierto'       :  $('#det_abierto').is(':checked'),
-                        'actualizar'         : $("#actualizar").val(),
+                        'actualizar'    : $("#actualizar").val(),
                         'rca_token'     : $("#token").val()
                 },
                 dataType: 'json',  

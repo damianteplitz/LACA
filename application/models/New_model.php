@@ -321,5 +321,29 @@ class New_model extends CI_Model {
                         return $result->result_array();
                 }
         }
+
+        public function new_cliente ($data){
+                $sql =  'INSERT INTO Clientes (nombre,apellido,telefono,documento,direccion,localidad,mail)
+                VALUES ("'.$data['nombre'].'","'.$data['apellido'].'",'.$data['telefono'].','.$data['documento'].',"'.$data['direccion'].'","'.$data['localidad'].'","'.$data['mail'].'");';
+                if ( ! $result = $this->db->query($sql)){
+                        $this->db->_error_message();
+                }
+                else{
+                        return $result;
+                }
+        }
+
+        public function update_cliente ($data){
+
+                $sql =  'UPDATE Clientes
+                        SET nombre = "'.$data['nombre'].'",apellido = "'.$data['apellido'].'",telefono = '.$data['telefono'].',documento = '.$data['documento'].',direccion = "'.$data['direccion'].'",localidad = "'.$data['localidad'].'",mail = "'.$data['mail'].'"
+                        WHERE id = '.$data['id'].';';
+                        if ( ! $result = $this->db->query($sql)){
+                                $this->db->_error_message();
+                        }
+                        else{
+                                return $result;
+                        }
+        }
 }
 
