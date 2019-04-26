@@ -42,7 +42,7 @@
                 
                                 <!-- Modal footer -->
                                 <div class="modal-footer">
-                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal_nuevo_cliente">Nuevo</button>
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal_editar_cliente" onclick="limpiar_campos_cliente()">Nuevo</button>
                                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal_editar_cliente" id="editar_cliente" disabled="true">Editar</button>
                                         <button type="button" class="btn btn-success" data-dismiss="modal" id="confirmar">Confirmar</button>
                                 </div>
@@ -103,128 +103,65 @@
                         </div>
                 </div>
         </div>
-        <div class="modal bg-secondary" id="modal_nuevo_cliente">
-                <div class="modal-dialog">
-                        <div class="modal-content">
-                                <!-- Modal Header -->
-                                <div class="modal-header">
-                                        <h4 class="modal-title">Nuevo Cliente</h4>
-                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                </div>
-                                <!-- Modal body -->
-                                <div class="modal-body">
-                                        <?php echo form_open('index.php/interesadas/nuevo_Cliente'); ?>
-                                        
-                                        <div class="input-group m-1 input-group-md">
-                                                <div class="input-group-prepend">
-                                                <span class="input-group-text" for="nombre">Nombre</span>
-                                                </div>
-                                                <input type="text" class="form-control" name="nombre">
-                                        </div>
-                                        <div class="input-group m-1 input-group-md">
-                                                <div class="input-group-prepend">
-                                                <span class="input-group-text" for="apellido">Apellido</span>
-                                                </div>
-                                                <input type="text" class="form-control" name="apellido">
-                                        </div>
-                                        <div class="input-group m-1 input-group-md">
-                                                <div class="input-group-prepend">
-                                                <span class="input-group-text" for="telefono">Telefono</span>
-                                                </div>
-                                                <input type="number" class="form-control" name="telefono">
-                                        </div>
-                                        <div class="input-group m-1 input-group-md">
-                                                <div class="input-group-prepend">
-                                                <span class="input-group-text" for="documento">DNI</span>
-                                                </div>
-                                                <input type="number" class="form-control" name="documento">
-                                        </div>
-                                        <div class="input-group m-1 input-group-md">
-                                                <div class="input-group-prepend">
-                                                <span class="input-group-text" for="direccion">Direccion</span>
-                                                </div>
-                                                <input type="text" class="form-control" name="direccion">
-                                        </div>
-                                        <div class="input-group m-1 input-group-md">
-                                                <div class="input-group-prepend">
-                                                <span class="input-group-text" for="localidad">Localidad</span>
-                                                </div>
-                                                <input type="text" class="form-control" name="localidad">
-                                        </div>
-                                        <div class="input-group m-1 input-group-md">
-                                                <div class="input-group-prepend">
-                                                <span class="input-group-text" for="mail">Mail</span>
-                                                </div>
-                                                <input type="text" class="form-control" name="mail">
-                                        </div>
-                                        <div class="modal-footer">
-                                                <button type="submit" id="register" class="btn btn-primary">Guardar</button>
-                                        </div>
-                                        
-                                        <?php echo form_close(); ?>
-                                </div>
-                        </div>
-                </div>
-        </div>
         <div class="modal bg-secondary" id="modal_editar_cliente">
                 <div class="modal-dialog">
                         <div class="modal-content">
                                 <!-- Modal Header -->
                                 <div class="modal-header">
-                                        <h4 class="modal-title">Editar Cliente</h4>
+                                        <h4 class="modal-title">Cliente</h4>
                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                                 </div>
                                 <!-- Modal body -->
                                 <div class="modal-body">
-                                        <?php echo form_open('index.php/interesadas/editar_Cliente'); ?>
-                                        <input type="hidden" name="id" id= "e_id" value = "">
-                                        <div class="input-group m-1 input-group-md">
-                                                <div class="input-group-prepend">
-                                                        <span class="input-group-text" for="nombre">Nombre</span>
+                                        <form action="#">
+                                                <input type="hidden" name="id" id= "e_id" value = "">
+                                                <input type="hidden" name="id" id= "actualizar" value = "">
+                                                <div class="input-group m-1 input-group-md">
+                                                        <div class="input-group-prepend">
+                                                                <span class="input-group-text" for="nombre">Nombre</span>
+                                                        </div>
+                                                        <input type="text" class="form-control" id="e_nombre" name="nombre" >
                                                 </div>
-                                                <input type="text" class="form-control" id="e_nombre" name="nombre" >
-                                        </div>
-                                        <div class="input-group m-1 input-group-md">
-                                                <div class="input-group-prepend">
-                                                        <span class="input-group-text" for="apellido">Apellido</span>
+                                                <div class="input-group m-1 input-group-md">
+                                                        <div class="input-group-prepend">
+                                                                <span class="input-group-text" for="apellido">Apellido</span>
+                                                        </div>
+                                                        <input type="text" class="form-control" name="apellido" id="e_apellido" value = "">
                                                 </div>
-                                                <input type="text" class="form-control" name="apellido" id="e_apellido" value = "">
-                                        </div>
-                                        <div class="input-group m-1 input-group-md">
-                                                <div class="input-group-prepend">
-                                                        <span class="input-group-text" for="telefono">Telefono</span>
+                                                <div class="input-group m-1 input-group-md">
+                                                        <div class="input-group-prepend">
+                                                                <span class="input-group-text" for="telefono">Telefono</span>
+                                                        </div>
+                                                        <input type="number" class="form-control" name="telefono" id="e_telefono" value = "">
                                                 </div>
-                                                <input type="number" class="form-control" name="telefono" id="e_telefono" value = "">
-                                        </div>
-                                        <div class="input-group m-1 input-group-md">
-                                                <div class="input-group-prepend">
-                                                        <span class="input-group-text" for="documento">DNI</span>
+                                                <div class="input-group m-1 input-group-md">
+                                                        <div class="input-group-prepend">
+                                                                <span class="input-group-text" for="documento">DNI</span>
+                                                        </div>
+                                                        <input type="number" class="form-control" name="documento" id="e_documento" value = "">
                                                 </div>
-                                                <input type="number" class="form-control" name="documento" id="e_documento" value = "">
-                                        </div>
-                                        <div class="input-group m-1 input-group-md">
-                                                <div class="input-group-prepend">
-                                                        <span class="input-group-text" for="direccion">Direccion</span>
+                                                <div class="input-group m-1 input-group-md">
+                                                        <div class="input-group-prepend">
+                                                                <span class="input-group-text" for="direccion">Direccion</span>
+                                                        </div>
+                                                        <input type="text" class="form-control" id="e_direccion" name="direccion" value = "">
                                                 </div>
-                                                <input type="text" class="form-control" id="e_direccion" name="direccion" value = "">
-                                        </div>
-                                        <div class="input-group m-1 input-group-md">
-                                                <div class="input-group-prepend">
-                                                        <span class="input-group-text" for="localidad">Localidad</span>
+                                                <div class="input-group m-1 input-group-md">
+                                                        <div class="input-group-prepend">
+                                                                <span class="input-group-text" for="localidad">Localidad</span>
+                                                        </div>
+                                                        <input type="text" class="form-control" id="e_localidad" name="localidad" value = "">
                                                 </div>
-                                                <input type="text" class="form-control" id="e_localidad" name="localidad" value = "">
-                                        </div>
-                                        <div class="input-group m-1 input-group-md">
-                                                <div class="input-group-prepend">
-                                                        <span class="input-group-text" for="mail">Mail</span>
+                                                <div class="input-group m-1 input-group-md">
+                                                        <div class="input-group-prepend">
+                                                                <span class="input-group-text" for="mail">Mail</span>
+                                                        </div>
+                                                        <input type="text" class="form-control" name="mail" id="e_mail" value = "">
                                                 </div>
-                                                <input type="text" class="form-control" name="mail" id="e_mail" value = "">
-                                        </div>
-                                        <div class="modal-footer">
-                                                <button type="submit" id="register" class="btn btn-primary">Guardar</button>
-                                        </div>
-                                        
-                                        <?php echo form_close(); ?>
+                                                <div class="modal-footer">
+                                                        <button type="submit" id="btn_actualizar_cliente" class="btn btn-primary">Guardar</button>
+                                                </div>
+                                        </form>
                                 </div>
                         </div>
                 </div>
@@ -377,6 +314,43 @@ $(document).ready(function(){
                 });
                 return false;
         });
+
+        $("#btn_actualizar_cliente").click(function(){
+                
+                $.ajax({
+                        type: 'POST',
+                        url: '<?=base_url()?>index.php/Interesadas/actualizar_Cliente', 
+                        data: {
+                                'id'            : $("#e_id").val(),
+                                'nombre'        : $("#e_nombre").val(),
+                                'apellido'      : $("#e_apellido").val(),
+                                'telefono'      : $("#e_telefono").val(),
+                                'documento'     : $("#e_documento").val(),
+                                'direccion'     : $("#e_direccion").val(),
+                                'localidad'     : $("#e_localidad").val(),
+                                'mail'          : $("#e_mail").val(),
+                                'actualizar'    : $("#actualizar").val(),
+                                'rca_token'     : $("#token").val()
+                        },
+                        dataType: 'json',  
+                        cache: false,
+                        async: true,
+                        success: function(data){
+                                //pedir_cursos_disponibles(cliente_seleccionado['id']);
+                                alert("Cliente actualizado correctamente!");
+                                borrar_id();
+                                borrar_cursos_disponibles();
+                                $("#info_cliente").css('display','none');
+                                $("#modal_editar_cliente").modal('hide');
+                                },
+                        error: function (xhr, ajaxOptions, thrownError) {
+                                //onsole.log("algo malo")
+                                console.log(xhr);
+                                
+                        }
+                });
+                return false;
+        });
         
         $("#editar_cliente").click(function()
         {       
@@ -389,6 +363,7 @@ $(document).ready(function(){
                 $("#e_telefono").val(cliente_seleccionado['telefono']);
                 $("#e_mail").val(cliente_seleccionado['mail']);
                 $("#e_id").val(cliente_seleccionado['id']);
+                $("#actualizar").val(1);
                 
         });
 
@@ -434,26 +409,6 @@ function pintar (id){
 }
 
 
-r=180;
-g=150;
-b=242;
-r1=7;
-g1=10;
-var box = document.querySelectorAll("#curso_det_box");
-for (i = 0; i < box.length; i++) {
-  box[i].style.backgroundColor = "rgb("+r+","+g+","+b+")";
-  box[i].id = i;
-  r=r+r1;
-  g=g+g1;
-  if(g>200){
-          r1=r1*-1;
-          g1=g1*-1;
-  }
-  if(g<150){
-          r1=r1*-1;
-          g1=g1*-1;
-  }
-}
 
 function cargar_lista_curso (id){
         cursos_disponibles.forEach(function(e) {
@@ -516,7 +471,7 @@ function cargar_detalle_cliente (cliente){
         $('li[name=cli_mail]').html("Mail: "+cliente['mail']);
         $('li[name=cli_telefono]').html("Telefono: "+cliente['telefono']);
         $('li[name=cli_localidad]').html("Localidad: "+cliente['localidad']);
-        
+        pintar("#curso_det_box");
         cliente_seleccionado = cliente;
 }
 
@@ -592,6 +547,18 @@ function pedir_cursos_disponibles (id){
 
 function borrar_cursos_disponibles (){
         cursos_disponibles = [];
+}
+
+function limpiar_campos_cliente (){
+        $("#e_nombre").val("");
+        $("#e_apellido").val("");
+        $("#e_documento").val("");
+        $("#e_direccion").val("");
+        $("#e_localidad").val("");
+        $("#e_telefono").val("");
+        $("#e_mail").val("");
+        $("#e_id").val(-1);
+        $("#actualizar").val(0);
 }
 
 </script>
