@@ -1,5 +1,5 @@
 <nav class="navbar navbar-fixed-bottom" id="footer">
-  <em>&copy; Designed by Damian Teplitz & Co.</em>
+ <!-- <em>&copy; Designed by Damian Teplitz & Co.</em> -->
   </div>
 </nav>
 
