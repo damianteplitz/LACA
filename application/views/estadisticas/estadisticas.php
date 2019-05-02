@@ -168,19 +168,19 @@ function agregar_a_tabla (datos,tabla){
     var tm;
     var tt;
     var tn;
-    if(datos['t_m']){
+    if(datos['t_m'] == 1){
         tm = "Mañana";
     }
     else{
         tm = "";
     }
-    if(datos['t_t']){
+    if(datos['t_t'] == 1){
         tt = "Tarde";
     }
     else{
         tt = "";
     }
-    if(datos['t_n']){
+    if(datos['t_n'] == 1){
         tn = "Noche";
     }
     else{
@@ -200,6 +200,9 @@ function agregar_a_tabla (datos,tabla){
     cell5.innerHTML = tm;
     cell6.innerHTML = tt;
     cell7.innerHTML = tn;
+    $(cell5).width(60);
+    $(cell6).width(60);
+    $(cell7).width(60);
 }
 
 </script>
