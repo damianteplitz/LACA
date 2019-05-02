@@ -153,7 +153,7 @@ $(document).ready(function(){
             success: function(data){
                     //pedir_cursos_disponibles(cliente_seleccionado['id']);
                     alert("Cliente actualizada correctamente!"); 
-                    $("#modal_buscar_curso").modal('hide');*/
+                    $("#modal_buscar_curso").modal('hide');
                     },
             error: function (xhr, ajaxOptions, thrownError) {
                     //onsole.log("algo malo")
@@ -182,7 +182,7 @@ $(document).ready(function(){
             success: function(data){
                     //pedir_cursos_disponibles(cliente_seleccionado['id']);
                     alert("Cliente actualizada correctamente!"); 
-                    $("#modal_buscar_persona").modal('hide');*/
+                    $("#modal_buscar_persona").modal('hide');
                     },
             error: function (xhr, ajaxOptions, thrownError) {
                     //onsole.log("algo malo")
