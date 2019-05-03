@@ -92,7 +92,7 @@
                             
                             <div class="modal-footer">
                                 <div class="checkbox">
-                                        <label><input name="abierto" type="checkbox" value="" id="det_abierto">Abierto</label>
+                                        <label><input name="abierto" type="checkbox" value="" id="det_abierto" checked>Abierto</label>
                                 </div>
                                 <button type="submit" id="btn_actualizar_curso" class="btn btn-primary">Guardar</button>
                             </div>
@@ -173,7 +173,8 @@ $(document).ready(function(){
                         alert("Curso actualizado correctamente!"); 
                         $("#row_cursos_abiertos").empty();
                         $("#row_cursos_cerrados").empty();
-                        get_cursos();
+                        get_cursos()
+                        borrar_datos_modal();
                         $("#modal_detalle_curso").modal('hide');
                         },
                 error: function (xhr, ajaxOptions, thrownError) {
@@ -320,6 +321,24 @@ function cargar_lista_curso (id){
                 }
         });
         pintar ("#curso_det_box");
+}
+function borrar_datos_modal(){
+    $('#det_nombre').val("");
+    $('#det_profesor').val("");
+    $('#det_detalles').val("");
+    $('#det_objetivo').val("");
+    $('#det_programa').val("");
+    $('#det_materiales').val("");
+    $('#det_requisitos').val("");
+    $('#det_kit_inicio').val("");
+    $('#det_duracion').val("");
+    $('#det_minimo').val("");
+    $('#det_maximo').val("");
+    $('#det_taller').val("");
+    $('#det_curso').val("");
+    $('#id_cabierto').val("");
+    $('#actualizar').val("");
+    $('#det_abierto').prop('checked',true);
 }
 
 </script>
